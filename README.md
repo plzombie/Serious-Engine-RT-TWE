@@ -7,7 +7,6 @@ Real-time path tracing support for Serious Engine 1.10. Fork of [this](https://g
 ### Windows
 
 1) Prerequisites:
-    * 64-bit CPU
     * GPU with ray tracing support
     * [Git](https://git-scm.com/downloads)
     * [Vulkan SDK](https://vulkan.lunarg.com/)
@@ -28,7 +27,7 @@ Real-time path tracing support for Serious Engine 1.10. Fork of [this](https://g
 1) Build shaders:
     * Run `Sources/RTGL1/Source/Shaders/GenerateShaders.py`. This script compiles SPIR-V files and places them into `Sources/RTGL1/Build`
 
-1) Open solution `Sources/AllTFE.sln` in Visual Studio and build it. 
+1) Open solution `Sources/All.sln` in Visual Studio and build it. 
     * The executables and libararies will be copied into `Bin` directory (or `Bin/Debug` if you are using the Debug configuration)
 
 ### Other OS

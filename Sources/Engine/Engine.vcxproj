@@ -38,12 +38,12 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -56,13 +56,13 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -73,13 +73,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -109,8 +109,6 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>Debug\</OutDir>
-    <IntDir>Debug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(SolutionDir)..\Tools.Win32;$(SolutionDir)..\Bin\Debug;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(SolutionDir)Engine;$(IncludePath)</IncludePath>
@@ -123,12 +121,8 @@
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(SolutionDir)Engine;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)D</TargetName>
-    <OutDir>Debug\</OutDir>
-    <IntDir>Debug\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>Release\</OutDir>
-    <IntDir>Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(SolutionDir)..\Tools.Win32;$(SolutionDir)..\Bin;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
@@ -141,8 +135,6 @@
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)</TargetName>
-    <OutDir>Release\</OutDir>
-    <IntDir>Release\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -154,15 +146,11 @@
       <WarningLevel>Level3</WarningLevel>
       <MinimalRebuild>true</MinimalRebuild>
       <PreprocessorDefinitions>RG_USE_SURFACE_WIN32;SE1_VULKAN;WIN32;_DEBUG;_WINDOWS;ENGINE_EXPORTS;_WINDLL;_USE_32BIT_TIME_T;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Debug\Engine.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>StdH.h</PrecompiledHeaderFile>
-      <ObjectFileName>.\Debug\</ObjectFileName>
-      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DisableSpecificWarnings>4603;4996;4812;4333</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(SolutionDir)\RTGL1\Include;$(VULKAN_SDK)\Include;..\libvorbis\include\;..\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)RTGL1\Include;$(VULKAN_SDK)\Include;..\libvorbis\include\;..\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -184,24 +172,23 @@
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>Debug/EngineD.dll</OutputFile>
-      <ImportLibrary>.\Debug\EngineD.lib</ImportLibrary>
       <AdditionalDependencies>gdi32.lib;DbgHelp.lib;vulkan-1.lib;RayTracedGL1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
       <IgnoreSpecificDefaultLibraries>libci.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib32;$(SolutionDir)RTGL1\Build\x64-Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib32;$(SolutionDir)RTGL1\Build\x86-Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CustomBuildStep>
-      <Command>copy Debug\$(TargetName).dll $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy Debug\$(TargetName).lib $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
+      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\Debug\ &gt;nul
+copy  "..\RTGL1\Build\x86-Debug\RayTracedGL1.dll"  "$(SolutionDir)..\Bin\Debug\" &gt;nul</Command>
       <Message>Copying %(Filename) binaries to \Bin\Debug</Message>
-      <Outputs>$(SolutionDir)..\Bin\Debug\$(TargetName).dll;%(Outputs)</Outputs>
+      <Outputs>$(SolutionDir)..\Bin\Debug\$(TargetName).dll;$(SolutionDir)..\Bin\Debug\RayTracedGL1.dll;%(Outputs)</Outputs>
     </CustomBuildStep>
     <PreBuildEvent>
       <Command>del $(SolutionDir)..\Bin\Debug\$(TargetName).dll /q &gt;nul;
-if not exist $(SolutionDir)RTGL1\Build\x64-Debug\RayTracedGL1.lib echo "ERROR: $(SolutionDir)RTGL1\Build\x64-Debug\RayTracedGL1.lib doesn't exist, please build RTGL1 project before building Engine"</Command>
+if not exist $(SolutionDir)RTGL1\Build\x86-Debug\RayTracedGL1.lib echo "ERROR: $(SolutionDir)RTGL1\Build\x86-Debug\RayTracedGL1.lib doesn't exist, please build RTGL1 project before building Engine"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -213,15 +200,11 @@ if not exist $(SolutionDir)RTGL1\Build\x64-Debug\RayTracedGL1.lib echo "ERROR: $
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RG_USE_SURFACE_WIN32;SE1_VULKAN;WIN32;_DEBUG;_WINDOWS;ENGINE_EXPORTS;_WINDLL;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Debug\Engine.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>StdH.h</PrecompiledHeaderFile>
-      <ObjectFileName>.\Debug\</ObjectFileName>
-      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DisableSpecificWarnings>4603;4996;4812;4333</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(RTGL1_SDK_PATH)\Include;$(VULKAN_SDK)\Include;..\libvorbis\include\;..\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)RTGL1\Include;$(VULKAN_SDK)\Include;..\libvorbis\include\;..\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -242,25 +225,23 @@ if not exist $(SolutionDir)RTGL1\Build\x64-Debug\RayTracedGL1.lib echo "ERROR: $
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>Debug/EngineD.dll</OutputFile>
-      <ImportLibrary>.\Debug\EngineD.lib</ImportLibrary>
       <AdditionalDependencies>gdi32.lib;DbgHelp.lib;vulkan-1.lib;RayTracedGL1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
       <IgnoreSpecificDefaultLibraries>libci.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib;$(RTGL1_SDK_PATH)\Build\x64-Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib;$(SolutionDir)RTGL1\Build\x64-Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CustomBuildStep>
-      <Command>copy Debug\$(TargetName).dll $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy Debug\$(TargetName).lib $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy  "$(RTGL1_SDK_PATH)\Build\x64-Debug\RayTracedGL1.dll"  "$(SolutionDir)..\Bin\Debug\"</Command>
+      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\Debug\ &gt;nul
+copy  "..\RTGL1\Build\x64-Debug\RayTracedGL1.dll"  "$(SolutionDir)..\Bin\Debug\" &gt;nul</Command>
       <Message>Copying %(Filename) binaries to \Bin\Debug</Message>
       <Outputs>$(SolutionDir)..\Bin\Debug\$(TargetName).dll;$(SolutionDir)..\Bin\Debug\RayTracedGL1.dll;%(Outputs)</Outputs>
     </CustomBuildStep>
     <PreBuildEvent>
       <Command>del $(SolutionDir)..\Bin\Debug\$(TargetName).dll /q &gt;nul;
-if not exist $(RTGL1_SDK_PATH)\Build\x64-Debug\RayTracedGL1.lib echo "ERROR: $(RTGL1_SDK_PATH)\Build\x64-Debug\RayTracedGL1.lib doesn't exist, please build RTGL1 project before building Engine"</Command>
+if not exist $(SolutionDir)RTGL1\Build\x64-Debug\RayTracedGL1.lib echo "ERROR: $(SolutionDir)RTGL1\Build\x64-Debug\RayTracedGL1.lib doesn't exist, please build RTGL1 project before building Engine"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -275,14 +256,10 @@ if not exist $(RTGL1_SDK_PATH)\Build\x64-Debug\RayTracedGL1.lib echo "ERROR: $(R
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <OmitFramePointers>false</OmitFramePointers>
       <PreprocessorDefinitions>RG_USE_SURFACE_WIN32;SE1_VULKAN;WIN32;NDEBUG;_WINDOWS;_USRDLL;ENGINE_EXPORTS;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\Engine.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>StdH.h</PrecompiledHeaderFile>
-      <ObjectFileName>.\Release\</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
       <DisableSpecificWarnings>4603;4996;4812;4333</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(SolutionDir)\RTGL1\Include;$(VULKAN_SDK)\Include;..\libvorbis\include\;..\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)RTGL1\Include;$(VULKAN_SDK)\Include;..\libvorbis\include\;..\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -304,24 +281,23 @@ if not exist $(RTGL1_SDK_PATH)\Build\x64-Debug\RayTracedGL1.lib echo "ERROR: $(R
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>.\Release\Engine.dll</OutputFile>
-      <ImportLibrary>.\Release\Engine.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;DbgHelp.lib;vulkan-1.lib;RayTracedGL1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
       <IgnoreSpecificDefaultLibraries>libci.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib32;$(SolutionDir)RTGL1\Build\x64-Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib32;$(SolutionDir)RTGL1\Build\x86-Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CustomBuildStep>
-      <Command>copy Release\$(TargetName).dll $(SolutionDir)..\Bin\ &gt;nul
-copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul
-copy Release\$(TargetName).lib $(SolutionDir)..\Bin\ &gt;nul</Command>
+      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin\
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\
+copy  "..\RTGL1\Build\x86-Release\RayTracedGL1.dll"  "$(SolutionDir)..\Bin\" &gt;nul</Command>
       <Message>Copying %(Filename) binaries to \Bin</Message>
-      <Outputs>$(SolutionDir)..\Bin\$(TargetName).dll;%(Outputs)</Outputs>
+      <Outputs>$(SolutionDir)..\Bin\$(TargetName).dll;$(SolutionDir)..\Bin\RayTracedGL1.dll;%(Outputs)</Outputs>
     </CustomBuildStep>
     <PreBuildEvent>
       <Command>del $(SolutionDir)..\Bin\$(TargetName).dll /q &gt;nul;
-if not exist $(SolutionDir)RTGL1\Build\x64-Release\RayTracedGL1.lib echo "ERROR: $(SolutionDir)RTGL1\Build\x64-Release\RayTracedGL1.lib doesn't exist, please build RTGL1 project before building Engine"</Command>
+if not exist $(SolutionDir)RTGL1\Build\x86-Release\RayTracedGL1.lib echo "ERROR: $(SolutionDir)RTGL1\Build\x86-Release\RayTracedGL1.lib doesn't exist, please build RTGL1 project before building Engine"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -336,14 +312,10 @@ if not exist $(SolutionDir)RTGL1\Build\x64-Release\RayTracedGL1.lib echo "ERROR:
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <OmitFramePointers>false</OmitFramePointers>
       <PreprocessorDefinitions>RG_USE_SURFACE_WIN32;SE1_VULKAN;WIN32;NDEBUG;_WINDOWS;_USRDLL;ENGINE_EXPORTS;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\Engine.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>StdH.h</PrecompiledHeaderFile>
-      <ObjectFileName>.\Release\</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
       <DisableSpecificWarnings>4603;4996;4812;4333</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(RTGL1_SDK_PATH)\Include;$(VULKAN_SDK)\Include;..\libvorbis\include\;..\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)RTGL1\Include;$(VULKAN_SDK)\Include;..\libvorbis\include\;..\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -364,25 +336,23 @@ if not exist $(SolutionDir)RTGL1\Build\x64-Release\RayTracedGL1.lib echo "ERROR:
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>.\Release\Engine.dll</OutputFile>
-      <ImportLibrary>.\Release\Engine.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;DbgHelp.lib;vulkan-1.lib;RayTracedGL1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
       <IgnoreSpecificDefaultLibraries>libci.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib;$(RTGL1_SDK_PATH)\Build\x64-Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib;$(SolutionDir)RTGL1\Build\x64-Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CustomBuildStep>
-      <Command>copy Release\$(TargetName).dll $(SolutionDir)..\Bin\ &gt;nul
-copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul
-copy Release\$(TargetName).lib $(SolutionDir)..\Bin\ &gt;nul
-copy  "$(RTGL1_SDK_PATH)\Build\x64-Release\RayTracedGL1.dll"  "$(SolutionDir)..\Bin\"</Command>
+      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\ &gt;nul
+copy  "..\RTGL1\Build\x64-Release\RayTracedGL1.dll"  "$(SolutionDir)..\Bin\" &gt;nul</Command>
       <Message>Copying %(Filename) binaries to \Bin</Message>
       <Outputs>$(SolutionDir)..\Bin\$(TargetName).dll;$(SolutionDir)..\Bin\RayTracedGL1.dll;%(Outputs)</Outputs>
     </CustomBuildStep>
     <PreBuildEvent>
       <Command>del $(SolutionDir)..\Bin\$(TargetName).dll /q &gt;nul;
-if not exist $(RTGL1_SDK_PATH)\Build\x64-Release\RayTracedGL1.lib echo "ERROR: $(RTGL1_SDK_PATH)\Build\x64-Release\RayTracedGL1.lib doesn't exist, please build RTGL1 project before building Engine"</Command>
+if not exist $(SolutionDir)RTGL1\Build\x64-Release\RayTracedGL1.lib echo "ERROR: $(SolutionDir)RTGL1\Build\x64-Release\RayTracedGL1.lib doesn't exist, please build RTGL1 project before building Engine"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
@@ -579,6 +549,8 @@ if not exist $(RTGL1_SDK_PATH)\Build\x64-Release\RayTracedGL1.lib echo "ERROR: $
     <ClCompile Include="Graphics\Gfx_wrapper_Raytracing.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Graphics\Gfx_wrapper_Vulkan.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
