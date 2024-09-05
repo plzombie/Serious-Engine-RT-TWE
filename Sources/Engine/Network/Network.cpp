@@ -1058,7 +1058,7 @@ void CNetworkLibrary::StartPeerToPeer_t(const CTString &strSessionName,
 #ifdef _WIN64
   _pShell->SetUINT64("pwoCurrentWorld64_0","pwoCurrentWorld64_1", (UINT64) &ga_World);
 #else
-  _pShell->SetINDEX("pwoCurrentWorld", &ga_World);
+  _pShell->SetINDEX("pwoCurrentWorld", (INDEX) &ga_World);
 #endif
 
   SetProgressDescription(TRANS("starting server"));
@@ -1171,7 +1171,7 @@ void CNetworkLibrary::Load_t(const CTFileName &fnmGame) // throw char *
 #ifdef _WIN64
   _pShell->SetUINT64("pwoCurrentWorld64_0","pwoCurrentWorld64_1", (UINT64) &ga_World);
 #else
-  _pShell->SetINDEX("pwoCurrentWorld", &ga_World);
+  _pShell->SetINDEX("pwoCurrentWorld", (INDEX) &ga_World);
 #endif
 
   // initialize server
@@ -1308,7 +1308,7 @@ void CNetworkLibrary::JoinSession_t(const CNetworkSession &nsSesssion, INDEX ctL
 #ifdef _WIN64
   _pShell->SetUINT64("pwoCurrentWorld64_0", "pwoCurrentWorld64_1", (UINT64) &ga_World);
 #else
-  _pShell->SetINDEX("pwoCurrentWorld", &ga_World);
+  _pShell->SetINDEX("pwoCurrentWorld", (INDEX) &ga_World);
 #endif
 
   // eventually cache all shadowmaps in world (memory eater!)
@@ -1384,7 +1384,7 @@ void CNetworkLibrary::StartDemoPlay_t(const CTFileName &fnDemo)  // throw char *
 #ifdef _WIN64
   _pShell->SetUINT64("pwoCurrentWorld64_0", "pwoCurrentWorld64_1", (UINT64) &ga_World);
 #else
-  _pShell->SetINDEX("pwoCurrentWorld", &ga_World);
+  _pShell->SetINDEX("pwoCurrentWorld", (INDEX) &ga_World);
 #endif
 
   // demo synchronization starts at the beginning initially
@@ -1728,7 +1728,7 @@ void CNetworkLibrary::ChangeLevel_internal(void)
   #ifdef _WIN64
     _pShell->SetUINT64("pwoCurrentWorld64_0", "pwoCurrentWorld64_1", (UINT64) &ga_World);
   #else
-    _pShell->SetINDEX("pwoCurrentWorld", &ga_World);
+    _pShell->SetINDEX("pwoCurrentWorld", (INDEX) &ga_World);
   #endif
     // if there is remembered level
   } else {

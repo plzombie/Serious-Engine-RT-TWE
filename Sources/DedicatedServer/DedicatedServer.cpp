@@ -140,7 +140,7 @@ static void LoadingHook_t(CProgressHookInfo *pphi)
   // print status text
   CTString strRes;
   printf("\r                                                                      ");
-  printf("\r%s : %3.0f%%\r", pphi->phi_strDescription, pphi->phi_fCompleted*100);
+  printf("\r%s : %3.0f%%\r", pphi->phi_strDescription.str_String, pphi->phi_fCompleted*100);
 }
 
 // loading hook functions

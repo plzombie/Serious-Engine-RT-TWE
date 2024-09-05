@@ -295,7 +295,7 @@ void CGfxLibrary::InitAPIs(void)
 
   if (!bHasGPUWithRT)
   {
-    FatalError("Can't find ray tracing feature on your GPU. Check if your GPU has it or try to update drivers.");
+    WarningMessage("Can't find ray tracing feature on your GPU. Check if your GPU has it or try to update drivers.");
   }
 #endif // RT
 

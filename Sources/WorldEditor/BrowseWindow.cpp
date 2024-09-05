@@ -760,7 +760,7 @@ void CBrowseWindow::InsertItem( CTFileName fnItem, CPoint pt)
       char err_str[ 256];
       sprintf( err_str, "Dropped texture \"%s\" has incorrect dimensions %.2f x %.2f."
                         "All textures must have dimensions that are potentions of 2.",
-                        (CTString&)fnItem, METERS_MEX( mexWidth), METERS_MEX( mexHeight));
+                        fnItem.str_String, METERS_MEX( mexWidth), METERS_MEX( mexHeight));
       AfxMessageBox( CString(err_str));
       return;
     }
@@ -923,8 +923,8 @@ void CBrowseWindow::OpenDirectory( CVirtualTreeNode *pVTNDir)
   // remember name of last opened virtual tree
   theApp.m_strOpenedVTDirectory = theApp.GetNameForVirtualTreeNode( pVTNDir);
   wchar_t achrOpenedDirectoryMessage[ 256];
-  swprintf( achrOpenedDirectoryMessage, L"Opened directory: \"%s\"",
-    CString(theApp.m_strOpenedVTDirectory));
+  swprintf( achrOpenedDirectoryMessage, L"Opened directory: \"%hs\"",
+    theApp.m_strOpenedVTDirectory.str_String);
   // put selected directory name into status line
   pMainFrame->m_wndStatusBar.SetPaneText( STATUS_LINE_PANE, achrOpenedDirectoryMessage, TRUE);
 

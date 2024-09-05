@@ -635,7 +635,7 @@ static BOOL StartUp_waveout( CSoundLibrary &sl, BOOL bReport=TRUE)
   // get waveout capabilities
   WAVEOUTCAPS woc;
   memset( &woc, 0, sizeof(woc));
-  res = waveOutGetDevCaps((int)sl.sl_hwoWaveOut, &woc, sizeof(woc));
+  res = waveOutGetDevCaps((UINT_PTR)sl.sl_hwoWaveOut, &woc, sizeof(woc));
   // report success
   if( bReport) {
     CTString strDevice = TRANS("default device");

@@ -200,7 +200,7 @@ CTFileName CEngineGUI::FileRequester(
   ofnRequestFiles.hwndOwner = AfxGetMainWnd()->m_hWnd;
   ofnRequestFiles.lpstrFilter = pchrFilters;
   ofnRequestFiles.lpstrFile = chrFiles;
-  sprintf( chrFiles, "%s", strFileSelectedByDefault);
+  sprintf( chrFiles, "%s", strFileSelectedByDefault.str_String);
   ofnRequestFiles.nMaxFile = 2048;
 
   CString strRequestInDirectory = _fnmApplicationPath+strDefaultDir;

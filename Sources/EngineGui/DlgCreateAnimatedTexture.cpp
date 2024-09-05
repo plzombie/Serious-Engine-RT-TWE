@@ -344,7 +344,7 @@ BOOL CDlgCreateAnimatedTexture::OnInitDialog()
       "SPEED 0.1\r\n"
       "FRAMES %d\r\n",
       METERS_MEX(m_pixSourceWidth * (1 << 5) ),
-      (CTString&)m_fnCreatedFileName.FileDir(),
+      m_fnCreatedFileName.FileDir().str_String,
       m_pafnPictures->Count());
     // add name for each frame
     FOREACHINDYNAMICARRAY( *m_pafnPictures, CTFileName, itPicture)
@@ -353,7 +353,7 @@ BOOL CDlgCreateAnimatedTexture::OnInitDialog()
       CTString strName=fn.FileName();
       CTString strExt=fn.FileExt();
       // add finishing part of script
-      sprintf( achrDefaultScript, "%s    %s%s\r\n", achrDefaultScript, strName, strExt);
+      sprintf( achrDefaultScript, "%s    %s%s\r\n", achrDefaultScript, strName.str_String, strExt.str_String);
     }
     // add finishing part of script
     sprintf( achrDefaultScript, "%sANIM_END\r\nEND\r\n", achrDefaultScript);

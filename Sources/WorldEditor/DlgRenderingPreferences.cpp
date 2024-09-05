@@ -381,7 +381,7 @@ void CDlgRenderingPreferences::OnBrowseBcgPicture()
   CTFileName fnBcgPicture = _EngineGUI.FileRequester( "Select background texture",
     "Texture (*.tex)\0*.tex\0" FILTER_TEX FILTER_END, "Background textures", "");
   if( fnBcgPicture == "") return;
-  sprintf( theApp.m_vpViewPrefs[ m_iBuffer].m_achrBcgPicture, "%s", fnBcgPicture);
+  sprintf( theApp.m_vpViewPrefs[ m_iBuffer].m_achrBcgPicture, "%s", fnBcgPicture.str_String);
   m_strBcgTexture = fnBcgPicture.FileName();
   UpdateData( FALSE);
 }

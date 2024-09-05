@@ -1282,13 +1282,9 @@ void BSPTree<Type, iDimensions>::Read_t(CTStream &strm) // throw char *
       bn.bn_pbnBack = &bt_abnNodes[iBack];
     }
 
-  #ifdef _WIN64
     ULONG ulPlaneTag;
     strm >> ulPlaneTag;
     bn.bn_ulPlaneTag = (UINT64) ulPlaneTag;
-  #else
-    strm >> bn.bn_ulPlaneTag;
-  #endif
   }
 
   // check end id

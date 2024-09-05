@@ -324,13 +324,13 @@ void CObjectCSG::PolygonEdgesToBSPEdges(
     if (ope.ope_Backward) {
       // add bsp edge with reverse vertices
       abed[iEdge] = DOUBLEbspedge3D(*ope.ope_Edge->oed_Vertex1,
-        *ope.ope_Edge->oed_Vertex0, (ULONG)ope.ope_Edge);
+        *ope.ope_Edge->oed_Vertex0, (UINT64)ope.ope_Edge);
 
     // if it is not reversed
     } else{
       // add bsp edge with normal vertices
       abed[iEdge] = DOUBLEbspedge3D(*ope.ope_Edge->oed_Vertex0,
-        *ope.ope_Edge->oed_Vertex1, (ULONG)ope.ope_Edge);
+        *ope.ope_Edge->oed_Vertex1, (UINT64)ope.ope_Edge);
     }
   }
 
@@ -542,7 +542,7 @@ void CObjectCSG::DoCSGSplitting(
         oc_popoPortalB1B2 = NULL;
 
         // create a bsp polygon from first temporary array
-        DOUBLEbsppolygon3D bpoA(*itopoA->opo_Plane, abedRemaining, (ULONG)itopoA->opo_Plane);
+        DOUBLEbsppolygon3D bpoA(*itopoA->opo_Plane, abedRemaining, (UINT64)itopoA->opo_Plane);
 
         // create a BSP cutter for B's sector BSP and A's polygon
         DOUBLEbspcutter3D bcCutter(bpoA, *itoscB->osc_BSPTree.bt_pbnRoot);

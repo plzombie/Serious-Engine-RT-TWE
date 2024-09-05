@@ -295,11 +295,11 @@ ENGINE_API void SE_InitEngine(CTString strGameID)
 
   // print basic engine info
   CPrintF(TRANS("--- Serious Engine Startup ---\n"));
-  CPrintF("  %s\n\n", _strEngineBuild);
+  CPrintF("  %s\n\n", _strEngineBuild.str_String);
 
   // print info on the started application
   CPrintF(TRANS("Executable: %s\n"), strExePath);
-  CPrintF(TRANS("Assumed engine directory: %s\n"), _fnmApplicationPath);
+  CPrintF(TRANS("Assumed engine directory: %s\n"), _fnmApplicationPath.str_String);
 
   CPrintF("\n");
 
@@ -321,12 +321,12 @@ ENGINE_API void SE_InitEngine(CTString strGameID)
     sys_iOSBuild = osv.dwBuildNumber & 0xFFFF;
     sys_strOSMisc = osv.szCSDVersion;
 
-    CPrintF(TRANS("  Type: %s\n"), (const char*)sys_strOS);
+    CPrintF(TRANS("  Type: %s\n"), sys_strOS.str_String);
     CPrintF(TRANS("  Version: %d.%d, build %d\n"), 
       osv.dwMajorVersion, osv.dwMinorVersion, osv.dwBuildNumber & 0xFFFF);
     CPrintF(TRANS("  Misc: %s\n"), osv.szCSDVersion);
   } else {
-    CPrintF(TRANS("Error getting OS info: %s\n"), GetWindowsError(GetLastError()) );
+    CPrintF(TRANS("Error getting OS info: %s\n"), GetWindowsError(GetLastError()).str_String);
   }
   CPrintF("\n");
 

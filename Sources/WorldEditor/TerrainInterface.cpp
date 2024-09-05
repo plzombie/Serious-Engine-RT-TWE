@@ -81,7 +81,7 @@ void GenerateTerrainBrushTexture( INDEX iBrush, FLOAT fHotSpot, FLOAT fFallOff);
 static CTString _strToolTip;
 static void GetToolTipText(void *pTerrainInterface, char *pToolTipText)
 {
-  pToolTipText+= sprintf(pToolTipText, "%s", _strToolTip);
+  pToolTipText+= sprintf(pToolTipText, "%s", _strToolTip.str_String);
 }
 
 CTFileName GetBrushTextureName(INDEX iBrush)

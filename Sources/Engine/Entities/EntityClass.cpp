@@ -13,7 +13,7 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. */
 
-#include "stdh.h"
+#include "StdH.h"
 
 #include <Engine/Base/Stream.h>
 #include <Engine/Entities/EntityClass.h>
@@ -262,7 +262,7 @@ HINSTANCE LoadDLL_t(const char *strFileName) // throw char *
     }
 
     // report error
-    ThrowF_t(TRANS("Cannot load DLL file '%s':\n%s"), strFileName, strWinError);
+    ThrowF_t(TRANS("Cannot load DLL file '%s':\n%s"), strFileName, strWinError.str_String);
   }
   return hiDLL;
 }
@@ -302,7 +302,7 @@ void CEntityClass::Read_t( CTStream *istr) // throw char *
     ec_hiClassDLL = NULL;
     ec_fnmClassDLL.Clear();
     // report error
-    ThrowF_t(TRANS("Class '%s' not found in entity class package file '%s'"), strClassName, fnmDLL);
+    ThrowF_t(TRANS("Class '%s' not found in entity class package file '%s'"), strClassName, fnmDLL.str_String);
   }
 
   // obtain all components needed by the DLL

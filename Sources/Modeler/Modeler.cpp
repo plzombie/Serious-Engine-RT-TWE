@@ -757,7 +757,7 @@ BOOL CModelerApp::AddModelerWorkingPatch( CTFileName fnPatchName)
     if( itPatch->wp_FileName == fnPatchName)
     {
       char achrMessage[ 256];
-      sprintf( achrMessage, "Working patch \"%s\" already exists.", (CTString&)fnPatchName);
+      sprintf( achrMessage, "Working patch \"%s\" already exists.", fnPatchName.str_String);
       AfxMessageBox( CString(achrMessage));
       return FALSE;
     }

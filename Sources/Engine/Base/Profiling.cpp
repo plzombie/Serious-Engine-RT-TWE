@@ -282,7 +282,7 @@ void CProfileCounter::Report(char *&strBuffer, INDEX ctAveragingCount)
     ctAveragingCount = 1;
   }
   strBuffer += sprintf(strBuffer, "%-45s: %7d %7.2f\n",
-    pc_strName, pc_ctCount, (double)pc_ctCount/ctAveragingCount);
+    pc_strName.str_String, pc_ctCount, (double)pc_ctCount/ctAveragingCount);
 }
 
 /* Print one timer in report. */
@@ -296,7 +296,7 @@ void CProfileTimer::Report(char *&strBuffer,
 
   if (pt_strAveragingName=="") {
     strBuffer += sprintf(strBuffer, "%-45s: %6.2f%% %6.2f%% %6.2f ms\n",
-      pt_strName,
+      pt_strName.str_String,
       pt_tvElapsed.GetSeconds()/tvAppElapsed.GetSeconds()*100,
       pt_tvElapsed.GetSeconds()/tvModElapsed.GetSeconds()*100,
       pt_tvElapsed.GetSeconds()/ctAveragingCount*1000
@@ -307,12 +307,12 @@ void CProfileTimer::Report(char *&strBuffer,
       ctLocalAveraging = 1;
     }
     strBuffer += sprintf(strBuffer, "%-45s: %6.2f%% %6.2f%% %6.2f ms (%4.0fc/%s x%d)\n",
-      pt_strName,
+      pt_strName.str_String,
       pt_tvElapsed.GetSeconds()/tvAppElapsed.GetSeconds()*100,
       pt_tvElapsed.GetSeconds()/tvModElapsed.GetSeconds()*100,
       pt_tvElapsed.GetSeconds()/ctAveragingCount*1000,
       pt_tvElapsed.GetSeconds()/ctLocalAveraging*_pTimer->tm_llCPUSpeedHZ,
-      pt_strAveragingName,
+      pt_strAveragingName.str_String,
       pt_ctAveraging/ctAveragingCount
       );
   }
@@ -339,7 +339,7 @@ void CProfileForm::Report(CTString &strReport)
   CTimerValue tvModuleElapsed = pf_tvOverAllElapsed;
   // print the main header
   strBuffer += sprintf(strBuffer, "%s profile for last %d %s:\n",
-    pf_strTitle, GetAveragingCounter(), pf_strAveragingUnits);
+    pf_strTitle.str_String, GetAveragingCounter(), pf_strAveragingUnits.str_String);
 
   // print header for timers
   strBuffer += sprintf(strBuffer,

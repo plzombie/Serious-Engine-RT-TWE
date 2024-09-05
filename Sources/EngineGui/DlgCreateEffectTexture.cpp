@@ -213,7 +213,7 @@ void CDlgCreateEffectTexture::DoDataExchange(CDataExchange* pDX)
       PIX pixBaseTextureHeight = m_tdCreated.td_ptdBaseTexture->GetPixHeight();
       char achrBaseTextureName[ 256];
       sprintf( achrBaseTextureName, "%s    (%d x %d)",
-        (CTString&)m_tdCreated.td_ptdBaseTexture->GetName(),
+        m_tdCreated.td_ptdBaseTexture->GetName().str_String,
         pixBaseTextureWidth, pixBaseTextureHeight);
       m_strBaseTextureName = achrBaseTextureName;
     }

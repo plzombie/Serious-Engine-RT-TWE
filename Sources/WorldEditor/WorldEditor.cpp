@@ -1434,7 +1434,7 @@ void CValuesForPrimitive::WriteToIniFile(CTString strPrimitiveType)
   INI_PRIMITIVE_WRITE( "mip start");
   SET_FLOAT( vfp_fMipStep);
   INI_PRIMITIVE_WRITE( "mip step");
-  SET_STRING( vfp_fnDisplacement);
+  SET_STRING( vfp_fnDisplacement.str_String);
   INI_PRIMITIVE_WRITE( "displacement picture");
 }
 
@@ -1634,10 +1634,10 @@ void CWorldEditorApp::WriteToIniFileOnEnd(void)
   SET_FLOAT( m_fNoiseAltitude);  
   INI_WRITE( "Noise altitude");
 
-  SET_STRING( m_fnDistributionNoiseTexture);
+  SET_STRING( m_fnDistributionNoiseTexture.str_String);
   INI_WRITE( "Distribution noise texture");
   
-  SET_STRING( m_fnContinousNoiseTexture);
+  SET_STRING( m_fnContinousNoiseTexture.str_String);
   INI_WRITE( "Continous noise texture");
 
   SET_INDEX( m_iFBMOctaves);
@@ -1731,7 +1731,7 @@ void CAppPrefs::WriteToIniFile()
   SET_COLOR( ap_DefaultGridColor);
   INI_WRITE( "Current grid color");
 
-  SET_STRING( ap_strSourceSafeProject);
+  SET_STRING( ap_strSourceSafeProject.str_String);
   INI_WRITE( "Source safe project");
 
   SET_FLOAT( ap_fDefaultFlyModeSpeed);  
@@ -2101,7 +2101,7 @@ BOOL CWorldEditorApp::OnIdle(LONG lCount)
       #ifdef _WIN64
         _pShell->SetUINT64("pwoCurrentWorld64_0", "pwoCurrentWorld64_1", (UINT64) &pdocCurrent->m_woWorld);
       #else
-        _pShell->SetINDEX("pwoCurrentWorld", &pdocCurrent->m_woWorld);
+        _pShell->SetINDEX("pwoCurrentWorld", (INDEX) &pdocCurrent->m_woWorld);
       #endif
       }
     }

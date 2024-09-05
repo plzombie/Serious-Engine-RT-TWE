@@ -95,7 +95,7 @@ void SubMain( int argc, char *argv[])
     printf("! Cannot save font.\n  %s\n", strError);
     exit(EXIT_FAILURE);
   }
-  printf( "- '%s' created successfuly.\n", strFontFileName);
+  printf( "- '%s' created successfuly.\n", strFontFileName.str_String);
   
   exit( EXIT_SUCCESS);
 }

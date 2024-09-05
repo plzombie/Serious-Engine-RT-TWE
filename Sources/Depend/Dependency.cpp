@@ -114,7 +114,7 @@ void CDependencyList::ExtractDependencies()
     {
       // if file is not available remove it from list
       //FatalError( "File %s can't be opened!", (CTString&)(_fnmApplicationPath + fnFileName));
-      printf( "warning, cannot open: %s (referenced from %s)\n", (CTString&)(fnFileName), (CTString&)(pdi->di_fnParent));
+      printf( "warning, cannot open: %s (referenced from %s)\n", fnFileName.str_String, pdi->di_fnParent.str_String);
       delete pdi;
     }
     // if file is opened properly
@@ -360,7 +360,7 @@ void CDependencyList::ExportASCII_t( CTFileName fnAsciiFile)
   FOREACHINLIST( CDependInfo, di_Node, dl_ListHead, itDependInfo)
   {
     // prepare line of text
-    sprintf( line, "%s\n", (CTString&)itDependInfo->di_fnFileName);
+    sprintf( line, "%s\n", itDependInfo->di_fnFileName.str_String);
     // write text line into file
     strmFile.Write_t( line, strlen( line));
   }

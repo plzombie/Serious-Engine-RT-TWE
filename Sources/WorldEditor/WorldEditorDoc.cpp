@@ -303,12 +303,12 @@ void CWorldEditorDoc::SetStatusLineModeInfoMessage( void)
         CTString strText;
         if(theApp.m_iTerrainBrushMode==TBM_FILTER)
         {
-          sprintf( strModeName, "%s", GetFilterName(theApp.m_iFilter));
+          sprintf( strModeName, "%s", GetFilterName(theApp.m_iFilter).str_String);
         }
         else
         {
           GetBrushModeInfo(INDEX(theApp.m_iTerrainBrushMode), iIcon, strText);
-          sprintf( strModeName, "%s", strText);
+          sprintf( strModeName, "%s", strText.str_String);
         }
       }
       else
