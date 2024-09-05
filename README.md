@@ -1,6 +1,6 @@
-# Serious Engine: Ray Traced
+# Serious Engine Ray Traced: The Working Edition 
 
-Real-time path tracing support for Serious Engine 1.10.
+Real-time path tracing support for Serious Engine 1.10. Fork of [this](https://github.com/sultim-t/Serious-Engine-RT) project of [sultim-t](https://github.com/sultim-t).
 
 ## Building
 
@@ -9,13 +9,13 @@ Real-time path tracing support for Serious Engine 1.10.
 1) Prerequisites:
     * 64-bit CPU
     * GPU with ray tracing support
-    * [Git](https://github.com/git-for-windows/git/releases)
+    * [Git](https://git-scm.com/downloads)
     * [Vulkan SDK](https://vulkan.lunarg.com/)
-    * [Visual Studio](https://www.visualstudio.com/post-download-vs?sku=community) (any version after 2013)
+    * [Visual Studio](https://www.visualstudio.com/post-download-vs?sku=community) (I use 2019)
     * [Python 3](https://www.python.org/downloads/)
 
 1) Clone this repository:
-    * `git clone https://github.com/sultim-t/Serious-Engine-RT.git`
+    * `git clone https://github.com/plzombie/Serious-Engine-RT-TWE.git`
 
 1) Fetch RTGL1 library submodule:
     * `git submodule update --init`
@@ -43,7 +43,7 @@ However, to run Serious Sam: The First Encounter Ray Traced:
 1) Copy files from the original [Serious Sam: The First Encounter](https://store.steampowered.com/app/41050/Serious_Sam_Classic_The_First_Encounter/)     
     * The list of required files is on the [Releases](https://github.com/sultim-t/Serious-Engine-RT/releases) page
 2) Unpack `TFE_RT_Textures.zip`
-    * Archive can be downloaded from the [Releases](https://github.com/sultim-t/Serious-Engine-RT/releases) page
+    * Archive can be downloaded from [here](https://github.com/sultim-t/Serious-Engine-RT/releases/download/v1.1/TFE_RT_Textures.zip)
     * It contains additional upscaled textures and PBR textures
 
 Note:
