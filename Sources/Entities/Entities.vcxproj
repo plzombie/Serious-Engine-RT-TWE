@@ -105,9 +105,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <ExecutablePath>$(SolutionDir)..\Bin;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>$(SolutionDir)..\Bin_x64;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir);$(SolutionDir)Entities;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\Bin;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)..\Bin_x64;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -119,9 +119,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <ExecutablePath>$(SolutionDir)..\Bin\Debug;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>$(SolutionDir)..\Bin_x64\Debug;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir);$(SolutionDir)Engine\;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\Bin\Debug;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)..\Bin_x64\Debug;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -155,7 +155,6 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\Entities.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -201,7 +200,6 @@ copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\ &gt;nul</Command>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\Entities.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -210,11 +208,11 @@ copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\ &gt;nul</Command>
       <SubSystem>Windows</SubSystem>
     </Link>
     <CustomBuildStep>
-      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin\ &gt;nul
-copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul
-copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\ &gt;nul</Command>
-      <Message>Copying %(Filename) binaries to \Bin</Message>
-      <Outputs>$(SolutionDir)..\Bin\$(InputName).dll;%(Outputs)</Outputs>
+      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin_x64\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_x64\ &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to \Bin_x64</Message>
+      <Outputs>$(SolutionDir)..\Bin_x64\$(InputName).dll;%(Outputs)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -245,7 +243,6 @@ copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\ &gt;nul</Command>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug\Entities.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -288,7 +285,6 @@ copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug\Entities.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -298,11 +294,11 @@ copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
       <AdditionalDependencies>EngineD.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
-      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
-      <Message>Copying %(Filename) binaries to \Bin\Debug</Message>
-      <Outputs>$(SolutionDir)..\Bin\Debug\$(InputName).dll;%(Outputs)</Outputs>
+      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_x64\Debug\ &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to \Bin_x64\Debug</Message>
+      <Outputs>$(SolutionDir)..\Bin_x64\Debug\$(InputName).dll;%(Outputs)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>

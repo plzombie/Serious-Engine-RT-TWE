@@ -117,7 +117,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <ExecutablePath>$(SolutionDir)..\Tools.Win32;$(SolutionDir)..\Bin\Debug;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>$(SolutionDir)..\Tools.Win32;$(SolutionDir)..\Bin_x64\Debug;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(SolutionDir)Engine;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)D</TargetName>
@@ -131,7 +131,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <ExecutablePath>$(SolutionDir)..\Tools.Win32;$(SolutionDir)..\Bin;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath>$(SolutionDir)..\Tools.Win32;$(SolutionDir)..\Bin_x64;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)</TargetName>
@@ -165,7 +165,6 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug\Engine.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -218,7 +217,6 @@ if not exist $(SolutionDir)RTGL1\Build\x86-Debug\RayTracedGL1.lib echo "ERROR: $
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug\Engine.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -232,15 +230,15 @@ if not exist $(SolutionDir)RTGL1\Build\x86-Debug\RayTracedGL1.lib echo "ERROR: $
       <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib;$(SolutionDir)RTGL1\Build\x64-Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CustomBuildStep>
-      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy  "..\RTGL1\Build\x64-Debug\RayTracedGL1.dll"  "$(SolutionDir)..\Bin\Debug\" &gt;nul</Command>
-      <Message>Copying %(Filename) binaries to \Bin\Debug</Message>
-      <Outputs>$(SolutionDir)..\Bin\Debug\$(TargetName).dll;$(SolutionDir)..\Bin\Debug\RayTracedGL1.dll;%(Outputs)</Outputs>
+      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
+copy  "..\RTGL1\Build\x64-Debug\RayTracedGL1.dll"  "$(SolutionDir)..\Bin_x64\Debug\" &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to \Bin_x64\Debug</Message>
+      <Outputs>$(SolutionDir)..\Bin_x64\Debug\$(TargetName).dll;$(SolutionDir)..\Bin_x64\Debug\RayTracedGL1.dll;%(Outputs)</Outputs>
     </CustomBuildStep>
     <PreBuildEvent>
-      <Command>del $(SolutionDir)..\Bin\Debug\$(TargetName).dll /q &gt;nul;
+      <Command>del $(SolutionDir)..\Bin_x64\Debug\$(TargetName).dll /q &gt;nul;
 if not exist $(SolutionDir)RTGL1\Build\x64-Debug\RayTracedGL1.lib echo "ERROR: $(SolutionDir)RTGL1\Build\x64-Debug\RayTracedGL1.lib doesn't exist, please build RTGL1 project before building Engine"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -274,7 +272,6 @@ if not exist $(SolutionDir)RTGL1\Build\x64-Debug\RayTracedGL1.lib echo "ERROR: $
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\Engine.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -329,7 +326,6 @@ if not exist $(SolutionDir)RTGL1\Build\x86-Release\RayTracedGL1.lib echo "ERROR:
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\Engine.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -343,15 +339,15 @@ if not exist $(SolutionDir)RTGL1\Build\x86-Release\RayTracedGL1.lib echo "ERROR:
       <AdditionalLibraryDirectories>$(VULKAN_SDK)\Lib;$(SolutionDir)RTGL1\Build\x64-Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CustomBuildStep>
-      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin\ &gt;nul
-copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul
-copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\ &gt;nul
-copy  "..\RTGL1\Build\x64-Release\RayTracedGL1.dll"  "$(SolutionDir)..\Bin\" &gt;nul</Command>
-      <Message>Copying %(Filename) binaries to \Bin</Message>
-      <Outputs>$(SolutionDir)..\Bin\$(TargetName).dll;$(SolutionDir)..\Bin\RayTracedGL1.dll;%(Outputs)</Outputs>
+      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin_x64\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_x64\ &gt;nul
+copy  "..\RTGL1\Build\x64-Release\RayTracedGL1.dll"  "$(SolutionDir)..\Bin_x64\" &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to \Bin_x64</Message>
+      <Outputs>$(SolutionDir)..\Bin_x64\$(TargetName).dll;$(SolutionDir)..\Bin_x64\RayTracedGL1.dll;%(Outputs)</Outputs>
     </CustomBuildStep>
     <PreBuildEvent>
-      <Command>del $(SolutionDir)..\Bin\$(TargetName).dll /q &gt;nul;
+      <Command>del $(SolutionDir)..\Bin_x64\$(TargetName).dll /q &gt;nul;
 if not exist $(SolutionDir)RTGL1\Build\x64-Release\RayTracedGL1.lib echo "ERROR: $(SolutionDir)RTGL1\Build\x64-Release\RayTracedGL1.lib doesn't exist, please build RTGL1 project before building Engine"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>

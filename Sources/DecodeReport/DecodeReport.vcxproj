@@ -97,8 +97,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>Debug\</OutDir>
-    <IntDir>Debug\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(SolutionDir)..\Tools.Win32;$(SolutionDir)..\Bin\Debug;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
@@ -108,12 +108,12 @@
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(SolutionDir)..\Tools.Win32;$(SolutionDir)..\Bin\Debug;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\Bin\Debug;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
-    <OutDir>Debug\</OutDir>
-    <IntDir>Debug\</IntDir>
+    <LibraryPath>$(SolutionDir)..\Bin_x64\Debug;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>Release\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(SolutionDir)..\Tools.Win32;$(SolutionDir)..\Bin;$(ExecutablePath)</ExecutablePath>
@@ -124,9 +124,9 @@
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(SolutionDir)..\Tools.Win32;$(SolutionDir)..\Bin;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\Bin;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
-    <OutDir>Release\</OutDir>
-    <IntDir>Release\</IntDir>
+    <LibraryPath>$(SolutionDir)..\Bin_x64;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -139,7 +139,6 @@
       <MinimalRebuild>true</MinimalRebuild>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;_DEBUG;_CONSOLE;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>Debug\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Debug\DecodeReport.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ObjectFileName>Debug\</ObjectFileName>
@@ -157,18 +156,16 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug\DecodeReport.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>Debug\DecodeReport.exe</OutputFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Debug\$(TargetName).exe $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
+      <Command>copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
       <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin\Debug</Message>
       <Outputs>$(SolutionDir)..\Bin\Debug\$(TargetName).exe</Outputs>
     </CustomBuildStep>
@@ -183,7 +180,6 @@ copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;_DEBUG;_CONSOLE;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>Debug\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Debug\DecodeReport.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ObjectFileName>Debug\</ObjectFileName>
@@ -201,20 +197,18 @@ copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug\DecodeReport.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>Debug\DecodeReport.exe</OutputFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Debug\$(TargetName).exe $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
-      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin\Debug</Message>
-      <Outputs>$(SolutionDir)..\Bin\Debug\$(TargetName).exe</Outputs>
+      <Command>copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\Debug\ &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin_x64\Debug</Message>
+      <Outputs>$(SolutionDir)..\Bin_x64\Debug\$(TargetName).exe</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -231,7 +225,6 @@ copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
       <StringPooling>true</StringPooling>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;NDEBUG;_CONSOLE;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\DecodeReport.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ObjectFileName>Release\</ObjectFileName>
@@ -248,18 +241,16 @@ copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\DecodeReport.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>Release\DecodeReport.exe</OutputFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Release\$(TargetName).exe $(SolutionDir)..\Bin\ &gt;nul
-copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
+      <Command>copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
       <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin</Message>
       <Outputs>$(SolutionDir)..\Bin\$(TargetName).exe</Outputs>
     </CustomBuildStep>
@@ -278,7 +269,6 @@ copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
       <StringPooling>true</StringPooling>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;NDEBUG;_CONSOLE;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\DecodeReport.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ObjectFileName>Release\</ObjectFileName>
@@ -295,20 +285,18 @@ copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\DecodeReport.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>Release\DecodeReport.exe</OutputFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Release\$(TargetName).exe $(SolutionDir)..\Bin\ &gt;nul
-copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
-      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin</Message>
-      <Outputs>$(SolutionDir)..\Bin\$(TargetName).exe</Outputs>
+      <Command>copy Release\$(TargetName).exe $(SolutionDir)..\Bin_x64\ &gt;nul
+copy Release\$(TargetName).map $(SolutionDir)..\Bin_x64\ &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin_x64</Message>
+      <Outputs>$(SolutionDir)..\Bin_x64\$(TargetName).exe</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>

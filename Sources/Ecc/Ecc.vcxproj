@@ -141,7 +141,6 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug\Ecc.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -180,7 +179,6 @@ copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug\Ecc.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -190,12 +188,12 @@ copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>mkdir $(SolutionDir)..\Bin 2&gt;nul
-mkdir $(SolutionDir)..\Bin\Debug 2&gt;nul
-copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
-      <Message>Copying %(Filename) binaries to \Bin\Debug</Message>
-      <Outputs>$(SolutionDir)..\Bin\Debug\$(TargetName).exe;%(Outputs)</Outputs>
+      <Command>mkdir $(SolutionDir)..\Bin_x64 2&gt;nul
+mkdir $(SolutionDir)..\Bin_x64\Debug 2&gt;nul
+copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\Debug\ &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to \Bin_x64\Debug</Message>
+      <Outputs>$(SolutionDir)..\Bin_x64\Debug\$(TargetName).exe;%(Outputs)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -223,7 +221,6 @@ copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\Ecc.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -265,7 +262,6 @@ copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\Ecc.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -275,11 +271,11 @@ copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>mkdir $(SolutionDir)..\Bin 2&gt;nul
-copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin\ &gt;nul
-copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
-      <Message>Copying %(Filename) binaries to \Bin</Message>
-      <Outputs>$(SolutionDir)..\Bin\$(TargetName).exe;%(Outputs)</Outputs>
+      <Command>mkdir $(SolutionDir)..\Bin_x64 2&gt;nul
+copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin_x64\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\ &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to \Bin_x64</Message>
+      <Outputs>$(SolutionDir)..\Bin_x64\$(TargetName).exe;%(Outputs)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
