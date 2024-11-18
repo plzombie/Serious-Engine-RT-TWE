@@ -138,13 +138,9 @@
       <WarningLevel>Level3</WarningLevel>
       <MinimalRebuild>true</MinimalRebuild>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;_DEBUG;_WINDOWS;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>Debug\</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\Debug\SeriousSkaStudio.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <ObjectFileName>Debug\</ObjectFileName>
-      <ProgramDataBaseFileName>Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DisableSpecificWarnings>4996;4603;4333</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;</AdditionalIncludeDirectories>
@@ -168,12 +164,11 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>Debug\SeriousSkaStudio.exe</OutputFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Debug\$(TargetName).exe $(SolutionDir)..\Bin\Debug\ &gt;nul 
-copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul </Command>
+      <Command>copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin\Debug\ &gt;nul 
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul </Command>
       <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin\Debug</Message>
       <Outputs>$(SolutionDir)..\Bin\Debug\$(TargetName).exe;%(Outputs)</Outputs>
     </CustomBuildStep>
@@ -187,13 +182,9 @@ copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul </Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;_DEBUG;_WINDOWS;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>Debug\</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\Debug\SeriousSkaStudio.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <ObjectFileName>Debug\</ObjectFileName>
-      <ProgramDataBaseFileName>Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DisableSpecificWarnings>4996;4603;4333</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;</AdditionalIncludeDirectories>
@@ -216,14 +207,13 @@ copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul </Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>Debug\SeriousSkaStudio.exe</OutputFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Debug\$(TargetName).exe $(SolutionDir)..\Bin\Debug\ &gt;nul 
-copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul </Command>
-      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin\Debug</Message>
-      <Outputs>$(SolutionDir)..\Bin\Debug\$(TargetName).exe;%(Outputs)</Outputs>
+      <Command>copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin_x64\Debug\ &gt;nul 
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\Debug\ &gt;nul </Command>
+      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin_x64\Debug</Message>
+      <Outputs>$(SolutionDir)..\Bin_x64\Debug\$(TargetName).exe;%(Outputs)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -236,13 +226,9 @@ copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul </Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;NDEBUG;_WINDOWS;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\Release\SeriousSkaStudio.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <ObjectFileName>Release\</ObjectFileName>
-      <ProgramDataBaseFileName>Release\</ProgramDataBaseFileName>
       <DisableSpecificWarnings>4996;4603;4333</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;</AdditionalIncludeDirectories>
     </ClCompile>
@@ -265,12 +251,11 @@ copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul </Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>.\Release\SeriousSkaStudio.exe</OutputFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Release\$(TargetName).exe $(SolutionDir)..\Bin\ &gt;nul 
-copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul </Command>
+      <Command>copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin\ &gt;nul 
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul </Command>
       <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin</Message>
       <Outputs>$(SolutionDir)..\Bin\$(TargetName).exe;%(Outputs)</Outputs>
     </CustomBuildStep>
@@ -285,13 +270,9 @@ copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul </Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;NDEBUG;_WINDOWS;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\Release\SeriousSkaStudio.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <ObjectFileName>Release\</ObjectFileName>
-      <ProgramDataBaseFileName>Release\</ProgramDataBaseFileName>
       <DisableSpecificWarnings>4996;4603;4333</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;</AdditionalIncludeDirectories>
     </ClCompile>
@@ -313,14 +294,13 @@ copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul </Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>.\Release\SeriousSkaStudio.exe</OutputFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Release\$(TargetName).exe $(SolutionDir)..\Bin\ &gt;nul 
-copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul </Command>
-      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin</Message>
-      <Outputs>$(SolutionDir)..\Bin\$(TargetName).exe;%(Outputs)</Outputs>
+      <Command>copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin_x64\ &gt;nul 
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\ &gt;nul </Command>
+      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin_x64</Message>
+      <Outputs>$(SolutionDir)..\Bin_x64\$(TargetName).exe;%(Outputs)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>

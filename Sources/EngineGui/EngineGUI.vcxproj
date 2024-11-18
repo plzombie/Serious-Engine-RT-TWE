@@ -212,7 +212,7 @@ copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\ &gt;nul</Command>
     <CustomBuildStep>
       <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin_x64\ &gt;nul
 copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\ &gt;nul
-copy$(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_x64\ &gt;nul</Command>
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_x64\ &gt;nul</Command>
       <Message>Copying %(Filename) binaries to \Bin</Message>
       <Outputs>$(SolutionDir)..\Bin\$(InputName).dll;%(Outputs)</Outputs>
     </CustomBuildStep>

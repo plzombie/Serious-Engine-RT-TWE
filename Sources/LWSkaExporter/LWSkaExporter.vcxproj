@@ -140,13 +140,9 @@
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;.\SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SE1_VULKAN;NDEBUG;WIN32;_WINDOWS;_USRDLL;LWSKAEXPORTER_EXPORTS;_X86_;_WIN32;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\Release\LWSkaExporter.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <ObjectFileName>Release\</ObjectFileName>
-      <ProgramDataBaseFileName>Release\</ProgramDataBaseFileName>
       <DisableSpecificWarnings>4996;4333</DisableSpecificWarnings>
     </ClCompile>
     <PostBuildEvent>
@@ -173,14 +169,15 @@
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>Release/LWSkaExporter.p</OutputFile>
-      <ImportLibrary>.\Release\LWSkaExporter.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\serv.def</ModuleDefinitionFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Release\$(TargetName).p $(SolutionDir)..\Bin\ &gt;nul
-copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
+      <Command>copy $(OutDir)$(TargetName).p $(SolutionDir)..\Bin\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\ &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin</Message>
+      <Outputs>$(SolutionDir)..\Bin\$(InputName).p;%(Outputs)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -194,13 +191,9 @@ copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;.\SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SE1_VULKAN;NDEBUG;WIN32;_WINDOWS;_USRDLL;LWSKAEXPORTER_EXPORTS;_X86_;_WIN32;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\Release\LWSkaExporter.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <ObjectFileName>Release\</ObjectFileName>
-      <ProgramDataBaseFileName>Release\</ProgramDataBaseFileName>
       <DisableSpecificWarnings>4996;4333</DisableSpecificWarnings>
     </ClCompile>
     <PostBuildEvent>
@@ -226,14 +219,15 @@ copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>Release/LWSkaExporter.p</OutputFile>
-      <ImportLibrary>.\Release\LWSkaExporter.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\serv.def</ModuleDefinitionFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Release\$(TargetName).p $(SolutionDir)..\Bin\ &gt;nul
-copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
+      <Command>copy $(OutDir)$(TargetName).p $(SolutionDir)..\Bin_x64\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_x64\ &gt;nul</Command>
+      <Outputs>$(SolutionDir)..\Bin_x64\$(InputName).p;%(Outputs)</Outputs>
+      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin_x64</Message>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -248,13 +242,9 @@ copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;.\SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SE1_VULKAN;_DEBUG;WIN32;_WINDOWS;_USRDLL;LWSKAEXPORTER_EXPORTS;_X86_;_WIN32;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>Debug\</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\Debug\LWSkaExporter.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <ObjectFileName>Debug\</ObjectFileName>
-      <ProgramDataBaseFileName>Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DisableSpecificWarnings>4996;4333</DisableSpecificWarnings>
     </ClCompile>
@@ -284,15 +274,16 @@ copy Release\$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>Debug/LWSkaExporterD.p</OutputFile>
-      <ImportLibrary>.\Debug\LWSkaExporterD.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\serv.def</ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Debug\$(TargetName).p $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
+      <Command>copy $(OutDir)$(TargetName).p $(SolutionDir)..\Bin\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin\Debug</Message>
+      <Outputs>$(SolutionDir)..\Bin\Debug\$(InputName).p;%(Outputs)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -306,13 +297,9 @@ copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;.\SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SE1_VULKAN;_DEBUG;WIN32;_WINDOWS;_USRDLL;LWSKAEXPORTER_EXPORTS;_X86_;_WIN32;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>Debug\</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <PrecompiledHeaderOutputFile>.\Debug\LWSkaExporter.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <ObjectFileName>Debug\</ObjectFileName>
-      <ProgramDataBaseFileName>Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DisableSpecificWarnings>4996;4333</DisableSpecificWarnings>
     </ClCompile>
@@ -341,15 +328,17 @@ copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <OutputFile>Debug/LWSkaExporterD.p</OutputFile>
-      <ImportLibrary>.\Debug\LWSkaExporterD.lib</ImportLibrary>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>.\serv.def</ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Debug\$(TargetName).p $(SolutionDir)..\Bin\Debug\ &gt;nul
-copy Debug\$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
+      <Command>copy $(OutDir)$(TargetName).p $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
+</Command>
+      <Outputs>$(SolutionDir)..\Bin_x64\Debug\$(InputName).p;%(Outputs)</Outputs>
+      <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin_x64\Debug</Message>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -138,11 +138,8 @@
       <WarningLevel>Level3</WarningLevel>
       <MinimalRebuild>true</MinimalRebuild>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;_DEBUG;_CONSOLE;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>Debug\</AssemblerListingLocation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <ObjectFileName>Debug\</ObjectFileName>
-      <ProgramDataBaseFileName>Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DisableSpecificWarnings>4996;4333</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;</AdditionalIncludeDirectories>
@@ -179,11 +176,8 @@ copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\Debug\ &gt;nul</Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;_DEBUG;_CONSOLE;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>Debug\</AssemblerListingLocation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <ObjectFileName>Debug\</ObjectFileName>
-      <ProgramDataBaseFileName>Debug\</ProgramDataBaseFileName>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DisableSpecificWarnings>4996;4333</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;</AdditionalIncludeDirectories>
@@ -224,11 +218,8 @@ copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\Debug\ &gt;nul</Command
       <OmitFramePointers>false</OmitFramePointers>
       <StringPooling>true</StringPooling>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;NDEBUG;_CONSOLE;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <ObjectFileName>Release\</ObjectFileName>
-      <ProgramDataBaseFileName>Release\</ProgramDataBaseFileName>
       <DisableSpecificWarnings>4996;4333</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;</AdditionalIncludeDirectories>
     </ClCompile>
@@ -268,11 +259,8 @@ copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
       <OmitFramePointers>false</OmitFramePointers>
       <StringPooling>true</StringPooling>
       <PreprocessorDefinitions>SE1_VULKAN;WIN32;NDEBUG;_CONSOLE;DIRECT3D_VERSION=0x0800;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <ObjectFileName>Release\</ObjectFileName>
-      <ProgramDataBaseFileName>Release\</ProgramDataBaseFileName>
       <DisableSpecificWarnings>4996;4333</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;</AdditionalIncludeDirectories>
     </ClCompile>
