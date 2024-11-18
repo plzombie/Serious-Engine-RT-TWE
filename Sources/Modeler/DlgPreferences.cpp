@@ -212,7 +212,7 @@ BOOL CDlgPreferences::OnInitDialog()
       m_ctrlGfxApi.SetCurSel(1);
       break;
 #endif // SE1_D3D
-#ifdef SE1_VULKAN:
+#ifdef SE1_VULKAN
     case GAT_VK:
       m_ctrlGfxApi.SetCurSel(1);
       break;
