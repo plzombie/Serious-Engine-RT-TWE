@@ -100,23 +100,27 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Bin;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
+    <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Bin_x64;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
+    <IntDir>$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Bin\Debug;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)D</TargetName>
+    <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Bin_x64\Debug;$(SolutionDir)..\Tools.Win32\Libraries\DX8SDK\Lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)D</TargetName>
+    <IntDir>$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
