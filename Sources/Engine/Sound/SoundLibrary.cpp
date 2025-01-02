@@ -794,9 +794,9 @@ void CSoundLibrary::Init(void)
   // for each device
   for(INDEX iDevice=0; iDevice<ctDevices; iDevice++) {
     // get description
-    WAVEOUTCAPS woc;
+    WAVEOUTCAPSA woc;
     memset( &woc, 0, sizeof(woc));
-    MMRESULT res = waveOutGetDevCaps(iDevice, &woc, sizeof(woc));
+    MMRESULT res = waveOutGetDevCapsA(iDevice, &woc, sizeof(woc));
     CPrintF(TRANS("    device %d: %s\n"), 
       iDevice, woc.szPname);
     CPrintF(TRANS("      ver: %d, id: %d.%d\n"), 

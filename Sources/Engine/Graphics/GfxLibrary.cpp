@@ -534,9 +534,9 @@ static void GAPInfo(void)
 
   // report renderer
   CDisplayAdapter &da = _pGfx->gl_gaAPI[eAPI].ga_adaAdapter[_pGfx->gl_iCurrentAdapter];
-  if( eAPI==GAT_OGL) CPrintF( "- Vendor:   %s\n", da.da_strVendor);
-  CPrintF( "- Renderer: %s\n", da.da_strRenderer);
-  CPrintF( "- Version:  %s\n", da.da_strVersion);
+  if( eAPI==GAT_OGL) CPrintF( "- Vendor:   %s\n", da.da_strVendor.str_String);
+  CPrintF( "- Renderer: %s\n", da.da_strRenderer.str_String);
+  CPrintF( "- Version:  %s\n", da.da_strVersion.str_String);
   CPrintF( "\n");
 
   // Z-buffer depth
@@ -614,7 +614,7 @@ static void GAPInfo(void)
         CTString strEffect = "Partial anti-aliasing";
         if( ogl_iTBufferEffect<1) strEffect = "none";
         if( ogl_iTBufferEffect>1) strEffect = "Motion blur";
-        CPrintF( "%s (%d buffers used)\n", strEffect, _pGfx->go_ctSampleBuffers);
+        CPrintF( "%s (%d buffers used)\n", strEffect.str_String, _pGfx->go_ctSampleBuffers);
       }
     }
 
@@ -672,9 +672,9 @@ static void GAPInfo(void)
     } */
     // report OpenGL externsions
     CPrintF("\n");
-    CPrintF("- Published extensions: %s", ReformatExtensionsString(_pGfx->go_strExtensions));
-    if( _pGfx->go_strWinExtensions != "") CPrintF("%s", ReformatExtensionsString(_pGfx->go_strWinExtensions));
-    CPrintF("\n- Supported extensions: %s\n", ReformatExtensionsString(_pGfx->go_strSupportedExtensions));
+    CPrintF("- Published extensions: %s", ReformatExtensionsString(_pGfx->go_strExtensions).str_String);
+    if( _pGfx->go_strWinExtensions != "") CPrintF("%s", ReformatExtensionsString(_pGfx->go_strWinExtensions).str_String);
+    CPrintF("\n- Supported extensions: %s\n", ReformatExtensionsString(_pGfx->go_strSupportedExtensions).str_String);
   }
 
   // Direct3D only stuff

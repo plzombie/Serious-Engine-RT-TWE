@@ -134,9 +134,9 @@ static void DetectCPU(void)
   // ebx
   memcpy(&strVendor[0], &cpuidData[1], 4);
   // edx
-  memcpy(&strVendor[0], &cpuidData[3], 4);
+  memcpy(&strVendor[4], &cpuidData[3], 4);
   // ecx
-  memcpy(&strVendor[0], &cpuidData[2], 4);
+  memcpy(&strVendor[8], &cpuidData[2], 4);
 
   // 1: Processor Info and Feature Bits
   __cpuid(cpuidData, 1);
@@ -173,8 +173,8 @@ static void DetectCPU(void)
   CTString strYes = TRANS("Yes");
   CTString strNo = TRANS("No");
 
-  CPrintF(TRANS("  MMX : %s\n"), bMMX ?strYes:strNo);
-  CPrintF(TRANS("  CMOV: %s\n"), bCMOV?strYes:strNo);
+  CPrintF(TRANS("  MMX : %s\n"), bMMX ?strYes.str_String:strNo.str_String);
+  CPrintF(TRANS("  CMOV: %s\n"), bCMOV?strYes.str_String:strNo.str_String);
   CPrintF(TRANS("  Clock: %.0fMHz\n"), _pTimer->tm_llCPUSpeedHZ/1E6);
 
   sys_strCPUVendor = strVendor;

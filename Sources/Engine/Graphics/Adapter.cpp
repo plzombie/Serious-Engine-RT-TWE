@@ -98,10 +98,10 @@ void CGfxLibrary::InitAPIs(void)
   INDEX iResolution;
 
   // detect current mode and print to console
-  DEVMODE devmode;
+  DEVMODEA devmode;
   memset( &devmode, 0, sizeof(devmode));
   devmode.dmSize = sizeof(devmode);
-  LONG lRes = EnumDisplaySettings(NULL, ENUM_CURRENT_SETTINGS, &devmode);
+  LONG lRes = EnumDisplaySettingsA(NULL, ENUM_CURRENT_SETTINGS, &devmode);
   CPrintF( TRANS("Current display: '%s' version %d - %dx%dx%d\n\n"), 
            devmode.dmDeviceName, devmode.dmDriverVersion,
            devmode.dmPelsWidth, devmode.dmPelsHeight, devmode.dmBitsPerPel);
@@ -448,7 +448,7 @@ BOOL CDS_SetMode( PIX pixSizeI, PIX pixSizeJ, enum DisplayDepth dd)
       case DISP_CHANGE_NOTUPDATED:  strError = "DISP_CHANGE_NOTUPDATED"; break;
       default: strError.PrintF("%d", lRes); break;
       }
-      CPrintF(TRANS("CDS error: %s\n"), strError);
+      CPrintF(TRANS("CDS error: %s\n"), strError.str_String);
       return FALSE;
     }
   }

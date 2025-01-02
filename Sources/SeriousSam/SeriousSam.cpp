@@ -404,14 +404,14 @@ void InitializeGame(void)
     CTFileName fnmExpanded;
     ExpandFilePath(EFP_READ, CTString(GAMEDLL), fnmExpanded);
 
-    CPrintF(TRANS("Loading game library '%s'...\n"), (const char *)fnmExpanded);
+    CPrintF(TRANS("Loading game library '%s'...\n"), fnmExpanded.str_String);
     HMODULE hGame = LoadLibraryA(fnmExpanded);
     if (hGame==NULL) {
-      ThrowF_t("%s", GetWindowsError(GetLastError()));
+      ThrowF_t("%s", GetWindowsError(GetLastError()).str_String);
     }
     CGame* (*GAME_Create)(void) = (CGame* (*)(void))GetProcAddress(hGame, "GAME_Create");
     if (GAME_Create==NULL) {
-      ThrowF_t("%s", GetWindowsError(GetLastError()));
+      ThrowF_t("%s", GetWindowsError(GetLastError()).str_String);
     }
     _pGame = GAME_Create();
 
@@ -442,7 +442,7 @@ BOOL Init( HINSTANCE hInstance, int nCmdShow, CTString strCmdLine)
 
   SE_LoadDefaultFonts();
   // now print the output of command line parsing
-  CPrintF("%s", cmd_strOutput);
+  CPrintF("%s", cmd_strOutput.str_String);
 
   // lock the directory
   DirectoryLockOn();
@@ -534,9 +534,9 @@ BOOL Init( HINSTANCE hInstance, int nCmdShow, CTString strCmdLine)
 
   // execute script given on command line
   if (cmd_strScript!="") {
-    CPrintF("Command line script: '%s'\n", cmd_strScript);
+    CPrintF("Command line script: '%s'\n", cmd_strScript.str_String);
     CTString strCmd;
-    strCmd.PrintF("include \"%s\"", cmd_strScript);
+    strCmd.PrintF("include \"%s\"", cmd_strScript.str_String);
     _pShell->Execute(strCmd);
   }
   
@@ -548,8 +548,8 @@ BOOL Init( HINSTANCE hInstance, int nCmdShow, CTString strCmdLine)
   // !! NOTE !! Re-enable these to allow mod support.
   LoadStringVar(CTString("Data\\Var\\Sam_Version.var"), sam_strVersion);
   LoadStringVar(CTString("Data\\Var\\ModName.var"), sam_strModName);
-  CPrintF(TRANS("Serious Sam version: %s\n"), sam_strVersion);
-  CPrintF(TRANS("Active mod: %s\n"), sam_strModName);
+  CPrintF(TRANS("Serious Sam version: %s\n"), sam_strVersion.str_String);
+  CPrintF(TRANS("Active mod: %s\n"), sam_strModName.str_String);
   InitializeMenus();      
   
   // if there is a mod
@@ -588,7 +588,7 @@ BOOL Init( HINSTANCE hInstance, int nCmdShow, CTString strCmdLine)
       _pShell->SetINDEX("net_iPort", cmd_iPort);
       strPort.PrintF(":%d", cmd_iPort);
     }
-    CPrintF(TRANS("Command line connection: '%s%s'\n"), cmd_strServer, strPort);
+    CPrintF(TRANS("Command line connection: '%s%s'\n"), cmd_strServer.str_String, strPort.str_String);
     // go to join menu
     _pGame->gam_strJoinAddress = cmd_strServer;
     if (cmd_bQuickJoin) {
@@ -599,7 +599,7 @@ BOOL Init( HINSTANCE hInstance, int nCmdShow, CTString strCmdLine)
     }
   // if starting world from command line
   } else if (cmd_strWorld!="") {
-    CPrintF(TRANS("Command line world: '%s'\n"), cmd_strWorld);
+    CPrintF(TRANS("Command line world: '%s'\n"), cmd_strWorld.str_String);
     // try to start the game with that level
     try {
       if (cmd_iGoToMarker>=0) {
@@ -617,7 +617,7 @@ BOOL Init( HINSTANCE hInstance, int nCmdShow, CTString strCmdLine)
         StartSinglePlayerGame();
       }
     } catch (char *strError) {
-      CPrintF(TRANS("Cannot start '%s': '%s'\n"), cmd_strWorld, strError);
+      CPrintF(TRANS("Cannot start '%s': '%s'\n"), cmd_strWorld.str_String, strError);
     }
   // if no relevant starting at command line
   } else {
@@ -674,7 +674,7 @@ void PrintDisplayModeInfo(void)
   // get resolution
   CTString strRes;
   extern CTString _strPreferencesDescription;
-  strRes.PrintF( "%dx%dx%s", slDPWidth, slDPHeight, _pGfx->gl_dmCurrentDisplayMode.DepthString());
+  strRes.PrintF( "%dx%dx%s", slDPWidth, slDPHeight, _pGfx->gl_dmCurrentDisplayMode.DepthString().str_String);
 
   if( dm.IsDualHead())   strRes += TRANS(" DualMonitor");
   if( dm.IsWideScreen()) strRes += TRANS(" WideScreen");
@@ -690,7 +690,7 @@ void PrintDisplayModeInfo(void)
 
 
   CTString strDescr;
-  strDescr.PrintF("\n%s (%s)\n", _strPreferencesDescription, RenderingPreferencesDescription(sam_iVideoSetup));
+  strDescr.PrintF("\n%s (%s)\n", _strPreferencesDescription.str_String, RenderingPreferencesDescription(sam_iVideoSetup));
   strRes+=strDescr;
 
   // tell if application is started for the first time, or failed to set mode
@@ -1226,14 +1226,14 @@ int SubMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int 
     // if addon is to be executed
     if (_iAddonExecState==1) {
       // print header and start console
-      CPrintF(TRANS("---- Executing addon: '%s'\n"), (const char*)_fnmAddonToExec);
+      CPrintF(TRANS("---- Executing addon: '%s'\n"), _fnmAddonToExec.str_String);
       sam_bToggleConsole = TRUE;
       _iAddonExecState = 2;
     // if addon is ready for execution
     } else if (_iAddonExecState==2 && _pGame->gm_csConsoleState == CS_ON) {
       // execute it
       CTString strCmd;
-      strCmd.PrintF("include \"%s\"", (const char*)_fnmAddonToExec);
+      strCmd.PrintF("include \"%s\"", _fnmAddonToExec.str_String);
       _pShell->Execute(strCmd);
       CPrintF(TRANS("Addon done, press Escape to close console\n"));
       _iAddonExecState = 3;
@@ -1276,7 +1276,7 @@ int SubMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int 
 
 	if (CreateProcessA(strCmd,strParam,NULL,NULL,FALSE,CREATE_DEFAULT_ERROR_MODE,NULL,NULL,&cif,&pi) == FALSE)
 	{
-	  MessageBox(0, L"error launching the Mod!\n", L"Serious Sam", MB_OK|MB_ICONERROR);		
+	  MessageBoxW(0, L"error launching the Mod!\n", L"Serious Sam", MB_OK|MB_ICONERROR);		
 	}
   }
   // invoke quit screen if needed

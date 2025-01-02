@@ -186,7 +186,7 @@ static void DumpDemoProfile(void)
     strm.FPrintF_t( strFragment);
     strm.FPrintF_t( strAnalyzed);
     // done!
-    CPrintF( TRANS("Demo profile data dumped to '%s'.\n"), strFileName);
+    CPrintF( TRANS("Demo profile data dumped to '%s'.\n"), strFileName.str_String);
   } 
   catch (char *strError) {
     // something went wrong :(
@@ -1225,7 +1225,7 @@ BOOL CGame::LoadGame(const CTFileName &fnGame)
   // start the new session
   try {
     _pNetwork->Load_t( fnGame);
-    CPrintF(TRANS("Loaded game: %s\n"), fnGame);
+    CPrintF(TRANS("Loaded game: %s\n"), fnGame.str_String);
   } catch (char *strError) {
     // stop network provider
     _pNetwork->StopProvider();
@@ -1275,7 +1275,7 @@ BOOL CGame::StartDemoPlay(const CTFileName &fnDemo)
   // start the new session
   try {
     _pNetwork->StartDemoPlay_t( fnDemo);
-    CPrintF(TRANS("Started playing demo: %s\n"), fnDemo);
+    CPrintF(TRANS("Started playing demo: %s\n"), fnDemo.str_String);
   } catch (char *strError) {
     // stop network provider
     _pNetwork->StopProvider();
@@ -1305,7 +1305,7 @@ BOOL CGame::StartDemoPlay(const CTFileName &fnDemo)
     fnmScript = CTString("Demos\\Default.ini");
   }
   CTString strCmd;
-  strCmd.PrintF("include \"%s\"", (const char*)fnmScript);
+  strCmd.PrintF("include \"%s\"", fnmScript.str_String);
   _pShell->Execute(strCmd);
 
   MaybeDiscardLastLines();
@@ -1319,7 +1319,7 @@ BOOL CGame::StartDemoRec(const CTFileName &fnDemo)
   // save demo recording
   try {
     _pNetwork->StartDemoRec_t( fnDemo);
-    CPrintF(TRANS("Started recording demo: %s\n"), fnDemo);
+    CPrintF(TRANS("Started recording demo: %s\n"), fnDemo.str_String);
     // save a thumbnail
     SaveThumbnail(fnDemo.NoExt()+"Tbn.tex");
     return TRUE;
@@ -1355,7 +1355,7 @@ BOOL CGame::SaveGame(const CTFileName &fnGame)
   // save new session
   try {
     _pNetwork->Save_t( fnGame);
-    CPrintF(TRANS("Saved game: %s\n"), fnGame);
+    CPrintF(TRANS("Saved game: %s\n"), fnGame.str_String);
     SaveThumbnail(fnGame.NoExt()+"Tbn.tex");
     return TRUE;
   } catch (char *strError) {
@@ -1771,7 +1771,7 @@ static void PrintStats( CDrawPort *pdpDrawPort)
   // display resolution info (if needed)
   if( hud_bShowResolution) {
     CTString strRes;
-    strRes.PrintF( "%dx%dx%s", slDPWidth, slDPHeight, _pGfx->gl_dmCurrentDisplayMode.DepthString());
+    strRes.PrintF( "%dx%dx%s", slDPWidth, slDPHeight, _pGfx->gl_dmCurrentDisplayMode.DepthString().str_String);
     pdpDrawPort->SetFont( _pfdDisplayFont);
     pdpDrawPort->SetTextScaling( fTextScale);
     pdpDrawPort->SetTextAspect( 1.0f);
@@ -2266,7 +2266,7 @@ void CGame::GameRedrawView( CDrawPort *pdpDrawPort, ULONG ulFlags)
       // print pause indicators
       CTString strIndicator;
       if (_pNetwork->IsDisconnected()) {
-        strIndicator.PrintF(TRANS("Disconnected: %s\nPress F9 to reconnect"), (const char *)_pNetwork->WhyDisconnected());
+        strIndicator.PrintF(TRANS("Disconnected: %s\nPress F9 to reconnect"), _pNetwork->WhyDisconnected().str_String);
       } else if (_pNetwork->IsWaitingForPlayers()) {
         strIndicator = TRANS("Waiting for all players to connect");
       } else if (_pNetwork->IsWaitingForServer()) {
@@ -2409,7 +2409,7 @@ void CGame::GameRedrawView( CDrawPort *pdpDrawPort, ULONG ulFlags)
     try {
       // save screen shot as TGA
       iiImageInfo.SaveTGA_t( fnmScreenShot);
-      if( dem_iAnimFrame<0) CPrintF( TRANS("screen shot: %s\n"), (CTString&)fnmScreenShot);
+      if( dem_iAnimFrame<0) CPrintF( TRANS("screen shot: %s\n"), fnmScreenShot.str_String);
     }
     // if failed
     catch (char *strError) {
@@ -2518,7 +2518,7 @@ CTString CGame::GetDefaultGameDescription(BOOL bWithInfo)
   strTimeline = achTimeLine;
   //setlocale(LC_ALL, "C");
 
-  strDescription.PrintF( "%s - %s", TranslateConst(_pNetwork->ga_World.GetName(), 0), strTimeline);
+  strDescription.PrintF( "%s - %s", TranslateConst(_pNetwork->ga_World.GetName().str_String, 0), strTimeline.str_String);
 
   if (bWithInfo) {
     CPlayer *penPlayer = (CPlayer *)&*CEntity::GetPlayerEntity(0);

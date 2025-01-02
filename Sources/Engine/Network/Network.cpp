@@ -343,7 +343,7 @@ static void NetworkInfo(void)
       CPlayerBuffer &plb = _pNetwork->ga_srvServer.srv_aplbPlayers[iplb];
       if (plb.plb_Active) {
         CPrintF("    %2d(%2d):'%s'@client%2d: (%dact)\n",
-          iplb, plb.plb_Index, plb.plb_pcCharacter.GetNameForPrinting(),
+          iplb, plb.plb_Index, plb.plb_pcCharacter.GetNameForPrinting().str_String,
           plb.plb_iClient, plb.plb_abReceived.GetCount());
       }
     }
@@ -408,7 +408,7 @@ static void ListPlayers(void)
   for(INDEX iplb=0; iplb<_pNetwork->ga_srvServer.srv_aplbPlayers.Count(); iplb++) {
     CPlayerBuffer &plb = _pNetwork->ga_srvServer.srv_aplbPlayers[iplb];
     if (plb.plb_Active) {
-      CPrintF("     %-2d   %s\n", plb.plb_iClient, plb.plb_pcCharacter.GetNameForPrinting());
+      CPrintF("     %-2d   %s\n", plb.plb_iClient, plb.plb_pcCharacter.GetNameForPrinting().str_String);
     }
   }
   CPrintF("  ----------------------\n");
@@ -429,7 +429,7 @@ static void KickClient(INDEX iClient, const CTString &strReason)
     CPrintF(TRANS("Can't kick local client!\n"));
     return;
   }
-  CPrintF( TRANS("Kicking %d with explanation '%s'...\n"), iClient, strReason);
+  CPrintF( TRANS("Kicking %d with explanation '%s'...\n"), iClient, strReason.str_String);
   _pNetwork->ga_srvServer.SendDisconnectMessage(iClient, "Admin: "+strReason);
 }
 static void KickClientCfunc(void* pArgs)
@@ -647,7 +647,7 @@ static void StockDump(void)
     _pSoundStock->DumpMemoryUsage_t(strm);
     strm.PutLine_t("Classes:");
     _pEntityClassStock->DumpMemoryUsage_t(strm);
-    CPrintF("Dumped to '%s'\n", CTString(fnm));
+    CPrintF("Dumped to '%s'\n", CTString(fnm).str_String);
   } catch (char *strError) {
     CPrintF("Error: %s\n", strError);
   }
@@ -1004,8 +1004,8 @@ void CNetworkLibrary::StartPeerToPeer_t(const CTString &strSessionName,
   _pSound->Mute();
 
   // go on
-  CPrintF( TRANS("Starting session: '%s'\n"), strSessionName);
-  CPrintF( TRANS("  level: '%s'\n"), (const char*) fnmWorld);
+  CPrintF( TRANS("Starting session: '%s'\n"), strSessionName.str_String);
+  CPrintF( TRANS("  level: '%s'\n"), fnmWorld.str_String);
   CPrintF( TRANS("  spawnflags: %08x\n"), ulSpawnFlags);
   CPrintF( TRANS("  max players: %d\n"), ctMaxPlayers);
   CPrintF( TRANS("  waiting: %d\n"), bWaitAllPlayers);
@@ -1269,7 +1269,7 @@ void CNetworkLibrary::JoinSession_t(const CNetworkSession &nsSesssion, INDEX ctL
   _pSound->Mute();
 
   // report session addres
-  CPrintF( TRANS("Joining session at: '%s'\n"), nsSesssion.ns_strAddress);
+  CPrintF( TRANS("Joining session at: '%s'\n"), nsSesssion.ns_strAddress.str_String);
 
   ga_bLocalPause = FALSE;
 
@@ -1862,7 +1862,7 @@ static void SendAdminResponse(ULONG ulAdr, UWORD uwPort, ULONG ulCode, const CTS
     str.DeleteChar(0);
     if (strLine.Length()>0) {
       CNetworkMessage nm(MSG_EXTRA);
-      nm<<CTString(0, "log %u %d %s\n", ulCode, iLineCt++, strLine);
+      nm<<CTString(0, "log %u %d %s\n", ulCode, iLineCt++, strLine.str_String);
       _pNetwork->SendBroadcast(nm, ulAdr, uwPort);
     }
   }
@@ -2041,11 +2041,11 @@ void CNetworkLibrary::MainLoop(void)
         CTString strAdr = AddressToString(ulFrom);
 
         if (net_strAdminPassword=="" || net_strAdminPassword!=strPass) {
-          CPrintF(TRANS("Server: Client '%s', Wrong password for remote administration.\n"), (const char*)strAdr);
+          CPrintF(TRANS("Server: Client '%s', Wrong password for remote administration.\n"), strAdr.str_String);
           continue;
         }
 
-        CPrintF(TRANS("Server: Client '%s', Admin cmd: %s\n"), (const char*)strAdr, strCmd);
+        CPrintF(TRANS("Server: Client '%s', Admin cmd: %s\n"), strAdr.str_String, strCmd);
 
         con_bCapture = TRUE;
         con_strCapture = "";
@@ -2256,7 +2256,7 @@ CPlayerSource *CNetworkLibrary::AddPlayer_t(CPlayerCharacter &pcCharacter)  // t
 {
   // synchronize access to network
   CTSingleLock slNetwork(&ga_csNetwork, TRUE);
-  CPrintF( TRANS("Adding player: '%s'\n"), pcCharacter.GetNameForPrinting());
+  CPrintF( TRANS("Adding player: '%s'\n"), pcCharacter.GetNameForPrinting().str_String);
 
   // for all local clients on this machine
   FOREACHINSTATICARRAY(ga_aplsPlayers, CPlayerSource, itcls) {
@@ -2332,7 +2332,7 @@ void CNetworkLibrary::CheckVersion_t(CTStream &strm, BOOL bAllowReinit, BOOL &bN
   if (iCurrent<iSaved) {
     // it cannot be reinitialized
     ThrowF_t(TRANS("File '%s' was saved by a newer version of engine, it cannot be loaded"),
-      strm.GetDescription());
+      strm.GetDescription().str_String);
     return;
   }
 
@@ -2351,7 +2351,7 @@ void CNetworkLibrary::CheckVersion_t(CTStream &strm, BOOL bAllowReinit, BOOL &bN
     // if it may not be reinitialized
     if (!bAllowReinit) {
       ThrowF_t(TRANS("File '%s' was saved by an older version of engine, it cannot be loaded"),
-        strm.GetDescription());
+        strm.GetDescription().str_String);
     }
     return;
   }
