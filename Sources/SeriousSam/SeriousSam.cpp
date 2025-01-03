@@ -422,9 +422,41 @@ void InitializeGame(void)
   _pGame->Initialize(CTString("Data\\SeriousSam.gms"));
 }
 
+static void DisableDPIScaling(void)
+{
+  typedef BOOL (WINAPI *SetProcessDpiAwarenessContext_t)(DPI_AWARENESS_CONTEXT value);
+  typedef HRESULT (WINAPI *SetProcessDpiAwareness_t)(PROCESS_DPI_AWARENESS value);
+  typedef BOOL(WINAPI *SetProcessDPIAware_t)(void);
+
+  HMODULE hSHCORE, hUSER32;
+  SetProcessDpiAwarenessContext_t pSetProcessDpiAwarenessContext = 0;
+  SetProcessDpiAwareness_t pSetProcessDpiAwareness = 0;
+  SetProcessDPIAware_t pSetProcessDPIAware = 0;
+
+  hUSER32 = GetModuleHandleW(L"User32.dll");
+  if(hUSER32) {
+    pSetProcessDPIAware = (SetProcessDPIAware_t)GetProcAddress(hUSER32, "SetProcessDPIAware");
+    pSetProcessDpiAwarenessContext = (SetProcessDpiAwarenessContext_t)GetProcAddress(hUSER32, "SetProcessDpiAwarenessContext");
+  }
+
+  hSHCORE = GetModuleHandleW(L"Shcore.dll");
+  if(!hSHCORE) hSHCORE = LoadLibraryW(L"Shcore.dll");
+  if(hSHCORE) {
+    pSetProcessDpiAwareness = (SetProcessDpiAwareness_t)GetProcAddress(hSHCORE, "SetProcessDpiAwareness");
+  }
+
+  if(pSetProcessDpiAwarenessContext)
+    pSetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+  else if(pSetProcessDpiAwareness)
+    pSetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
+  else if(pSetProcessDPIAware)
+    pSetProcessDPIAware();
+}
+
 BOOL Init( HINSTANCE hInstance, int nCmdShow, CTString strCmdLine)
 {
   _hInstance = hInstance;
+  DisableDPIScaling();
   ShowSplashScreen(hInstance);
 
   // remember desktop width

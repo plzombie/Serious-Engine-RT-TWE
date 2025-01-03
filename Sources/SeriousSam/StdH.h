@@ -23,6 +23,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #define DECL_DLL _declspec(dllimport)
 #endif
 
+#ifdef WIN32
+#include <shellscalingapi.h>
+#endif
+
 #ifdef PLATFORM_UNIX
 #define DECL_DLL 
 #endif
