@@ -417,7 +417,7 @@ static BOOL HasExtension( const char *strAllExtensions, const char *strExtension
   const char *strFound = strstr( strAllExtensions, strExtension);
   //  no extension if not found
   if( strFound==NULL) return FALSE;
-  INDEX iExtensionLen = strlen(strExtension);
+  size_t iExtensionLen = strlen(strExtension);
   // if found substring is substring of some other extension
   if( strFound[iExtensionLen]!=' ' && strFound[iExtensionLen]!=0) {
     // continue searching after that char

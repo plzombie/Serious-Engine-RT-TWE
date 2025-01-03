@@ -153,13 +153,14 @@ void CAnimData::Clear()
 // get amount of memory used by this object
 SLONG CAnimData::GetUsedMemory(void)
 {
-  SLONG slUsed = sizeof(*this)+sizeof(COneAnim)*ad_NumberOfAnims;
+  size_t slUsed = sizeof(*this)+sizeof(COneAnim)*ad_NumberOfAnims;
   slUsed += strlen(GetName())+1;
 
   for(INDEX iAnim=0; iAnim<ad_NumberOfAnims; iAnim++) {
     slUsed += ad_Anims[iAnim].oa_NumberOfFrames*sizeof(INDEX);
   }
-  return slUsed;
+  if(slUsed > MAX_SLONG) return -1;
+  return (SLONG)slUsed;
 }
 
 // check if this kind of objects is auto-freed

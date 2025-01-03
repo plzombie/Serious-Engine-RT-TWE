@@ -110,7 +110,7 @@ BOOL CTString::RemovePrefix( const CTString &strPrefix)
 /* Check if has given prefix */
 BOOL CTString::HasPrefix( const CTString &strPrefix) const
 {
-  INDEX lenPrefix = strlen( strPrefix);
+  size_t lenPrefix = strlen( strPrefix);
   if( strnicmp( str_String, strPrefix, lenPrefix) != 0)
     return FALSE;
   return TRUE;
@@ -287,9 +287,9 @@ void CTString::OnlyFirstLine(void)
 ULONG CTString::GetHash(void) const
 {
   ULONG ulKey = 0;
-  INDEX len = strlen(str_String);
+  size_t len = strlen(str_String);
 
-  for(INDEX i=0; i<len; i++) {
+  for(size_t i=0; i<len; i++) {
     ulKey = _rotl(ulKey,4)+toupper(str_String[i]);
   }
   return ulKey;
