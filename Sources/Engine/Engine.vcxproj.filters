@@ -640,12 +640,6 @@
     <ClCompile Include="zlib\deflate.c">
       <Filter>Source Files\zlib</Filter>
     </ClCompile>
-    <ClCompile Include="zlib\infblock.c">
-      <Filter>Source Files\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="zlib\infcodes.c">
-      <Filter>Source Files\zlib</Filter>
-    </ClCompile>
     <ClCompile Include="zlib\inffast.c">
       <Filter>Source Files\zlib</Filter>
     </ClCompile>
@@ -653,9 +647,6 @@
       <Filter>Source Files\zlib</Filter>
     </ClCompile>
     <ClCompile Include="zlib\inftrees.c">
-      <Filter>Source Files\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="zlib\infutil.c">
       <Filter>Source Files\zlib</Filter>
     </ClCompile>
     <ClCompile Include="zlib\trees.c">
@@ -839,6 +830,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Raytracing\RTLights.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\crc32.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1338,12 +1332,6 @@
     <ClInclude Include="zlib\deflate.h">
       <Filter>Header Files\zlib Headers</Filter>
     </ClInclude>
-    <ClInclude Include="zlib\infblock.h">
-      <Filter>Header Files\zlib Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="zlib\infcodes.h">
-      <Filter>Header Files\zlib Headers</Filter>
-    </ClInclude>
     <ClInclude Include="zlib\inffast.h">
       <Filter>Header Files\zlib Headers</Filter>
     </ClInclude>
@@ -1351,9 +1339,6 @@
       <Filter>Header Files\zlib Headers</Filter>
     </ClInclude>
     <ClInclude Include="zlib\inftrees.h">
-      <Filter>Header Files\zlib Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="zlib\infutil.h">
       <Filter>Header Files\zlib Headers</Filter>
     </ClInclude>
     <ClInclude Include="zlib\trees.h">
@@ -1507,6 +1492,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Raytracing\SSRTGlobals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\crc32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inflate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\gzguts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

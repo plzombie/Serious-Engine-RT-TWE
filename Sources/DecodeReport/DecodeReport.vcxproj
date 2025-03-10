@@ -281,8 +281,8 @@ copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin\ &gt;nul</Command>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <CustomBuildStep>
-      <Command>copy Release\$(TargetName).exe $(SolutionDir)..\Bin_x64\ &gt;nul
-copy Release\$(TargetName).map $(SolutionDir)..\Bin_x64\ &gt;nul</Command>
+      <Command>copy $(OutDir)$(TargetName).exe $(SolutionDir)..\Bin_x64\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\ &gt;nul</Command>
       <Message>Copying %(Filename) binaries to $(ENGINE_DIR)\Bin_x64</Message>
       <Outputs>$(SolutionDir)..\Bin_x64\$(TargetName).exe</Outputs>
     </CustomBuildStep>
