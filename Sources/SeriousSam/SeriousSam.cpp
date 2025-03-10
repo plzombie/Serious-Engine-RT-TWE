@@ -362,7 +362,8 @@ BOOL FileExistsOnHD(const CTString &strFile)
 
 void TrimString(char *str)
 {
-  int i = strlen(str);
+  size_t i = strlen(str);
+  if(!i) return;
   if (str[i-1]=='\n' || str[i-1]=='\r') {
     str[i-1]=0;
   }
@@ -371,7 +372,7 @@ void TrimString(char *str)
 // run web browser and view an url
 void RunBrowser(const char *strUrl)
 {
-  int iResult = (int)ShellExecuteA( _hwndMain, "OPEN", strUrl, NULL, NULL, SW_SHOWMAXIMIZED);
+  intptr_t iResult = (intptr_t)ShellExecuteA( _hwndMain, "OPEN", strUrl, NULL, NULL, SW_SHOWMAXIMIZED);
   if (iResult<32) {
     // should report error?
     NOTHING;
