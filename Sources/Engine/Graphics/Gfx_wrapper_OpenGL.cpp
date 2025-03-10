@@ -996,7 +996,7 @@ static void ogl_SetTextureModulation( INDEX iScale)
 
 
 // generate texture for API
-static void ogl_GenerateTexture( ULONG &ulTexObject)
+static void ogl_GenerateTexture( ULONG_PTR &ulTexObject)
 {
   ASSERT( _pGfx->gl_eCurrentAPI==GAT_OGL);
   _sfStats.StartTimer(CStatForm::STI_BINDTEXTURE);
@@ -1012,7 +1012,7 @@ static void ogl_GenerateTexture( ULONG &ulTexObject)
 
  
 // unbind texture from API
-static void ogl_DeleteTexture( ULONG &ulTexObject)
+static void ogl_DeleteTexture( ULONG_PTR &ulTexObject)
 {
   // skip if already unbound
   ASSERT( _pGfx->gl_eCurrentAPI==GAT_OGL);

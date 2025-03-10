@@ -199,14 +199,14 @@ extern void (*gfxSetTextureModulation)( INDEX iScale);
 extern void gfxSetTextureUnit( INDEX iUnit);
 
 // generate texture for API
-extern void (*gfxGenerateTexture)( ULONG &ulTexObject);
+extern void (*gfxGenerateTexture)( ULONG_PTR &ulTexObject);
 // unbind texture from API
-extern void (*gfxDeleteTexture)( ULONG &ulTexObject);
+extern void (*gfxDeleteTexture)( ULONG_PTR &ulTexObject);
 
 
 // set texture as current
 //  - ulTexture = bind number for OGL, or *LPDIRECT3DTEXTURE8 for D3D (pointer to pointer!)
-extern void gfxSetTexture( ULONG &ulTexObject, CTexParams &tpLocal);
+extern void gfxSetTexture( ULONG_PTR &ulTexObject, CTexParams &tpLocal);
 
 // upload texture
 // - ulTexture  = bind number for OGL, or LPDIRECT3DTEXTURE8 for D3D

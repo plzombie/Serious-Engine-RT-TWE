@@ -125,8 +125,8 @@ extern void (*gfxSetViewMatrix)( const FLOAT *pfMatrix) = NULL;
 extern void (*gfxPolygonMode)( GfxPolyMode ePolyMode) = NULL;
 extern void (*gfxSetTextureWrapping)( enum GfxWrap eWrapU, enum GfxWrap eWrapV) = NULL;
 extern void (*gfxSetTextureModulation)( INDEX iScale) = NULL;
-extern void (*gfxGenerateTexture)( ULONG &ulTexObject) = NULL;
-extern void (*gfxDeleteTexture)( ULONG &ulTexObject) = NULL;
+extern void (*gfxGenerateTexture)( ULONG_PTR &ulTexObject) = NULL;
+extern void (*gfxDeleteTexture)( ULONG_PTR &ulTexObject) = NULL;
 extern void (*gfxSetVertexArray)( GFXVertex4 *pvtx, INDEX ctVtx) = NULL;
 extern void (*gfxSetNormalArray)( GFXNormal *pnor) = NULL;
 extern void (*gfxSetTexCoordArray)( GFXTexCoord *ptex, BOOL b4) = NULL;
@@ -395,7 +395,7 @@ extern void gfxSetTextureUnit( INDEX iUnit)
 
 
 // set texture as current
-extern void gfxSetTexture( ULONG &ulTexObject, CTexParams &tpLocal)
+extern void gfxSetTexture(ULONG_PTR &ulTexObject, CTexParams &tpLocal)
 {
   // clamp texture filtering if needed
   static INDEX _iLastTextureFiltering = 0;
@@ -643,7 +643,7 @@ extern INDEX gfxGetFormatPixRatio( ULONG ulTextureFormat)
 // PATTERN TEXTURE FOR LINES
 
 CTexParams _tpPattern;
-extern ULONG _ulPatternTexture = NONE;
+extern ULONG_PTR _ulPatternTexture = NONE;
 extern ULONG _ulLastUploadedPattern = 0;
 
 // upload pattern to accelerator memory
@@ -838,7 +838,7 @@ static void none_SetMatrix( const FLOAT *pfMatrix) { NOTHING; };
 static void none_PolygonMode( GfxPolyMode ePolyMode) { NOTHING; };
 static void none_SetTextureWrapping( enum GfxWrap eWrapU, enum GfxWrap eWrapV) { NOTHING; };
 static void none_SetTextureModulation( INDEX iScale) { NOTHING; };
-static void none_GenDelTexture( ULONG &ulTexObject) { NOTHING; };
+static void none_GenDelTexture( ULONG_PTR &ulTexObject) { NOTHING; };
 static void none_SetVertexArray( GFXVertex4 *pvtx, INDEX ctVtx) { NOTHING; };
 static void none_SetNormalArray( GFXNormal *pnor) { NOTHING; };
 static void none_SetTexCoordArray( GFXTexCoord *ptex, BOOL b4) { NOTHING; };

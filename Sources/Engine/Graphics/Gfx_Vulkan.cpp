@@ -42,8 +42,8 @@ FLOAT	VkViewMatrix[16];
 
 
 // fog/haze textures
-extern ULONG _fog_ulTexture;
-extern ULONG _haze_ulTexture;
+extern ULONG_PTR _fog_ulTexture;
+extern ULONG_PTR _haze_ulTexture;
 static VkDescriptorSet _no_ulTextureDescSet;
 
 extern BOOL GFX_abTexture[GFX_MAXTEXUNITS];
@@ -492,7 +492,7 @@ void SvkMain::InitContext_Vulkan()
 
   // prepare pattern texture
   extern CTexParams _tpPattern;
-  extern ULONG _ulPatternTexture;
+  extern ULONG_PTR _ulPatternTexture;
   extern ULONG _ulLastUploadedPattern;
   _ulPatternTexture = CreateTexture();
   _ulLastUploadedPattern = 0;

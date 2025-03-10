@@ -39,7 +39,7 @@ static BOOL _bTexture = FALSE;
 static BOOL _bDepth = FALSE;
 static BOOL _bMultiTexture = FALSE;
 static UBYTE *_pubTexture;
-static ULONG _ulTexObject;
+static ULONG_PTR _ulTexObject;
 static ULONG _ulTexFormat;
 static BOOL _bSubImage = FALSE;
 static INDEX _ctR = 100;

@@ -35,8 +35,8 @@ extern INDEX ogl_iTBufferSamples;
 
 
 // fog/haze textures
-extern ULONG _fog_ulTexture;
-extern ULONG _haze_ulTexture;
+extern ULONG_PTR _fog_ulTexture;
+extern ULONG_PTR _haze_ulTexture;
 
 // change control
 extern INDEX GFX_ctVertices;
@@ -716,7 +716,7 @@ void CGfxLibrary::InitContext_OGL(void)
 
   // prepare pattern texture
   extern CTexParams _tpPattern;
-  extern ULONG _ulPatternTexture;
+  extern ULONG_PTR _ulPatternTexture;
   extern ULONG _ulLastUploadedPattern;
   pglGenTextures( 1, (GLuint*)&_ulPatternTexture);
   _ulLastUploadedPattern = 0;

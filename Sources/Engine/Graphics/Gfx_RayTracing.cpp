@@ -26,8 +26,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <Engine/Raytracing/SSRT.h>
 
 // fog/haze textures
-extern ULONG _fog_ulTexture;
-extern ULONG _haze_ulTexture;
+extern ULONG_PTR _fog_ulTexture;
+extern ULONG_PTR _haze_ulTexture;
 
 extern BOOL GFX_abTexture[GFX_MAXTEXUNITS];
 
@@ -136,7 +136,7 @@ void CGfxLibrary::InitContext_RayTracing()
 
   // prepare pattern texture
   extern CTexParams _tpPattern;
-  extern ULONG _ulPatternTexture;
+  extern ULONG_PTR _ulPatternTexture;
   extern ULONG _ulLastUploadedPattern;
   _ulPatternTexture = 0;
   _ulLastUploadedPattern = 0;

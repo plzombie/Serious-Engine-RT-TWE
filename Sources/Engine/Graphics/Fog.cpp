@@ -48,7 +48,7 @@ FLOAT _fog_fMulZ=0;
 FLOAT _fog_fMulH=0;
 FLOAT _fog_fAddH=0;
 ULONG _fog_ulAlpha=0;
-ULONG _fog_ulTexture=0;
+ULONG_PTR _fog_ulTexture=0;
 ULONG _fog_ulFormat=0;
 
 PIX _fog_pixSizeH=0;
@@ -336,7 +336,7 @@ FLOAT3D _haze_vViewDirAbs;
 FLOAT _haze_fMul=0;
 FLOAT _haze_fAdd=0;
 ULONG _haze_ulAlpha=0;
-ULONG _haze_ulTexture=0;
+ULONG_PTR _haze_ulTexture=0;
 ULONG _haze_ulFormat=0;
 
 

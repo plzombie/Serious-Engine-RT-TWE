@@ -417,7 +417,7 @@ static void svk_SetTextureWrapping(enum GfxWrap eWrapU, enum GfxWrap eWrapV)
 
 
 // generate texture for API
-static void svk_GenerateTexture(ULONG& ulTexObject)
+static void svk_GenerateTexture(ULONG_PTR& ulTexObject)
 {
   ASSERT(_pGfx->gl_eCurrentAPI == GAT_VK);
   _sfStats.StartTimer(CStatForm::STI_BINDTEXTURE);
@@ -432,7 +432,7 @@ static void svk_GenerateTexture(ULONG& ulTexObject)
 
 
 // unbind texture from API
-static void svk_DeleteTexture(ULONG& ulTexObject)
+static void svk_DeleteTexture(ULONG_PTR& ulTexObject)
 {
   // skip if already unbound
   ASSERT(_pGfx->gl_eCurrentAPI == GAT_VK);

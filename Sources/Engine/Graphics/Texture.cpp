@@ -1361,7 +1361,7 @@ void CTextureData::SetAsCurrent( INDEX iFrameNo/*=0*/, BOOL bForceUpload/*=FALSE
 
     if( td_ctFrames>1) {
       // animation textures
-      td_pulObjects = (ULONG*)AllocMemory( td_ctFrames *sizeof(td_ulProbeObject));
+      td_pulObjects = (ULONG_PTR*)AllocMemory( td_ctFrames *sizeof(td_ulProbeObject));
       for( INDEX i=0; i<td_ctFrames; i++) gfxGenerateTexture( td_pulObjects[i]);
     } else {
       // single-frame textures
@@ -1447,7 +1447,7 @@ void CTextureData::SetAsCurrent( INDEX iFrameNo/*=0*/, BOOL bForceUpload/*=FALSE
     }
   } 
   // set corresponding probe or texture frame as current
-  ULONG ulTexObject = td_ulObject; // single-frame
+  ULONG_PTR ulTexObject = td_ulObject; // single-frame
   if( td_ctFrames>1) ulTexObject = td_pulObjects[iFrameNo]; // animation
   if( bUseProbe) {
     // set probe if burst value doesn't allow real texture

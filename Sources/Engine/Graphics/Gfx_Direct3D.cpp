@@ -42,8 +42,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 extern INDEX gap_iTruformLevel;
 
-extern ULONG _fog_ulTexture;
-extern ULONG _haze_ulTexture;
+extern ULONG_PTR _fog_ulTexture;
+extern ULONG_PTR _haze_ulTexture;
 
 
 // state variables
@@ -664,7 +664,7 @@ void CGfxLibrary::InitContext_D3D()
 
   // prepare pattern texture
   extern CTexParams _tpPattern;
-  extern ULONG _ulPatternTexture;
+  extern ULONG_PTR _ulPatternTexture;
   extern ULONG _ulLastUploadedPattern;
   _ulPatternTexture = NONE;
   _ulLastUploadedPattern = 0;
