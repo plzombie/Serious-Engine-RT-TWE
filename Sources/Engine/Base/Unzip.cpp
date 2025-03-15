@@ -722,13 +722,13 @@ void UNZIPReadBlock_t(INDEX iHandle, UBYTE *pub, SLONG slStart, SLONG slLen)
     // if zlib has no more input
     while(zh.zh_zstream.avail_in==0) {
       // read more to it
-      SLONG slRead = fread(zh.zh_pubBufIn, 1, BUF_SIZE, zh.zh_fFile);
+      size_t slRead = fread(zh.zh_pubBufIn, 1, BUF_SIZE, zh.zh_fFile);
       if (slRead<=0) {
         return; // !!!!
       }
       // tell zlib that there is more to read
       zh.zh_zstream.next_in = zh.zh_pubBufIn;
-      zh.zh_zstream.avail_in  = slRead;
+      zh.zh_zstream.avail_in  = (uInt)slRead; // BUF_SIZE is lower than 4GB anyway
     }
     // read dummy data from the output
     #define DUMMY_SIZE 256
@@ -760,13 +760,13 @@ void UNZIPReadBlock_t(INDEX iHandle, UBYTE *pub, SLONG slStart, SLONG slLen)
     // if zlib has no more input
     while(zh.zh_zstream.avail_in==0) {
       // read more to it
-      SLONG slRead = fread(zh.zh_pubBufIn, 1, BUF_SIZE, zh.zh_fFile);
+      size_t slRead = fread(zh.zh_pubBufIn, 1, BUF_SIZE, zh.zh_fFile);
       if (slRead<=0) {
         return; // !!!!
       }
       // tell zlib that there is more to read
       zh.zh_zstream.next_in = zh.zh_pubBufIn;
-      zh.zh_zstream.avail_in  = slRead;
+      zh.zh_zstream.avail_in  = (uInt)slRead; // BUF_SIZE is lower than 4GB anyway
     }
     // decode to output
     int ierr = inflate(&zh.zh_zstream, Z_SYNC_FLUSH);

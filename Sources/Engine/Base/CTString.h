@@ -67,11 +67,11 @@ public:
   /* Remove given prefix string from this string */
   BOOL RemovePrefix( const CTString &strPrefix);
   /* Trim the string to contain at most given number of characters. */
-  INDEX TrimLeft(  INDEX ctCharacters);
-  INDEX TrimRight( INDEX ctCharacters);
+  size_t TrimLeft(  size_t ctCharacters);
+  size_t TrimRight( size_t ctCharacters);
   /* Trim the string from spaces. */
-  INDEX TrimSpacesLeft(void);
-  INDEX TrimSpacesRight(void);
+  size_t TrimSpacesLeft(void);
+  size_t TrimSpacesRight(void);
   /* Calcuate hashing value for the string. */
   ULONG GetHash(void) const;
   // retain only first line of the string
@@ -95,9 +95,9 @@ public:
   ENGINE_API friend CTString operator+(const char *strFirst, const CTString &strSecond);
 
   // split string in two strings at specified position (char AT splitting position goes to str2)
-  void Split( INDEX iPos, CTString &str1, CTString &str2);
-  void InsertChar( INDEX iPos, char cChr); // insert char at position
-  void DeleteChar( INDEX iPos); // delete char at position
+  void Split(size_t iPos, CTString &str1, CTString &str2);
+  void InsertChar( size_t iPos, char cChr); // insert char at position
+  void DeleteChar( size_t iPos); // delete char at position
   
   /* Throw exception */
   void Throw_t(void);

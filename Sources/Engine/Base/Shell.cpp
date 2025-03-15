@@ -509,9 +509,9 @@ CTString RemoveSubstring(const CTString &strFull, const CTString &strSub)
   if (pchFound==NULL || strlen(strSub)==0) {
     return strFull;
   }
-  INDEX iOffset = pchFound-pchFullL;
-  INDEX iLenFull = strlen(strFull);
-  INDEX iLenSub = strlen(strSub);
+  size_t iOffset = pchFound-pchFullL;
+  size_t iLenFull = strlen(strFull);
+  size_t iLenSub = strlen(strSub);
 
   CTString strLeft = strFull;
   strLeft.TrimRight(iOffset);

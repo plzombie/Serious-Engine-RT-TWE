@@ -69,8 +69,8 @@ CTString GetNextParam(void)
   // if the first char is not quote
   } else {
     // find first next space
-    INDEX iSpace;
-    INDEX ctChars = strlen(_strCmd);
+    size_t iSpace;
+    size_t ctChars = strlen(_strCmd);
     for(iSpace=0; iSpace<ctChars; iSpace++) {
       if (isspace(_strCmd[iSpace])) {
         break;

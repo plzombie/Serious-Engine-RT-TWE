@@ -70,7 +70,7 @@ CMemHandlerInit::CMemHandlerInit(void)
 
 #undef AllocMemory
 
-void *AllocMemory( SLONG memsize )
+void *AllocMemory( size_t memsize )
 {
   void *pmem;
   ASSERTMSG(memsize>0, "AllocMemory: Block size is less or equal zero.");
@@ -81,7 +81,7 @@ void *AllocMemory( SLONG memsize )
   // memory handler asures no null results here?!
   if (pmem==NULL) {
     _CrtCheckMemory();
-    FatalError(TRANS("Not enough memory (%d bytes needed)!"), memsize);
+    FatalError(TRANS("Not enough memory (%d bytes needed)!"), (int)memsize);
   }
   return pmem;
 }
@@ -105,7 +105,7 @@ void *_debug_AllocMemory( SLONG memsize, int iType, const char *strFile, int iLi
 }
 #endif
 
-void *AllocMemoryAligned(SLONG memsize, SLONG slAlignPow2)
+void *AllocMemoryAligned(size_t memsize, size_t slAlignPow2)
 {
   UINT64 ulMem = (UINT64) AllocMemory(memsize + slAlignPow2 * 2);
   UINT64 ulMemAligned = ((ulMem + slAlignPow2 - 1) & ~(slAlignPow2 - 1)) + slAlignPow2;
@@ -123,7 +123,7 @@ void FreeMemory( void *memory )
   free( (char *)memory);
 }
 
-void ResizeMemory( void **ppv, SLONG slSize )
+void ResizeMemory( void **ppv, size_t slSize )
 {
   if (_bCheckAllAllocations) {
     _CrtCheckMemory();
@@ -132,17 +132,17 @@ void ResizeMemory( void **ppv, SLONG slSize )
   // memory handler asures no null results here?!
   if (pv==NULL) {
     _CrtCheckMemory();
-    FatalError(TRANS("Not enough memory (%d bytes needed)!"), slSize);
+    FatalError(TRANS("Not enough memory (%d bytes needed)!"), (int)slSize);
   }
   *ppv = pv;
 }
 
-void GrowMemory( void **ppv, SLONG newSize )
+void GrowMemory( void **ppv, size_t newSize )
 {
   ResizeMemory(ppv, newSize);
 }
 
-void ShrinkMemory( void **ppv, SLONG newSize )
+void ShrinkMemory( void **ppv, size_t newSize )
 {
   ResizeMemory(ppv, newSize);
 }
@@ -153,7 +153,7 @@ void ShrinkMemory( void **ppv, SLONG newSize )
  */
 char *StringDuplicate(const char *strOriginal) {
   // get the size
-  SLONG slSize = strlen(strOriginal)+1;
+  size_t slSize = strlen(strOriginal)+1;
   // allocate that much memory
   char *strCopy = (char *)AllocMemory(slSize);
   // copy it there

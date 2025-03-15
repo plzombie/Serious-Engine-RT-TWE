@@ -104,7 +104,7 @@ void CCompMessage::Format(INDEX ctCharsPerLine)
   }
 
   // allocate overestimated buffer
-  SLONG slMaxBuffer = strlen(strText)*2;
+  size_t slMaxBuffer = strlen(strText)*2;
   char *pchBuffer = (char *)AllocMemory(slMaxBuffer);
 
   // start at the beginning of text and buffer

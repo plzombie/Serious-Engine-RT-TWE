@@ -457,9 +457,9 @@ void CTStream::PutString_t(const char *strString) // throw char *
   // check that the stream is writteable
   ASSERT(IsWriteable());
   // get string length
-  INDEX iStringLength = strlen(strString);
+  size_t iStringLength = strlen(strString);
   // put line into stream
-  for( INDEX iLetter=0; iLetter<iStringLength; iLetter++)
+  for( size_t iLetter=0; iLetter<iStringLength; iLetter++)
   {
     if (*strString=='\n') {
       // write "\r\n" into stream

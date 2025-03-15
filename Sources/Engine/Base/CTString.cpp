@@ -97,8 +97,8 @@ CTString &CTString::operator+=(const CTString &strSecond)
  */
 BOOL CTString::RemovePrefix( const CTString &strPrefix)
 {
-  INDEX lenPrefix = strlen( strPrefix);
-  INDEX lenDest = strlen( str_String) - lenPrefix;
+  size_t lenPrefix = strlen( strPrefix);
+  size_t lenDest = strlen( str_String) - lenPrefix;
 
   if( strnicmp( str_String, strPrefix, lenPrefix) != 0)
     return FALSE;
@@ -151,15 +151,15 @@ BOOL CTString::ReplaceSubstr(const CTString &strSub, const CTString &strNewSub)
 }
 
 /* Trim the string from left to contain at most given number of characters. */
-INDEX CTString::TrimLeft( INDEX ctCharacters)
+size_t CTString::TrimLeft( size_t ctCharacters)
 {
   // clamp negative values
   if( ctCharacters<0) ctCharacters = 0;
   // find how much characters to remove
-  INDEX lenOriginal = strlen(str_String);
-  INDEX lenPrefix = lenOriginal-ctCharacters;
+  size_t lenOriginal = strlen(str_String);
   // if nothing needs to be removed
-  if( lenPrefix<=0) return 0;
+  if(lenOriginal<=ctCharacters) return 0;
+  size_t lenPrefix = lenOriginal-ctCharacters;
   // crop
   memmove( str_String, &str_String[ lenPrefix], ctCharacters+1);
   ShrinkMemory( (void **)&str_String, ctCharacters+1);
@@ -167,15 +167,15 @@ INDEX CTString::TrimLeft( INDEX ctCharacters)
 }
 
 /* Trim the string from right to contain at most given number of characters. */
-INDEX CTString::TrimRight( INDEX ctCharacters)
+size_t CTString::TrimRight( size_t ctCharacters)
 {
   // clamp negative values
   if( ctCharacters<0) ctCharacters = 0;
   // find how much characters to remove
-  INDEX lenOriginal = strlen(str_String);
-  INDEX lenPrefix = lenOriginal-ctCharacters;
+  size_t lenOriginal = strlen(str_String);
   // if nothing needs to be removed
-  if( lenPrefix<=0) return 0;
+  if(lenOriginal<=ctCharacters) return 0;
+  size_t lenPrefix = lenOriginal-ctCharacters;
   // crop
   str_String[ctCharacters] = '\0';
   ShrinkMemory( (void**)&str_String, ctCharacters+1);
@@ -236,7 +236,7 @@ BOOL IsSpace(char c)
 }
 
 /* Trim the string from from spaces from left. */
-INDEX CTString::TrimSpacesLeft(void)
+size_t CTString::TrimSpacesLeft(void)
 {
   // for each character in string
   const char *chr;
@@ -252,7 +252,7 @@ INDEX CTString::TrimSpacesLeft(void)
 }
 
 /* Trim the string from from spaces from right. */
-INDEX CTString::TrimSpacesRight(void)
+size_t CTString::TrimSpacesRight(void)
 {
   // for each character in string reversed
   const char *chr;
@@ -530,7 +530,7 @@ INDEX CTString::ScanF(const char *strFormat, ...)
 
 
   // split string in two strings at specified position (char AT splitting position goes to str2)
-void CTString::Split( INDEX iPos, CTString &str1, CTString &str2)
+void CTString::Split( size_t iPos, CTString &str1, CTString &str2)
 {
   str1 = str_String;
   str2 = str_String;
@@ -540,10 +540,10 @@ void CTString::Split( INDEX iPos, CTString &str1, CTString &str2)
 
 
 // insert one character in string at specified pos
-void CTString::InsertChar( INDEX iPos, char cChr)
+void CTString::InsertChar( size_t iPos, char cChr)
 {
   // clamp position
-  INDEX ctChars = strlen(str_String);
+  size_t ctChars = strlen(str_String);
   if( iPos>ctChars) iPos=ctChars;
   else if( iPos<0)  iPos=0;
   // grow memory used by string
@@ -555,10 +555,10 @@ void CTString::InsertChar( INDEX iPos, char cChr)
 
 
 // delete one character from string at specified pos
-void CTString::DeleteChar( INDEX iPos)
+void CTString::DeleteChar( size_t iPos)
 {
   // clamp position
-  INDEX ctChars = strlen(str_String);
+  size_t ctChars = strlen(str_String);
   if (ctChars==0) {
     return;
   }
