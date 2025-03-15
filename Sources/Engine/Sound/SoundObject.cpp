@@ -13,7 +13,7 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. */
 
-#include "stdh.h"
+#include "StdH.h"
 
 #include <Engine/Base/Stream.h>
 #include <Engine/Base/Console.h>
@@ -147,7 +147,7 @@ void CSoundObject::Set3DParameters( FLOAT fFalloff, FLOAT fHotSpot,
       //CPrintF("SET3D: ");
       CEntity *pen = so_penEntity->GetPredictionTail();
       if (pen!=so_penEntity) {
-        pso = (CSoundObject *)( ((UBYTE*)pen) + (int(this)-int(so_penEntity)) );
+        pso = (CSoundObject *)( ((UBYTE*)pen) + (intptr_t(this)-intptr_t(so_penEntity)) );
       }
     }
   }
@@ -175,7 +175,7 @@ CSoundObject *CSoundObject::GetPredictionTail(ULONG ulTypeID, ULONG ulEventID)
       // it must not play the sound
       return NULL;
     }
-    SLONG slOffset = int(this)-int(so_penEntity);
+    SLONG slOffset = intptr_t(this)-intptr_t(so_penEntity);
 
     ULONG ulCRC;
     CRC_Start(ulCRC);

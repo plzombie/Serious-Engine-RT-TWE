@@ -13,7 +13,7 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. */
 
-#include "stdh.h"
+#include "StdH.h"
 
 #include <Engine/Models/ModelObject.h>
 #include <Engine/Models/ModelData.h>
@@ -964,16 +964,16 @@ void CEditModel::LoadFromScript_t(CTFileName &fnScriptName) // throw char *
   bLoadInitialMapping = FALSE;
 
   // to hold number of line's chars
-  int iLineChars;
+
 	FOREVER
 	{
+    size_t iLineChars;
 		do
     {
       File.GetLine_t(ld_line, 128);
       iLineChars = strlen( ld_line);
     }
 		while( (iLineChars == 0) || (ld_line[0]==';') );
-
 		// If key-word is "DIRECTORY", remember base path it and add "\" character at the
 		// end of new path if it is not yet there
 		if( EQUAL_SUB_STR( "DIRECTORY"))
