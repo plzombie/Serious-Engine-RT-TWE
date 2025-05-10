@@ -441,11 +441,11 @@ copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_x64\Debug\ &gt;nul</Command
       <AdditionalDependencies>EngineD.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
-      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
-copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_x64\Debug\ &gt;nul
-copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_x64\Debug\ &gt;nul</Command>
-      <Message>Copying %(Filename) binaries to \Bin_x64\Debug</Message>
-      <Outputs>$(SolutionDir)..\Bin_x64\Debug\$(InputName).dll;%(Outputs)</Outputs>
+      <Command>copy $(OutDir)$(TargetName).dll $(SolutionDir)..\Bin_ARM64\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_ARM64\Debug\ &gt;nul
+copy $(OutDir)$(TargetName).lib $(SolutionDir)..\Bin_ARM64\Debug\ &gt;nul</Command>
+      <Message>Copying %(Filename) binaries to \Bin_ARM64\Debug</Message>
+      <Outputs>$(SolutionDir)..\Bin_ARM64\Debug\$(InputName).dll;%(Outputs)</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
