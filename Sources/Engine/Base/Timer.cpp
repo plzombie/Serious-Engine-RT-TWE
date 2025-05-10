@@ -27,6 +27,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <Engine/Base/ListIterator.inl>
 #include <Engine/Base/Priority.inl>
 
+#if defined(_M_IX86) || defined(_M_X64)
 #include <intrin.h>
 
 // https://docs.microsoft.com/cpp/intrinsics/rdtsc?view=msvc-160
@@ -37,6 +38,7 @@ static inline __int64 ReadTSC(void)
 
   return i;
 }
+#endif
 
 
 // link with Win-MultiMedia
@@ -131,6 +133,7 @@ void __stdcall CTimer_TimerFunc(UINT uID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR
 #define MAX_MEASURE_TRIES 5
 static INDEX _aiTries[MAX_MEASURE_TRIES];
 
+#if defined(_M_IX86) || defined(_M_X64)
 // Get processor speed in Hertz
 static __int64 GetCPUSpeedHz(void)
 {
@@ -216,6 +219,7 @@ static __int64 GetCPUSpeedHz(void)
     return (__int64)slSpeedRead*1000000;
   }
 }
+#endif
 
 
 /*
@@ -229,6 +233,7 @@ CTimer::CTimer(BOOL bInterrupt /*=TRUE*/)
   _pTimer = this;
   tm_bInterrupt = bInterrupt;
 
+#if defined(_M_IX86) || defined(_M_X64)
   { // this part of code must be executed as precisely as possible
     CSetPriority sp(REALTIME_PRIORITY_CLASS, THREAD_PRIORITY_TIME_CRITICAL);
     tm_llCPUSpeedHZ = GetCPUSpeedHz();
@@ -237,6 +242,23 @@ CTimer::CTimer(BOOL bInterrupt /*=TRUE*/)
     // measure profiling errors and set epsilon corrections
     CProfileForm::CalibrateProfilingTimers();
   }
+#else
+  {
+    LARGE_INTEGER perf_frequency;
+
+    if (QueryPerformanceFrequency(&perf_frequency))
+    {
+      tm_llPerformanceCounterFrequency = perf_frequency.QuadPart;
+    }
+    else
+    {
+      tm_llPerformanceCounterFrequency = 1;
+    }
+
+    tm_llCPUSpeedHZ = tm_llPerformanceCounterFrequency;
+    
+  }
+#endif
 
   // clear counters
   _CurrentTickTimer = TIME(0);
@@ -390,7 +412,14 @@ void CTimer::DisableLerp(void)
 
 inline CTimerValue CTimer::GetHighPrecisionTimer(void)
 {
+#if defined(_M_IX86) || defined(_M_X64)
   return CTimerValue(ReadTSC());
+#else
+  LARGE_INTEGER performance_counter;
+
+  QueryPerformanceCounter(&performance_counter);
+  return CTimerValue(performance_counter.QuadPart);
+#endif
 }
 
 // convert a time value to a printable string (hh:mm:ss)

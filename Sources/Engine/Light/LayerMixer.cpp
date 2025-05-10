@@ -35,7 +35,18 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <Engine/Templates/StaticArray.cpp>
 #include <Engine/Templates/DynamicArray.cpp>
 
-#include <xmmintrin.h>
+#if defined(_M_IX86) || defined(_M_X64) 
+  #include <xmmintrin.h>
+#else
+  #include <stdint.h>
+
+  typedef union {
+    uint8_t m64_u8[8];
+    uint16_t m64_u16[4];
+    int16_t m64_i16[4];
+    uint32_t m64_u32[2];
+  } __m64;
+#endif
 
 // asm shortcuts
 #define O offset

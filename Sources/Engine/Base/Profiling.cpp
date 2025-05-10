@@ -25,10 +25,18 @@ template CStaticArray<CProfileTimer>;
 // https://docs.microsoft.com/cpp/intrinsics/rdtsc?view=msvc-160
 static inline __int64 ReadTSC_profile(void)
 {
+#if defined(_M_IX86) || defined(_M_X64)
   unsigned __int64 i;
   i = __rdtsc();
 
   return i;
+#else
+  LARGE_INTEGER performance_counter;
+
+  QueryPerformanceCounter(&performance_counter);
+
+  return performance_counter.QuadPart;
+#endif
 }
 
 

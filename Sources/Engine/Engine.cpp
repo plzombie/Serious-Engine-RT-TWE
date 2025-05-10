@@ -125,6 +125,12 @@ static void DetectCPU(void)
 
   // test MMX presence and update flag
 
+#if defined(_M_ARM64)
+  memcpy(strVendor, "ARM", 4);
+
+  ulTFMS = 0;
+  ulFeatures = 0;
+#else
   // eax, ebx, ecx, edx
   int cpuidData[4];
 
@@ -144,6 +150,7 @@ static void DetectCPU(void)
   memcpy(&ulTFMS, &cpuidData[0], 4);
   // edx
   memcpy(&ulFeatures, &cpuidData[3], 4);
+#endif
 
   /*__asm {
     mov     eax,0           ;// request for basic id
