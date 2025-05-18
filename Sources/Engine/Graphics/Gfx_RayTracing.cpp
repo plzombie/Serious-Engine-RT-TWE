@@ -63,9 +63,15 @@ BOOL CGfxLibrary::InitDriver_RayTracing()
 {
   ASSERT(gl_SSRT == nullptr);
 
-  gl_SSRT = new SSRT::SSRTMain();
+  try {
+    gl_SSRT = new SSRT::SSRTMain();
 
-  return TRUE;
+    return TRUE;
+  } catch(const std::exception &exception) {
+    CPrintF("RayTracing: %s\n", exception.what());
+
+    return false;
+  }
 }
 
 // Init global values

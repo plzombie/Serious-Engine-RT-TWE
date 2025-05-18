@@ -368,13 +368,21 @@ SSRT::SSRTMain::SSRTMain() :
   info.pfnPrint = DebugPrint;
 
   RgResult r = rgCreateInstance(&info, &instance);
-  RG_CHECKERROR(r);
+  if(r != RG_SUCCESS)
+  {
+    RG_THROW(r, "rgCreateInstance");
+  }
 
+  RgBool32 dlssIsAvailable; r = rgIsRenderUpscaleTechniqueAvailable(instance, RG_RENDER_UPSCALE_TECHNIQUE_NVIDIA_DLSS, &dlssIsAvailable);
+  if(r != RG_SUCCESS)
+  {
+    rgDestroyInstance(instance);
+
+    RG_THROW(r, "rgIsRenderUpscaleTechniqueAvailable");
+  }
 
   textureUploader = new TextureUploader(instance);
 
-
-  RgBool32 dlssIsAvailable; r = rgIsRenderUpscaleTechniqueAvailable(instance, RG_RENDER_UPSCALE_TECHNIQUE_NVIDIA_DLSS, &dlssIsAvailable); RG_CHECKERROR(r);
   _srtGlobals.srt_bDLSSAvailable = !!dlssIsAvailable;
 }
 SSRT::SSRTMain::~SSRTMain()

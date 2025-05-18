@@ -18,8 +18,21 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <Engine/Entities/Entity.h>
 #include <Engine/Brushes/Brush.h>
 #include <RTGL1/RTGL1.h>
+#include <stdexcept>
 
 #define RG_CHECKERROR(x) ASSERT(x == RG_SUCCESS)
+#define RG_THROW(x, f) { \
+                      switch(x) { \
+                        case RG_GRAPHICS_API_ERROR: \
+                          throw std::runtime_error(std::string("Method " f " returned \"Graphics API error\"")); \
+                          break; \
+                        case RG_CANT_FIND_PHYSICAL_DEVICE: \
+                          throw std::runtime_error(std::string("Method " f " returned \"Can't find physical device\"")); \
+                          break; \
+                        default: \
+                           throw std::runtime_error(std::string("Method " f " returned code " + std::to_string((int)(x)))); \
+                      } \
+                    }
 
 class CRenderModel;
 
