@@ -154,7 +154,7 @@ public:
   SvkMain();
 
   // Vulkan specific
-  BOOL InitDriver_Vulkan();
+  BOOL InitDriver_Vulkan(INDEX iPreferredAdapter);
   void EndDriver_Vulkan();
   void Reset_Vulkan();
   //BOOL InitDisplay_Vulkan(INDEX iAdapter, PIX pixSizeI, PIX pixSizeJ, enum DisplayDepth eColorDepth);
@@ -163,7 +163,7 @@ public:
   void SwapBuffers_Vulkan();
   void SetViewport_Vulkan(float leftUpperX, float leftUpperY, float width, float height, float minDepth, float maxDepth);
 
-  BOOL PickPhysicalDevice();
+  BOOL PickPhysicalDevice(INDEX iPreferredAdapter);
   BOOL InitSurface_Win32(HINSTANCE hinstance, HWND hwnd);
   BOOL CreateDevice();
   void CreateRenderPass();

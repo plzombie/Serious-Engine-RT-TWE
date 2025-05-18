@@ -1442,7 +1442,7 @@ BOOL TryToSetDisplayMode(enum GfxAPIType eGfxAPI, INDEX iAdapter, PIX pixSizeI, 
     }
   #endif // SE1_VULKAN
 
-    bSuccess = _pGfx->ResetDisplayMode(eGfxAPI);
+    bSuccess = _pGfx->ResetDisplayMode(eGfxAPI, iAdapter);
 
     if (bSuccess && eGfxAPI == GAT_OGL)
     {

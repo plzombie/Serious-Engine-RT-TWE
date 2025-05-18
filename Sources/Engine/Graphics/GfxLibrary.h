@@ -232,7 +232,7 @@ private:
   void SwapBuffers_D3D( CViewPort *pvpToSwap);
 
   // Vulkan specific
-  BOOL InitDriver_Vulkan();
+  BOOL InitDriver_Vulkan(INDEX iAdapter);
   void EndDriver_Vulkan();
   void Reset_Vulkan();
   //BOOL InitDisplay_Vulkan(INDEX iAdapter, PIX pixSizeI, PIX pixSizeJ, enum DisplayDepth eColorDepth);
@@ -289,7 +289,7 @@ public:
   BOOL SetDisplayMode( enum GfxAPIType eAPI, INDEX iAdapter, PIX pixSizeI, PIX pixSizeJ,
                        enum DisplayDepth eColorDepth);
   // set display mode to original desktop display mode (and eventually change API)
-  BOOL ResetDisplayMode( enum GfxAPIType eAPI=GAT_CURRENT);
+  BOOL ResetDisplayMode( enum GfxAPIType eAPI=GAT_CURRENT, INDEX iAdapter=0);
 
   // get current API/adapter/display mode
   inline enum  GfxAPIType GetCurrentAPI(void) { return gl_eCurrentAPI; };

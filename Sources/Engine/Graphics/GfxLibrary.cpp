@@ -1346,7 +1346,7 @@ BOOL CGfxLibrary::SetDisplayMode( enum GfxAPIType eAPI, INDEX iAdapter, PIX pixS
 
 
 // set display mode to original desktop display mode and default ICD driver
-BOOL CGfxLibrary::ResetDisplayMode( enum GfxAPIType eAPI/*=GAT_CURRENT*/)
+BOOL CGfxLibrary::ResetDisplayMode( enum GfxAPIType eAPI/*=GAT_CURRENT*/, INDEX iAdapter)
 {
   // determine new API
   GfxAPIType eNewAPI = eAPI;
@@ -1354,11 +1354,11 @@ BOOL CGfxLibrary::ResetDisplayMode( enum GfxAPIType eAPI/*=GAT_CURRENT*/)
 
   // shutdown old and startup new API, and mode and ... stuff, you know!
   StopDisplayMode();
-  BOOL bRet = StartDisplayMode( eNewAPI, 0, 0, 0, DD_DEFAULT);
+  BOOL bRet = StartDisplayMode( eNewAPI, iAdapter, 0, 0, DD_DEFAULT);
   if( !bRet) return FALSE; // didn't make it?
 
   // update some info
-  gl_iCurrentAdapter = 0;
+  gl_iCurrentAdapter = gl_gaAPI[gl_eCurrentAPI].ga_iCurrentAdapter = iAdapter;
   gl_dmCurrentDisplayMode.dm_pixSizeI = 0;
   gl_dmCurrentDisplayMode.dm_pixSizeJ = 0;
   gl_dmCurrentDisplayMode.dm_ddDepth  = DD_DEFAULT;
@@ -1449,7 +1449,7 @@ BOOL CGfxLibrary::StartDisplayMode( enum GfxAPIType eAPI, INDEX iAdapter, PIX pi
 #ifdef SE1_VULKAN
   else if (eAPI == GAT_VK)
   {
-    bSuccess = InitDriver_Vulkan();
+    bSuccess = InitDriver_Vulkan(iAdapter);
     if (!bSuccess) return FALSE;
 
     gl_eCurrentAPI = GAT_VK;

@@ -86,12 +86,12 @@ void GetDebugMsgCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &outInfo)
 }
 #pragma endregion
 
-BOOL CGfxLibrary::InitDriver_Vulkan()
+BOOL CGfxLibrary::InitDriver_Vulkan(INDEX iAdapter)
 {
   ASSERT(gl_SvkMain == nullptr);
 
   gl_SvkMain = new SvkMain();
-  return gl_SvkMain->InitDriver_Vulkan();
+  return gl_SvkMain->InitDriver_Vulkan(iAdapter);
 }
 
 void CGfxLibrary::EndDriver_Vulkan(void)
@@ -139,7 +139,7 @@ SvkMain::SvkMain()
 }
 
 // initialize Vulkan driver
-BOOL SvkMain::InitDriver_Vulkan()
+BOOL SvkMain::InitDriver_Vulkan(INDEX iPreferredAdapter)
 {
   _pGfx->gl_hiDriver = NONE; // must be initialized?
 
@@ -231,7 +231,7 @@ BOOL SvkMain::InitDriver_Vulkan()
     gl_VkPhysDeviceExtensions[0] = VK_KHR_SWAPCHAIN_EXTENSION_NAME;
   }
 
-  if (!PickPhysicalDevice())
+  if (!PickPhysicalDevice(iPreferredAdapter))
   {
     CPrintF("Vulkan error: Can't find suitable physical device.\n");
     return FALSE;

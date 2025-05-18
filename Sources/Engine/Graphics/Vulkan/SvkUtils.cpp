@@ -315,7 +315,7 @@ void SvkMain::DestroyVertexLayouts()
   gl_VkDefaultVertexLayout = nullptr;
 }
 
-BOOL SvkMain::PickPhysicalDevice()
+BOOL SvkMain::PickPhysicalDevice(INDEX iPreferredAdapter)
 {
   VkResult r;
   uint32_t physDeviceCount = 0;
@@ -333,6 +333,7 @@ BOOL SvkMain::PickPhysicalDevice()
 
   for (uint32_t i = 0; i < physDeviceCount; i++)
   {
+    if(iPreferredAdapter >= 0 && i != iPreferredAdapter) continue;
     VkPhysicalDevice physDevice = physDevices[i];
 
     BOOL foundQueues = GetQueues(physDevice, gl_VkQueueFamGraphics, gl_VkQueueFamTransfer, gl_VkQueueFamPresent);
@@ -371,7 +372,7 @@ BOOL SvkMain::PickPhysicalDevice()
 
       for (uint32_t j = 0; j < formatsCount; j++)
       {
-        if (gl_VkPhSurfFormats[j].format == VK_FORMAT_R8G8B8A8_UNORM)
+        if (gl_VkPhSurfFormats[j].format == VK_FORMAT_R8G8B8A8_UNORM || gl_VkPhSurfFormats[j].format == VK_FORMAT_B8G8R8A8_UNORM)
         {
           gl_VkSurfColorFormat = gl_VkPhSurfFormats[j].format;
           gl_VkSurfColorSpace = gl_VkPhSurfFormats[j].colorSpace;
