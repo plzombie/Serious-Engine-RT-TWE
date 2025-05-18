@@ -65,13 +65,13 @@ void FatalError(const char *strFormat, ...)
   if (_pConsole!=NULL) {
     // print the buffer to the console
     CPutString(TRANS("FatalError:\n"));
-    CPutString(strBuffer);
+    CPutString(strBuffer.str_String);
     // make sure the console log was written safely
     _pConsole->CloseLog();
   }
 
   // create message box with just OK button
-  MessageBoxA(NULL, strBuffer, TRANS("Fatal Error"),
+  MessageBoxA(NULL, strBuffer.str_String, TRANS("Fatal Error"),
     MB_OK|MB_ICONHAND|MB_SETFOREGROUND|MB_TASKMODAL);
 
   _bInFatalError = FALSE;
@@ -94,11 +94,11 @@ void WarningMessage(const char *strFormat, ...)
   strBuffer.VPrintF(strFormat, arg);
 
   // print it to console
-  CPrintF("%s\n", strBuffer);
+  CPrintF("%s\n", strBuffer.str_String);
   // if warnings are enabled
   if( !con_bNoWarnings) {
     // create message box
-    MessageBoxA(NULL, strBuffer, TRANS("Warning"), MB_OK|MB_ICONEXCLAMATION|MB_SETFOREGROUND|MB_TASKMODAL);
+    MessageBoxA(NULL, strBuffer.str_String, TRANS("Warning"), MB_OK|MB_ICONEXCLAMATION|MB_SETFOREGROUND|MB_TASKMODAL);
   }
 }
 
@@ -111,9 +111,9 @@ void InfoMessage(const char *strFormat, ...)
   strBuffer.VPrintF(strFormat, arg);
 
   // print it to console
-  CPrintF("%s\n", strBuffer);
+  CPrintF("%s\n", strBuffer.str_String);
   // create message box
-  MessageBoxA(NULL, strBuffer, TRANS("Information"), MB_OK|MB_ICONINFORMATION|MB_SETFOREGROUND|MB_TASKMODAL);
+  MessageBoxA(NULL, strBuffer.str_String, TRANS("Information"), MB_OK|MB_ICONINFORMATION|MB_SETFOREGROUND|MB_TASKMODAL);
 }
 
 /* Ask user for yes/no answer(stops program until user responds). */
@@ -126,9 +126,9 @@ BOOL YesNoMessage(const char *strFormat, ...)
   strBuffer.VPrintF(strFormat, arg);
 
   // print it to console
-  CPrintF("%s\n", strBuffer);
+  CPrintF("%s\n", strBuffer.str_String);
   // create message box
-  return MessageBoxA(NULL, strBuffer, TRANS("Question"), MB_YESNO|MB_ICONQUESTION|MB_SETFOREGROUND|MB_TASKMODAL)==IDYES;
+  return MessageBoxA(NULL, strBuffer.str_String, TRANS("Question"), MB_YESNO|MB_ICONQUESTION|MB_SETFOREGROUND|MB_TASKMODAL)==IDYES;
 }
 
 /*
