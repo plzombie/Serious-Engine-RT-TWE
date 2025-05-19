@@ -48,6 +48,7 @@ extern BOOL bMenuRendering = FALSE;
 extern BOOL _bDefiningKey;
 static BOOL _bReconsiderInput = FALSE;
 extern PIX  _pixDesktopWidth = 0;    // desktop width when started (for some tests)
+extern PIX  _pixDesktopHeight = 0;    // desktop height when started (for some tests)
 
 static INDEX sam_iMaxFPSActive   = 500;
 static INDEX sam_iMaxFPSInactive = 10;
@@ -460,8 +461,9 @@ BOOL Init( HINSTANCE hInstance, int nCmdShow, CTString strCmdLine)
   DisableDPIScaling();
   ShowSplashScreen(hInstance);
 
-  // remember desktop width
+  // remember desktop width and height
   _pixDesktopWidth = ::GetSystemMetrics(SM_CXSCREEN);
+  _pixDesktopHeight = ::GetSystemMetrics(SM_CYSCREEN);
 
   // prepare main window
   MainWindow_Init();
@@ -1382,8 +1384,7 @@ int PASCAL WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
 BOOL TryToSetDisplayMode(enum GfxAPIType eGfxAPI, INDEX iAdapter, PIX pixSizeI, PIX pixSizeJ,
                          enum DisplayDepth eColorDepth, BOOL bFullScreenMode)
 {
-  // RT: force no fullscreen and default color depth option
-  bFullScreenMode = FALSE;
+  // RT: force default color depth option
   eColorDepth = DD_DEFAULT;
 
   CPrintF(TRANS("  Starting display mode: %dx%d\n"), pixSizeI, pixSizeJ);
@@ -1454,6 +1455,12 @@ BOOL TryToSetDisplayMode(enum GfxAPIType eGfxAPI, INDEX iAdapter, PIX pixSizeI, 
       ResetMainWindowNormal();
     }
   #endif // SE1_D3D
+#ifdef SE1_VULKAN
+    if(eGfxAPI == GAT_VK || eGfxAPI == GAT_RT)
+    {
+      ResetMainWindowNormal();
+    }
+#endif // SE1_VULKAN
   }
 
   // if new mode was set

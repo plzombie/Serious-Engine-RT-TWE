@@ -637,10 +637,10 @@ static void FillResolutionsList(void)
     _astrResolutionTexts = new CTString[_ctResolutions];
     _admResolutionModes = new CDisplayMode[_ctResolutions];
     extern PIX _pixDesktopWidth;
+    extern PIX _pixDesktopHeight;
 
-    int iFullscreenWidth = ::GetSystemMetrics(SM_CXSCREEN);
-    int iFullscreenHeight = ::GetSystemMetrics(SM_CYSCREEN);
-    ASSERT(_pixDesktopWidth == iFullscreenWidth);
+    int iFullscreenWidth = _pixDesktopWidth;
+    int iFullscreenHeight = _pixDesktopHeight;
       
     INDEX iRes = 0;
     for (; iRes<_ctResolutions; iRes++) {
@@ -673,9 +673,6 @@ static void FillResolutionsList(void)
 
     // if fullscreen
   } else {
-
-  #ifndef SE1_RAYTRACING
-
     // get resolutions list from engine
     CDisplayMode *pdm = _pGfx->EnumDisplayModes(_ctResolutions,
       SwitchToAPI(gmCurrent.gm_mgDisplayAPITrigger.mg_iSelected), gmCurrent.gm_mgDisplayAdaptersTrigger.mg_iSelected);
@@ -687,24 +684,6 @@ static void FillResolutionsList(void)
       // add it to list
       SetResolutionInList(iRes, pdm[iRes].dm_pixSizeI, pdm[iRes].dm_pixSizeJ);
     }
-
-  #else
-
-    // only the size of the monitor
-    _ctResolutions = 1;
-    _astrResolutionTexts = new CTString[_ctResolutions];
-    _admResolutionModes = new CDisplayMode[_ctResolutions];
-
-    int iFullscreenWidth = ::GetSystemMetrics(SM_CXSCREEN);
-    int iFullscreenHeight = ::GetSystemMetrics(SM_CYSCREEN);
-
-    _astrResolutionTexts[0].PrintF("%dx%d", iFullscreenWidth, iFullscreenHeight);
-
-    _admResolutionModes[0].dm_pixSizeI = iFullscreenWidth;
-    _admResolutionModes[0].dm_pixSizeJ = iFullscreenHeight;
-    _admResolutionModes[0].dm_ddDepth = DD_DEFAULT;
-
-  #endif // !SE1_RAYTRACING
   }
 
   gmCurrent.gm_mgResolutionsTrigger.mg_astrTexts = _astrResolutionTexts;
@@ -1046,11 +1025,17 @@ extern void UpdateVideoOptionsButtons(INDEX iSelected)
     gmCurrent.gm_mgBitsPerPixelTrigger.ApplyCurrentSelection();
   }
 #else
-  gmCurrent.gm_mgFullScreenTrigger.mg_bEnabled = FALSE;
-  gmCurrent.gm_mgFullScreenTrigger.mg_iSelected = 0;
+  gmCurrent.gm_mgFullScreenTrigger.mg_bEnabled = TRUE;
+  if(da.da_ulFlags&DAF_FULLSCREENONLY) {
+    gmCurrent.gm_mgFullScreenTrigger.mg_bEnabled = FALSE;
+    gmCurrent.gm_mgFullScreenTrigger.mg_iSelected = 1;
+    gmCurrent.gm_mgFullScreenTrigger.ApplyCurrentSelection();
+  }
+
   gmCurrent.gm_mgBitsPerPixelTrigger.mg_bEnabled = FALSE;
   gmCurrent.gm_mgBitsPerPixelTrigger.mg_iSelected = DepthToSwitch(DD_DEFAULT);
   gmCurrent.gm_mgDisplayPrefsTrigger.mg_bEnabled = FALSE;
+  
 
   UpdateSSRTOptions(iSelected);
 #endif // !SE1_RAYTRACING
@@ -1062,22 +1047,7 @@ extern void UpdateVideoOptionsButtons(INDEX iSelected)
   // select same resolution again if possible
   FillResolutionsList();
 
-#ifndef SE1_RAYTRACING
   SizeToResolution(pixSizeI, pixSizeJ, gmCurrent.gm_mgResolutionsTrigger.mg_iSelected);
-#else
-  // RT: if fullscreen, force enable the size of the screen
-  if (gmCurrent.gm_mgFullScreenTrigger.mg_iSelected == 1)
-  {
-    ASSERT(_ctResolutions == 1);
-    gmCurrent.gm_mgResolutionsTrigger.mg_iSelected = 0;
-  }
-  else
-  {
-    SizeToResolution(pixSizeI, pixSizeJ, gmCurrent.gm_mgResolutionsTrigger.mg_iSelected);
-  }
-
-  gmCurrent.gm_mgResolutionsTrigger.mg_bEnabled = _ctResolutions > 1;
-#endif // !SE1_RAYTRACING
 
   // apply adapter and resolutions
   gmCurrent.gm_mgDisplayAdaptersTrigger.ApplyCurrentSelection();

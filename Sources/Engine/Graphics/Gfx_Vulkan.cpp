@@ -861,6 +861,7 @@ void SvkMain::AcquireNextImage()
   if (r == VK_ERROR_OUT_OF_DATE_KHR)
   {
     // TODO: Vulkan: recreate swapchain
+    FatalError("%s\n", "TODO: Vulkan: recreate swapchain");
   }
   else if (r != VK_SUCCESS && r != VK_SUBOPTIMAL_KHR)
   {

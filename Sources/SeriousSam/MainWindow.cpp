@@ -211,7 +211,7 @@ void ResetMainWindowNormal(void)
   if (bBorderlessFull)
   {
     LONG lStyle = GetWindowLong(_hwndMain, GWL_STYLE);
-    lStyle &= ~(WS_CAPTION | WS_THICKFRAME | WS_MINIMIZE | WS_MAXIMIZE | WS_SYSMENU);
+    lStyle &= ~(WS_CAPTION | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU);
     SetWindowLong(_hwndMain, GWL_STYLE, lStyle);
     LONG lExStyle = GetWindowLong(_hwndMain, GWL_EXSTYLE);
     lExStyle &= ~(WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE);
@@ -222,9 +222,17 @@ void ResetMainWindowNormal(void)
     // disable maximize button
     LONG lStyle = GetWindowLong(_hwndMain, GWL_STYLE);
     lStyle &= ~(WS_MAXIMIZEBOX | WS_THICKFRAME);
-    // for WS_MAXIMIZEBOX
-    lStyle |= WS_SYSMENU; 
+    // enable other
+    lStyle |= WS_OVERLAPPED|WS_CAPTION|WS_MINIMIZEBOX|WS_SYSMENU;
     SetWindowLong(_hwndMain, GWL_STYLE, lStyle);
+  }
+
+  MSG msg;
+
+  // We need to dispatch messages after changing window styles
+  while(PeekMessageA(&msg, NULL, 0, 0, PM_REMOVE)) {
+    TranslateMessage(&msg);
+    DispatchMessageA(&msg);
   }
 
   // set new window size and show it
@@ -266,8 +274,27 @@ void OpenMainWindowNormal( PIX pixSizeI, PIX pixSizeJ)
 // open the main application window for fullscreen mode
 void OpenMainWindowFullScreen( PIX pixSizeI, PIX pixSizeJ)
 {
-  ASSERTALWAYS("Fullscreen is replaced by a borderless window that covers whole screen");
-  OpenMainWindowNormal(pixSizeI, pixSizeJ);
+  ASSERT(_hwndMain==NULL);
+  // create a window, invisible initially
+  _hwndMain = CreateWindowExA(
+    WS_EX_TOPMOST | WS_EX_APPWINDOW,
+    APPLICATION_NAME,
+    "",   // title
+    WS_POPUP,
+    0, 0,
+    pixSizeI, pixSizeJ,  // window size
+    NULL,
+    NULL,
+    _hInstance,
+    NULL);
+  // didn't make it?
+  if(_hwndMain==NULL) FatalError(TRANS("Cannot open main window!"));
+  SE_UpdateWindowHandle(_hwndMain);
+
+  // set window title and show it
+  sprintf(achWindowTitle, TRANS("Serious Sam (FullScreen %dx%d)"), pixSizeI, pixSizeJ);
+  SetWindowTextA(_hwndMain, achWindowTitle);
+  ShowWindow(_hwndMain, SW_SHOWNORMAL);
 }
 
 

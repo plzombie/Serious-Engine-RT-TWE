@@ -57,29 +57,28 @@ void CVideoOptionsMenu::Initialize_t(void)
     gm_mgDisplayAPITrigger, gm_mgResolutionsTrigger, TRANS("DISPLAY ADAPTER"), astrNoYes);
   gm_mgDisplayAdaptersTrigger.mg_strTip = TRANS("choose display adapter to be used");
   TRIGGER_MG(gm_mgResolutionsTrigger, 2,
-    gm_mgDisplayAdaptersTrigger, gm_mgNvDlssTrigger, TRANS("WINDOW SIZE"), astrNoYes);
+    gm_mgDisplayAdaptersTrigger, gm_mgFullScreenTrigger, TRANS("WINDOW SIZE"), astrNoYes);
   gm_mgResolutionsTrigger.mg_strTip = TRANS("select size of the presentation window");
+  TRIGGER_MG(gm_mgFullScreenTrigger, 3,
+    gm_mgResolutionsTrigger, gm_mgNvDlssTrigger, TRANS("FULL SCREEN"), astrNoYes);
+  gm_mgFullScreenTrigger.mg_strTip = TRANS("make game run in a window or in full screen");
 
   // new
-  TRIGGER_MG(gm_mgNvDlssTrigger, 3.5,
-    gm_mgResolutionsTrigger, gm_mgAmdFsrTrigger, TRANS("NVIDIA DLSS"), astrNvDlssTexts);
+  TRIGGER_MG(gm_mgNvDlssTrigger, 4.5,
+    gm_mgFullScreenTrigger, gm_mgAmdFsrTrigger, TRANS("NVIDIA DLSS"), astrNvDlssTexts);
   gm_mgNvDlssTrigger.mg_strTip = TRANS("set Nvidia DLSS quality mode");
-  TRIGGER_MG(gm_mgAmdFsrTrigger, 4.5,
+  TRIGGER_MG(gm_mgAmdFsrTrigger, 5.5,
     gm_mgNvDlssTrigger, gm_mgRenderScaleTrigger, TRANS("AMD FSR"), astrAmdFsrTexts);
   gm_mgAmdFsrTrigger.mg_strTip = TRANS("set AMD FSR 1.0 quality mode");
-  TRIGGER_MG(gm_mgRenderScaleTrigger, 5.5,
+  TRIGGER_MG(gm_mgRenderScaleTrigger, 6.5,
     gm_mgAmdFsrTrigger, gm_mgCPUPerformanceTrigger, TRANS("CUSTOM RENDER SCALE"), astrRenderScalePercentsTexts);
   gm_mgRenderScaleTrigger.mg_strTip = TRANS("set render resolution scale, if FSR and DLSS are disabled");  
-  TRIGGER_MG(gm_mgCPUPerformanceTrigger, 7,
+  TRIGGER_MG(gm_mgCPUPerformanceTrigger, 8,
     gm_mgRenderScaleTrigger, gm_mgVideoRendering, TRANS("CPU PRESET"), astrCPUPerformancePresetTexts);
   gm_mgCPUPerformanceTrigger.mg_strTip = TRANS("set CPU performance preset");
 
   // ignored
   const int iOutOfScreenRow = 128;
-  
-  TRIGGER_MG(gm_mgFullScreenTrigger, iOutOfScreenRow,
-    gm_mgResolutionsTrigger, gm_mgVideoRendering, TRANS("FULL SCREEN"), astrNoYes);
-  gm_mgFullScreenTrigger.mg_strTip = TRANS("make game run in a window or in full screen");
 
   TRIGGER_MG(gm_mgDisplayPrefsTrigger, iOutOfScreenRow,
     gm_mgDisplayAdaptersTrigger, gm_mgResolutionsTrigger, TRANS("PREFERENCES"), astrDisplayPrefsRadioTexts);
@@ -107,7 +106,7 @@ void CVideoOptionsMenu::Initialize_t(void)
   gm_mgVideoRendering.mg_boxOnScreen = BoxMediumRow(7.0f);
   gm_mgVideoRendering.mg_pmgUp = &gm_mgBitsPerPixelTrigger;
 #else
-  gm_mgVideoRendering.mg_boxOnScreen = BoxMediumRow(9.0f);
+  gm_mgVideoRendering.mg_boxOnScreen = BoxMediumRow(10.0f);
   gm_mgVideoRendering.mg_pmgUp = &gm_mgCPUPerformanceTrigger;
 #endif // !SE1_RAYTRACING
   gm_mgVideoRendering.mg_pmgDown = &gm_mgApply;
@@ -117,7 +116,7 @@ void CVideoOptionsMenu::Initialize_t(void)
   gm_mgVideoRendering.mg_pActivatedFunction = NULL;
 
   gm_mgApply.mg_bfsFontSize = BFS_LARGE;
-  gm_mgApply.mg_boxOnScreen = BoxBigRow(7.0f);
+  gm_mgApply.mg_boxOnScreen = BoxBigRow(7.5f);
   gm_mgApply.mg_pmgUp = &gm_mgVideoRendering;
   gm_mgApply.mg_pmgDown = &gm_mgDisplayAPITrigger;
   gm_mgApply.mg_strText = TRANS("APPLY");

@@ -1449,6 +1449,15 @@ BOOL CGfxLibrary::StartDisplayMode( enum GfxAPIType eAPI, INDEX iAdapter, PIX pi
 #ifdef SE1_VULKAN
   else if (eAPI == GAT_VK)
   {
+    if(bFullScreen) {
+      // set windows mode to fit same size
+      bSuccess = CDS_SetMode(pixSizeI, pixSizeJ, eColorDepth);
+      if(!bSuccess) return FALSE;
+    } else {
+      // reset windows mode
+      CDS_ResetMode();
+    }
+
     bSuccess = InitDriver_Vulkan(iAdapter);
     if (!bSuccess) return FALSE;
 
@@ -1456,6 +1465,15 @@ BOOL CGfxLibrary::StartDisplayMode( enum GfxAPIType eAPI, INDEX iAdapter, PIX pi
   }
   else if (eAPI == GAT_RT)
   {
+    if(bFullScreen) {
+      // set windows mode to fit same size
+      bSuccess = CDS_SetMode(pixSizeI, pixSizeJ, eColorDepth);
+      if(!bSuccess) return FALSE;
+    } else {
+      // reset windows mode
+      CDS_ResetMode();
+    }
+
     bSuccess = InitDriver_RayTracing();
     if (!bSuccess) return FALSE;
 
