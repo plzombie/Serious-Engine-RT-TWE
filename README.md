@@ -40,7 +40,7 @@ This version of the engine comes with a set of resources (`SE1_10.gro`) that all
 
 However, to run Serious Sam: The First Encounter Ray Traced:
 1) Copy files from the original [Serious Sam: The First Encounter](https://store.steampowered.com/app/41050/Serious_Sam_Classic_The_First_Encounter/)     
-    * The list of required files is on the [Releases](https://github.com/sultim-t/Serious-Engine-RT/releases) page
+    * The list of required files is on the [Releases](https://github.com/plzombie/Serious-Engine-RT-TWE/releases) page
 2) Unpack `TFE_RT_Textures.zip`
     * Archive can be downloaded from [here](https://github.com/sultim-t/Serious-Engine-RT/releases/download/v1.1/TFE_RT_Textures.zip)
     * It contains additional upscaled textures and PBR textures
