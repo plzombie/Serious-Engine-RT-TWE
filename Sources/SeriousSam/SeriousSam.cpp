@@ -1005,7 +1005,9 @@ int SubMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int 
           } 
         #else
           // RT: don't recreate context when the window should be restored
-          ShowWindow(_hwndMain, SW_SHOWNORMAL);
+          ShowWindow(_hwndMain, SW_RESTORE);
+          SetFocus(_hwndMain);
+          SetCapture(_hwndMain);
         #endif // !SE1_RAYTRACING
 
           break;
