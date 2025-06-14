@@ -122,7 +122,7 @@ extern void ApplyGLSettings(BOOL bForce)
 {
   CPrintF( TRANS("\nAutomatic 3D-board preferences adjustment...\n"));
   CDisplayAdapter &da = _pGfx->gl_gaAPI[_pGfx->gl_eCurrentAPI].ga_adaAdapter[_pGfx->gl_iCurrentAdapter];
-  CPrintF( TRANS("Detected: %s - %s - %s\n"), da.da_strVendor, da.da_strRenderer, da.da_strVersion);
+  CPrintF( TRANS("Detected: %s - %s - %s\n"), da.da_strVendor.str_String, da.da_strRenderer.str_String, da.da_strVersion.str_String);
 
   // get new settings
   CSettingsEntry *pse = GetGLSettings( da.da_strRenderer);
@@ -135,7 +135,7 @@ extern void ApplyGLSettings(BOOL bForce)
   }
 
   // report
-  CPrintF(TRANS("Matching: %s (%s)\n"), pse->se_strRenderer, pse->se_strDescription);
+  CPrintF(TRANS("Matching: %s (%s)\n"), pse->se_strRenderer.str_String, pse->se_strDescription.str_String);
   _strPreferencesDescription = pse->se_strDescription;
 
   if (!bForce) {
@@ -157,7 +157,7 @@ extern void ApplyGLSettings(BOOL bForce)
   if (sam_iVideoSetup<3) {
     // execute the script
     CTString strCmd;
-    strCmd.PrintF("include \"Scripts\\GLSettings\\%s\"", CTString(pse->se_fnmScript));
+    strCmd.PrintF("include \"Scripts\\GLSettings\\%s\"", pse->se_fnmScript.str_String);
     _pShell->Execute(strCmd);
     // refresh textures
     _pShell->Execute("RefreshTextures();");

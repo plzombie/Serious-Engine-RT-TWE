@@ -114,7 +114,7 @@ void LoadLevelsList(void)
     // try to load its info, and if valid
     CLevelInfo li;
     if (GetLevelInfo(li, fnm)) {
-      CPrintF(TRANS("'%s' spawn=0x%08x\n"), li.li_strName, li.li_ulSpawnFlags);
+      CPrintF(TRANS("'%s' spawn=0x%08x\n"), li.li_strName.str_String, li.li_ulSpawnFlags);
 
       // create new info for that file
       CLevelInfo *pliNew = new CLevelInfo;

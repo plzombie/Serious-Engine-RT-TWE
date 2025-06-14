@@ -175,7 +175,7 @@ extern void ModConnectConfirm(void)
     return;
   }
 
-  CPrintF(TRANS("Server is running a different MOD (%s).\nYou need to reload to connect.\n"), _fnmModSelected);
+  CPrintF(TRANS("Server is running a different MOD (%s).\nYou need to reload to connect.\n"), _fnmModSelected.str_String);
   gmCurrent._pConfimedYes = &ModConnect;
   gmCurrent._pConfimedNo = NULL;
   gmCurrent.gm_mgConfirmLabel.mg_strText = TRANS("CHANGE THE MOD?");
