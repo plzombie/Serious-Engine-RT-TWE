@@ -364,7 +364,7 @@ void CGfxLibrary::Benchmark(CViewPort *pvp, CDrawPort *pdp)
 #endif // SE1_VULKAN
 
   CPrintF("=====================================\n");
-  CPrintF("%s performance testing ...\n", strAPI);
+  CPrintF("%s performance testing ...\n", strAPI.str_String);
 
   InitTexture();
   InitTris();

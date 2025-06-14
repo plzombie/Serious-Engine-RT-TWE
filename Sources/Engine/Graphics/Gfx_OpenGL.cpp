@@ -397,8 +397,8 @@ BOOL CGfxLibrary::SetupPixelFormat_OGL( HDC hdc, BOOL bReport/*=FALSE*/)
                               
   // output pixel format description to console (for debugging purposes)
   CPrintF( TRANS("\nPixel Format Description:\n"));
-  CPrintF( TRANS("  Number:     %d (%s)\n"), iPixelFormat, strPixelType);
-  CPrintF( TRANS("  Flags:      %s\n"), strFlags);
+  CPrintF( TRANS("  Number:     %d (%s)\n"), iPixelFormat, strPixelType.str_String);
+  CPrintF( TRANS("  Flags:      %s\n"), strFlags.str_String);
   CPrintF( TRANS("  Color bits: %d (%d:%d:%d:%d)\n"), pfd.cColorBits, 
            pfd.cRedBits, pfd.cGreenBits, pfd.cBlueBits, pfd.cAlphaBits);
   CPrintF( TRANS("  Depth bits: %d (%d for stencil)\n"), pfd.cDepthBits, pfd.cStencilBits);
@@ -532,7 +532,7 @@ void CGfxLibrary::InitContext_OGL(void)
 
   // report
   CPrintF( TRANS("\n* OpenGL context created: *----------------------------------\n"));
-  CPrintF( "  (%s, %s, %s)\n\n", da.da_strVendor, da.da_strRenderer, da.da_strVersion);
+  CPrintF( "  (%s, %s, %s)\n\n", da.da_strVendor.str_String, da.da_strRenderer.str_String, da.da_strVersion.str_String);
 
   // test for used extensions
   GLint   gliRet;

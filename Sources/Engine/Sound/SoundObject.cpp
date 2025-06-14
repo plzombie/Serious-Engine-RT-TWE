@@ -211,7 +211,7 @@ void CSoundObject::Play(CSoundData *pCsdLink, SLONG slFlags)
   // synchronize access to sounds
   CTSingleLock slSounds( &_pSound->sl_csSound, TRUE);
 
-  //CPrintF("PLAY: '%s'", (const char*)pCsdLink->GetName().FileName());
+  //CPrintF("PLAY: '%s'", (const char*)pCsdLink->GetName().FileName().str_String);
   // get prediction tail
   CSoundObject *psoTail = GetPredictionTail(EVENT_SOUNDPLAY, (ULONG)pCsdLink);
   // if the event is predicted
@@ -321,7 +321,7 @@ void CSoundObject::SetOffset( FLOAT fOffset)
   // safety check
   ASSERT( fOffset>=0);
   if( fOffset<0) {
-    CPrintF( "BUG: Trying to set negative offset (%.2g) in sound '%s' !\n", fOffset, (CTString&)psoTail->so_pCsdLink->GetName());
+    CPrintF( "BUG: Trying to set negative offset (%.2g) in sound '%s' !\n", fOffset, (CTString&)psoTail->so_pCsdLink->GetName().str_String);
     fOffset = 0.0f;
   }
 
@@ -344,7 +344,7 @@ void CSoundObject::Stop(void)
 
   //CPrintF("STOP");
   if (so_pCsdLink!=NULL) {
-    //CPrintF(" '%s'", (const char*)so_pCsdLink->GetName().FileName());
+    //CPrintF(" '%s'", (const char*)so_pCsdLink->GetName().FileName().str_String);
   }
 
   CSoundObject *psoTail = this;
@@ -395,12 +395,12 @@ void CSoundObject::Update3DEffects(void)
 /*    if (so_penEntity!=NULL && so_penEntity->IsPredictor()) {
       // kill the sound
       so_slFlags&=~SOF_PLAY;
-      //CPrintF("Update canceled %s (%s)\n", (const char*)so_pCsdLink->GetName(), GetPred(so_penEntity));
+      //CPrintF("Update canceled %s (%s)\n", (const char*)so_pCsdLink->GetName().str_String, GetPred(so_penEntity));
       // do nothing;
       return;
     }
     */
-    //CPrintF("Update PASSED %s (%s)\n", (const char*)so_pCsdLink->GetName(), GetPred(so_penEntity));
+    //CPrintF("Update PASSED %s (%s)\n", (const char*)so_pCsdLink->GetName().str_String, GetPred(so_penEntity));
 //  }
 
   // total parameters (accounting for all listeners)

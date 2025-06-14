@@ -1354,7 +1354,7 @@ void CSessionState::ProcessGameStreamBlock(CNetworkMessage &nmMessage)
           FatalError(TRANS("Cannot load Player class:\n%s"), strError);
         }
         if (!_pNetwork->IsPlayerLocal(penNewPlayer)) {
-          CPrintF(TRANS("%s joined\n"), penNewPlayer->GetPlayerName());
+          CPrintF(TRANS("%s joined\n"), penNewPlayer->GetPlayerName().str_String);
         }
       } else {
         // attach entity to client data
@@ -1363,7 +1363,7 @@ void CSessionState::ProcessGameStreamBlock(CNetworkMessage &nmMessage)
         penNewPlayer->CharacterChanged(pcCharacter);
 
         if (!_pNetwork->IsPlayerLocal(penNewPlayer)) {
-          CPrintF(TRANS("%s rejoined\n"), penNewPlayer->GetPlayerName());
+          CPrintF(TRANS("%s rejoined\n"), penNewPlayer->GetPlayerName().str_String);
         }
       }
 
@@ -1378,7 +1378,7 @@ void CSessionState::ProcessGameStreamBlock(CNetworkMessage &nmMessage)
       _pNetwork->ga_World.DeletePredictors();
 
       // inform entity of disconnnection
-      CPrintF(TRANS("%s left\n"), ses_apltPlayers[iPlayer].plt_penPlayerEntity->GetPlayerName());
+      CPrintF(TRANS("%s left\n"), ses_apltPlayers[iPlayer].plt_penPlayerEntity->GetPlayerName().str_String);
       ses_apltPlayers[iPlayer].plt_penPlayerEntity->Disconnect();
       // deactivate the player
       ses_apltPlayers[iPlayer].Deactivate();
@@ -1454,9 +1454,9 @@ void CSessionState::ProcessGameStreamBlock(CNetworkMessage &nmMessage)
       // report who paused
       if (ses_bPause!=bPauseBefore) {
         if (ses_bPause) {
-          CPrintF(TRANS("Paused by '%s'\n"), strPauser);
+          CPrintF(TRANS("Paused by '%s'\n"), strPauser.str_String);
         } else {
-          CPrintF(TRANS("Unpaused by '%s'\n"), strPauser);
+          CPrintF(TRANS("Unpaused by '%s'\n"), strPauser.str_String);
         }
       }
     }
@@ -2043,7 +2043,7 @@ void CSessionState::SessionStateLoop(void)
         CTString strReason;
         nmReliable>>strReason;
         ses_strDisconnected = strReason;
-        CPrintF(TRANS("Disconnected: %s\n"), strReason);
+        CPrintF(TRANS("Disconnected: %s\n"), strReason.str_String);
         // disconnect
         _cmiComm.Client_Close();
       // if this is recon response
@@ -2051,7 +2051,7 @@ void CSessionState::SessionStateLoop(void)
         // just print it
         CTString strResponse;
         nmReliable>>strResponse;
-        CPrintF("%s", "|"+strResponse+"\n");
+        CPrintF("%s", ("|"+strResponse+"\n").str_String);
       // otherwise
       } else {
         CPrintF(TRANS("Session state: Unexpected reliable message during game: %s(%d)\n"),
@@ -2105,7 +2105,7 @@ void CSessionState::SessionStateLoop(void)
         DumpSyncToFile_t(strmFile, ses_iExtensiveSyncCheck);
       }
       // inform user
-      CPrintF("Sync data dumped to '%s'\n", strFileName);
+      CPrintF("Sync data dumped to '%s'\n", strFileName.str_String);
     }
     catch (char *strError)
     {

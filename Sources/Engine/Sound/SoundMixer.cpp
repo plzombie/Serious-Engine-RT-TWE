@@ -769,7 +769,7 @@ void MixSound( CSoundObject *pso)
       pso->so_fRightOffset += fOfsDelta;
       const FLOAT fMinOfs = Min( pso->so_fLeftOffset, pso->so_fRightOffset);
       ASSERT( fMinOfs>=0);
-      if( fMinOfs<0) CPrintF( "BUG: negative offset (%.2g) encountered in sound: '%s' !\n", fMinOfs, (CTString&)psd->GetName());
+      if( fMinOfs<0) CPrintF( "BUG: negative offset (%.2g) encountered in sound: '%s' !\n", fMinOfs, (CTString&)psd->GetName().str_String);
       // if looping
       if (pso->so_slFlags & SOF_LOOP) {
         // adjust offset ptrs inside sound
@@ -895,7 +895,7 @@ void MixSound( CSoundObject *pso)
     // safety check (needed because of bad-bug!)
     FLOAT fMinOfs = Min( fLeftOfs, fRightOfs);
     ASSERT( fMinOfs>=0);
-    if( fMinOfs<0) CPrintF( "BUG: negative offset (%.2g) encountered in sound: '%s' !\n", fMinOfs, (CTString&)psd->GetName());
+    if( fMinOfs<0) CPrintF( "BUG: negative offset (%.2g) encountered in sound: '%s' !\n", fMinOfs, (CTString&)psd->GetName().str_String);
     // adjust offset ptrs inside sound to match those of phase shift
     while( fLeftOfs  < 0) fLeftOfs  += slSoundBufferSize;
     while( fRightOfs < 0) fRightOfs += slSoundBufferSize;

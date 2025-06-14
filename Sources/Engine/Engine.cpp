@@ -737,7 +737,7 @@ nextRegion:
 
       // printout block info
       CPrintF("--------\n");
-      CTString strTmp1, strTmp2;
+      const char *strTmp1 = "", *strTmp2 = "";
       CPrintF("Base/Alloc Address: 0x%8X / 0x%8X - Size: %d KB\n", mbi.BaseAddress, mbi.AllocationBase, mbi.RegionSize/1024);
       switch( mbi.Protect) {
       case PAGE_READONLY:          strTmp1 = "PAGE_READONLY";          break;

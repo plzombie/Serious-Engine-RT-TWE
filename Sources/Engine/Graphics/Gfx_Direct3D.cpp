@@ -509,7 +509,7 @@ void CGfxLibrary::InitContext_D3D()
   // report header
   CPrintF( TRANS("\n* Direct3D context created: *----------------------------------\n"));
   CDisplayAdapter &da = gl_gaAPI[GAT_D3D].ga_adaAdapter[gl_iCurrentAdapter];
-  CPrintF( "  (%s, %s, %s)\n\n", da.da_strVendor, da.da_strRenderer, da.da_strVersion);
+  CPrintF( "  (%s, %s, %s)\n\n", da.da_strVendor.str_String, da.da_strRenderer.str_String, da.da_strVersion.str_String);
   HRESULT hr;
 
   // reset engine's internal Direct3D state variables

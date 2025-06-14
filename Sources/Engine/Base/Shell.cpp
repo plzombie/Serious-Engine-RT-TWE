@@ -307,14 +307,14 @@ extern void PrintShellSymbolHelp(const CTString &strSymbol)
   try {
     CTString strHelp = GetShellSymbolHelp_t(strSymbol);
     if (strHelp!="") {
-      CPrintF("%s\n", strHelp);
+      CPrintF("%s\n", strHelp.str_String);
     } else {
-      CPrintF( TRANS("No help found for '%s'.\n"), strSymbol);
+      CPrintF( TRANS("No help found for '%s'.\n"), strSymbol.str_String);
     }
   // if failed
   } catch(char *strError) {
     // just print the error
-    CPrintF( TRANS("Cannot print help for '%s': %s\n"), strSymbol, strError);
+    CPrintF( TRANS("Cannot print help for '%s': %s\n"), strSymbol.str_String, strError);
   }
 }
 
@@ -345,23 +345,23 @@ extern void ListSymbolsByPattern(CTString strPattern)
 
     // print its declaration to the console
     if (st.st_sttType == STT_FUNCTION) {
-      CPrintF("void %s(void)", ss.ss_strName);
+      CPrintF("void %s(void)", ss.ss_strName.str_String);
 
     } else if (st.st_sttType == STT_STRING) {
-      CPrintF("CTString %s = \"%s\"", ss.ss_strName, *(CTString*)ss.ss_pvValue);
+      CPrintF("CTString %s = \"%s\"", ss.ss_strName.str_String, ((CTString*)ss.ss_pvValue)->str_String);
     } else if (st.st_sttType == STT_FLOAT) {
-      CPrintF("FLOAT %s = %g", ss.ss_strName, *(FLOAT*)ss.ss_pvValue);
+      CPrintF("FLOAT %s = %g", ss.ss_strName.str_String, *(FLOAT*)ss.ss_pvValue);
     } else if (st.st_sttType == STT_INDEX) {
-      CPrintF("INDEX %s = %d (0x%08x)", ss.ss_strName, *(INDEX*)ss.ss_pvValue, *(INDEX*)ss.ss_pvValue);
+      CPrintF("INDEX %s = %d (0x%08x)", ss.ss_strName.str_String, *(INDEX*)ss.ss_pvValue, *(INDEX*)ss.ss_pvValue);
     } else if (st.st_sttType == STT_ARRAY) {
       // get base type
       ShellType &stBase = _shell_ast[st.st_istBaseType];
       if (stBase.st_sttType == STT_FLOAT) {
-        CPrintF("FLOAT %s[%d]", ss.ss_strName, st.st_ctArraySize);
+        CPrintF("FLOAT %s[%d]", ss.ss_strName.str_String, st.st_ctArraySize);
       } else if (stBase.st_sttType == STT_INDEX) {
-        CPrintF("INDEX %s[%d]", ss.ss_strName, st.st_ctArraySize);
+        CPrintF("INDEX %s[%d]", ss.ss_strName.str_String, st.st_ctArraySize);
       } else if (stBase.st_sttType == STT_STRING) {
-        CPrintF("CTString %s[%d]", ss.ss_strName, st.st_ctArraySize);
+        CPrintF("CTString %s[%d]", ss.ss_strName.str_String, st.st_ctArraySize);
       } else {
         ASSERT(FALSE);
       }
@@ -391,7 +391,7 @@ static void ListSymbols(void)
 void Echo(void* pArgs)
 {
   CTString str = *NEXTARGUMENT(CTString*);
-  CPrintF("%s", str);
+  CPrintF("%s", str.str_String);
 }
 
 
@@ -845,7 +845,7 @@ void CShell::ErrorF(const char *strFormat, ...)
   strBuffer.VPrintF(strFormat, arg);
 
   // print it to the main console
-  CPrintF(strBuffer);
+  CPrintF(strBuffer.str_String);
   // go to new line
   CPrintF("\n");
 }

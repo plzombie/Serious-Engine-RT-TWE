@@ -1049,7 +1049,7 @@ void RT_PrintBrushPolygonInfo(SSRT::Scene *pScene)
     if (crRay.cr_penHit->GetRenderType() == CEntity::RenderType::RT_MODEL)
     {
       CPrintF("Model:\n");
-      CPrintF("%s\n", crRay.cr_penHit->GetName());
+      CPrintF("%s\n", crRay.cr_penHit->GetName().str_String);
       CPrintF("en_ulID: %i\n", crRay.cr_penHit->en_ulID);
       CPrintF("cr_fHitDistance: %fm\n", crRay.cr_fHitDistance);
 
@@ -1057,7 +1057,7 @@ void RT_PrintBrushPolygonInfo(SSRT::Scene *pScene)
 
       if (pmo->mo_toTexture.ao_AnimData != nullptr)
       {
-        CPrintF("mo_toTexture: %s\n", pmo->mo_toTexture.ao_AnimData->GetName());
+        CPrintF("mo_toTexture: %s\n", pmo->mo_toTexture.ao_AnimData->GetName().str_String);
       }
 
       FOREACHINLIST(CAttachmentModelObject, amo_lnInMain, pmo->mo_lhAttachments, itamo)
@@ -1068,13 +1068,13 @@ void RT_PrintBrushPolygonInfo(SSRT::Scene *pScene)
 
         if (amo.amo_moModelObject.mo_toTexture.ao_AnimData != nullptr)
         {
-          CPrintF("    mo_toTexture: %s", amo.amo_moModelObject.mo_toTexture.ao_AnimData->GetName());
+          CPrintF("    mo_toTexture: %s", amo.amo_moModelObject.mo_toTexture.ao_AnimData->GetName().str_String);
         }
       }
 
       if (pmo->mo_toReflection.ao_AnimData != nullptr)
       {
-        CPrintF("mo_toReflection: %s\n", pmo->mo_toReflection.ao_AnimData->GetName());
+        CPrintF("mo_toReflection: %s\n", pmo->mo_toReflection.ao_AnimData->GetName().str_String);
       }
 
       return;
@@ -1102,13 +1102,13 @@ void RT_PrintBrushPolygonInfo(SSRT::Scene *pScene)
     }
 
 
-    CPrintF("%s\n", crRay.cr_penHit->GetName());
+    CPrintF("%s\n", crRay.cr_penHit->GetName().str_String);
     CPrintF("en_ulID: %i\n", crRay.cr_penHit->en_ulID);
     CPrintF("cr_fHitDistance: %fm\n", crRay.cr_fHitDistance);
 
     if (crRay.cr_pbscBrushSector != nullptr)
     {
-      CPrintF("bsc_strName: %s\n", crRay.cr_pbscBrushSector->bsc_strName);
+      CPrintF("bsc_strName: %s\n", crRay.cr_pbscBrushSector->bsc_strName.str_String);
       CPrintF("bsc_iInWorld: %i\n", crRay.cr_pbscBrushSector->bsc_iInWorld);
     }
 

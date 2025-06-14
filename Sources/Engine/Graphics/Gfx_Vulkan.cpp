@@ -455,7 +455,7 @@ void SvkMain::InitContext_Vulkan()
   // report header
   CPrintF(TRANS("\n* Vulkan context created: *------------------------------------\n"));
   CDisplayAdapter &da = _pGfx->gl_gaAPI[GAT_VK].ga_adaAdapter[_pGfx->gl_iCurrentAdapter];
-  CPrintF("  (%s, %s, %s)\n\n", da.da_strVendor, da.da_strRenderer, da.da_strVersion);
+  CPrintF("  (%s, %s, %s)\n\n", da.da_strVendor.str_String, da.da_strRenderer.str_String, da.da_strVersion.str_String);
 
   _pGfx->gl_ctTextureUnits = 4;
   _pGfx->gl_ctRealTextureUnits = 4;

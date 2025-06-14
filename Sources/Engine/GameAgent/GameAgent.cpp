@@ -168,7 +168,7 @@ void _initializeWinsock(void)
   // if we couldn't resolve the hostname
   if(phe == NULL) {
     // report and stop
-    CPrintF("Couldn't resolve GameAgent server %s.\n", ga_strServer);
+    CPrintF("Couldn't resolve GameAgent server %s.\n", ga_strServer.str_String);
     _uninitWinsock();
     return;
   }
@@ -909,7 +909,7 @@ extern void GameAgent_EnumUpdate(void)
                 } else if(strKey == "gamename") {
                   strGameName = strValue;
                 } else {
-                  CPrintF("Unknown GameAgent parameter key '%s'!", strKey);
+                  CPrintF("Unknown GameAgent parameter key '%s'!", strKey.str_String);
                 }
 
                 // reset temporary holders
@@ -1127,7 +1127,7 @@ DWORD WINAPI _MS_Thread(LPVOID lpParam) {
                         } else if(strKey == "maxplayers") {
                             strMaxPlayers = strValue;
                         } else {
-                            //CPrintF("Unknown GameAgent parameter key '%s'!", strKey);
+                            //CPrintF("Unknown GameAgent parameter key '%s'!", strKey.str_String);
                         }
                         // reset temporary holders
                         strKey = "";
@@ -1335,7 +1335,7 @@ DWORD WINAPI _LocalNet_Thread(LPVOID lpParam) {
                         } else if(strKey == "maxplayers") {
                             strMaxPlayers = strValue;
                         } else {
-							//CPrintF("Unknown GameAgent parameter key '%s'!", strKey);
+                            //CPrintF("Unknown GameAgent parameter key '%s'!", strKey.str_String);
                         }
                         // reset temporary holders
                         strKey = "";

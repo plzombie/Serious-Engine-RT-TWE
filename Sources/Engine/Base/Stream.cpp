@@ -131,7 +131,7 @@ void InitStreams(void)
     LoadStringVar(CTString("DefaultMod.txt"), _fnmMod);
   }
 
-  CPrintF(TRANS("Current mod: %s\n"), _fnmMod==""?TRANS("<none>"):(CTString&)_fnmMod);
+  CPrintF(TRANS("Current mod: %s\n"), _fnmMod==""?TRANS("<none>"):(CTString&)_fnmMod.str_String);
   // if there is a mod active
   if (_fnmMod!="") {
     // load mod's include/exclude lists
@@ -834,7 +834,7 @@ void CTStream::DictionaryPreload_t(void)
         fnm.fnm_pserPreloaded = _pModelStock->Obtain_t(fnm);
       }
     } catch (char *strError) {
-      CPrintF( TRANS("Cannot preload %s: %s\n"), (CTString&)fnm, strError);
+      CPrintF( TRANS("Cannot preload %s: %s\n"), (CTString&)fnm.str_String, strError);
     }
   }
 }

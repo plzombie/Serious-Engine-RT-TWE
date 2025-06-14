@@ -888,7 +888,7 @@ void CEntity::Teleport(const CPlacement3D &plNew, BOOL bTelefrag /*=TRUE*/)
         CEntity *ppenObstacleDummy;
         if (pmme->CheckForCollisionNow(pmme->en_iCollisionBox, &ppenObstacleDummy)) {
           CPrintF("Entity '%s' was teleported inside a wall at (%g,%g,%g)!\n", 
-            GetName(), 
+            GetName().str_String, 
             en_plPlacement.pl_PositionVector(1),
             en_plPlacement.pl_PositionVector(2),
             en_plPlacement.pl_PositionVector(3));

@@ -318,7 +318,7 @@ void CCommunicationInterface::PrepareForUse(BOOL bUseNetwork, BOOL bClient)
       }
     }
 
-    CPrintF(TRANS("  local addresses: %s (%s)\n"), cm_strName, cm_strAddress);
+    CPrintF(TRANS("  local addresses: %s (%s)\n"), cm_strName.str_String, cm_strAddress.str_String);
     CPrintF(TRANS("  port: %d\n"), net_iPort);
 
     // try to open master UDP socket
@@ -771,7 +771,7 @@ BOOL CCommunicationInterface::Server_Update()
 					}
 				}
 			} else {
-        CPrintF(TRANS("Unable to deliver data to client '%s', disconnecting.\n"),AddressToString(cm_aciClients[iClient].ci_adrAddress.adr_ulAddress));
+        CPrintF(TRANS("Unable to deliver data to client '%s', disconnecting.\n"),AddressToString(cm_aciClients[iClient].ci_adrAddress.adr_ulAddress).str_String);
         Server_ClearClient(iClient);
         _pNetwork->ga_srvServer.HandleClientDisconected(iClient);
 
@@ -816,7 +816,7 @@ BOOL CCommunicationInterface::Server_Update()
 				// warn about possible attack
 				extern INDEX net_bReportMiscErrors;
 				if (net_bReportMiscErrors) {
-					CPrintF(TRANS("WARNING: Invalid message from: %s\n"), AddressToString(ppaPacket->pa_adrAddress.adr_ulAddress));
+					CPrintF(TRANS("WARNING: Invalid message from: %s\n"), AddressToString(ppaPacket->pa_adrAddress.adr_ulAddress).str_String);
 				}
 			}
  		}
@@ -1152,7 +1152,7 @@ BOOL CCommunicationInterface::Client_Update(void)
 				// warn about possible attack
 				extern INDEX net_bReportMiscErrors;
 				if (net_bReportMiscErrors) {
-					CPrintF(TRANS("WARNING: Invalid message from: %s\n"), AddressToString(ppaPacket->pa_adrAddress.adr_ulAddress));
+					CPrintF(TRANS("WARNING: Invalid message from: %s\n"), AddressToString(ppaPacket->pa_adrAddress.adr_ulAddress).str_String);
 				}
 			}
  		}
@@ -1212,7 +1212,7 @@ void CCommunicationInterface::UpdateMasterBuffers()
 					// the packet is in error
           extern INDEX net_bReportMiscErrors;          
           if (net_bReportMiscErrors) {
-					  CPrintF(TRANS("WARNING: Bad UDP packet from '%s'\n"), AddressToString(adrIncomingAddress.adr_ulAddress));
+					  CPrintF(TRANS("WARNING: Bad UDP packet from '%s'\n"), AddressToString(adrIncomingAddress.adr_ulAddress).str_String);
           }
 					// there might be more to do
 					bSomethingDone = TRUE;

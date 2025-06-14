@@ -466,8 +466,8 @@ static void Startup2ndMouse(INDEX iPort)
 /*
       if( iError==5) CPrintF( "Cannot open %s (access denied).\n"
                               "The port is probably already used by another device (mouse, modem...)\n",
-                              str2ndMousePort);
-      else CPrintF( "Cannot open %s (error %d).\n", str2ndMousePort, iError);
+                              str2ndMousePort.str_String);
+      else CPrintF( "Cannot open %s (error %d).\n", str2ndMousePort.str_String, iError);
       */
       _h2ndMouse = NONE;
       return;
@@ -624,9 +624,9 @@ BOOL CInput::CheckJoystick(INDEX iJoy)
 {
   CPrintF(TRANS("  joy %d:"), iJoy+1);
 
-  JOYCAPS jc;
+  JOYCAPSA jc;
   // seek for capabilities of requested joystick
-  MMRESULT mmResult = joyGetDevCaps( JOYSTICKID1+iJoy,	&jc, sizeof(JOYCAPS));
+  MMRESULT mmResult = joyGetDevCapsA( JOYSTICKID1+iJoy,	&jc, sizeof(JOYCAPSA));
   // report possible errors
   if( mmResult == MMSYSERR_NODRIVER) {
     CPrintF(TRANS(" joystick driver is not present\n"));

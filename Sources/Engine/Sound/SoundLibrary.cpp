@@ -628,14 +628,14 @@ static BOOL StartUp_waveout( CSoundLibrary &sl, BOOL bReport=TRUE)
     case WAVERR_SYNC:           strError = TRANS("Wrong flag?");                break;
     default: strError.PrintF( "%d", res);
     };
-    CPrintF( TRANS("  ! WaveOut error: %s\n"), strError);
+    CPrintF( TRANS("  ! WaveOut error: %s\n"), strError.str_String);
     return FALSE;
   }
 
   // get waveout capabilities
-  WAVEOUTCAPS woc;
+  WAVEOUTCAPSA woc;
   memset( &woc, 0, sizeof(woc));
-  res = waveOutGetDevCaps((UINT_PTR)sl.sl_hwoWaveOut, &woc, sizeof(woc));
+  res = waveOutGetDevCapsA((UINT_PTR)sl.sl_hwoWaveOut, &woc, sizeof(woc));
   // report success
   if( bReport) {
     CTString strDevice = TRANS("default device");
