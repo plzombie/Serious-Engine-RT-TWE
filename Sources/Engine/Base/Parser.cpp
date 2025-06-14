@@ -1403,7 +1403,7 @@ case 46:
   yyval.lvLValue.lv_pssSymbol = &ssSymbol;
   if (!ssSymbol.IsDeclared()) {
     // error
-    _pShell->ErrorF("Identifier '%s' is not declared", yyvsp[0].pssSymbol->ss_strName);
+    _pShell->ErrorF("Identifier '%s' is not declared", yyvsp[0].pssSymbol->ss_strName.str_String);
     fDummy = -666;
     yyval.lvLValue.lv_sttType = STT_VOID;
     yyval.lvLValue.lv_pvAddress = &fDummy;
@@ -1415,7 +1415,7 @@ case 46:
   // if the identifier is something else
   } else {
     // error
-    _pShell->ErrorF("'%s' doesn't have a value", yyvsp[0].pssSymbol->ss_strName);
+    _pShell->ErrorF("'%s' doesn't have a value", yyvsp[0].pssSymbol->ss_strName.str_String);
     fDummy = -666.0f;
     yyval.lvLValue.lv_sttType = STT_VOID;
     yyval.lvLValue.lv_pvAddress = &fDummy;
@@ -1881,7 +1881,7 @@ case 80:
   // if the identifier is not declared
   if (!yyvsp[-3].pssSymbol->IsDeclared()) {
     // error
-    _pShell->ErrorF("Identifier '%s' is not declared", yyvsp[-3].pssSymbol->ss_strName);
+    _pShell->ErrorF("Identifier '%s' is not declared", yyvsp[-3].pssSymbol->ss_strName.str_String);
   // if the identifier is declared
   } else {
     // get its type

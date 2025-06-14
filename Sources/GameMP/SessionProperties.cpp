@@ -262,7 +262,11 @@ BOOL IsMenuEnabled(const CTString &strMenuName)
   } else if (strMenuName=="High Score"   ) {
     return TRUE;
   } else if (strMenuName=="Training"   ) {
+#ifdef SS_THE_FIRST_ENCOUNTER
+    return TRUE;
+#else
     return FALSE;
+#endif
   } else if (strMenuName=="Technology Test") {
     return TRUE;
   } else {
