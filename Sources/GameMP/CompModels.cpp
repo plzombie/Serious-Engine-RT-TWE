@@ -939,7 +939,7 @@ void RenderMessageModel(CDrawPort *pdp, const CTString &strModel)
     // if failed
     } catch(char *strError) {
       // report error
-      CPrintF("Cannot setup model '%s':\n%s\n", strModel, strError);
+      CPrintF("Cannot setup model '%s':\n%s\n", strModel.str_String, strError);
       // do nothing
       return;
     }

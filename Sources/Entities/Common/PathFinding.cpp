@@ -90,7 +90,7 @@ static BOOL FindPath(CNavigationMarker *pnmSrc, CNavigationMarker *pnmDst)
   CPathNode *ppnDst = pnmDst->GetPathNode();
 
   PRINTOUT(CPrintF("--------------------\n"));
-  PRINTOUT(CPrintF("FindPath(%s, %s)\n", ppnSrc->GetName(), ppnDst->GetName()));
+  PRINTOUT(CPrintF("FindPath(%s, %s)\n", ppnSrc->GetName().str_String, ppnDst->GetName().str_String));
 
   // start with empty open and closed lists
   ASSERT(_lhOpen.IsEmpty());
@@ -101,7 +101,7 @@ static BOOL FindPath(CNavigationMarker *pnmSrc, CNavigationMarker *pnmDst)
   ppnSrc->pn_fH = NodeDistance(ppnSrc, ppnDst);
   ppnSrc->pn_fF = ppnSrc->pn_fG +ppnSrc->pn_fH;
   _lhOpen.AddTail(ppnSrc->pn_lnInOpen);
-  PRINTOUT(CPrintF("StartState: %s\n", ppnSrc->GetName()));
+  PRINTOUT(CPrintF("StartState: %s\n", ppnSrc->GetName().str_String));
 
   // while the open list is not empty
   while (!_lhOpen.IsEmpty()) {
@@ -109,7 +109,7 @@ static BOOL FindPath(CNavigationMarker *pnmSrc, CNavigationMarker *pnmDst)
     CPathNode *ppnNode = LIST_HEAD(_lhOpen, CPathNode, pn_lnInOpen);
     ppnNode->pn_lnInOpen.Remove();
       _lhClosed.AddTail(ppnNode->pn_lnInClosed);
-    PRINTOUT(CPrintF("Node: %s - moved from OPEN to CLOSED\n", ppnNode->GetName()));
+    PRINTOUT(CPrintF("Node: %s - moved from OPEN to CLOSED\n", ppnNode->GetName().str_String));
 
     // if this is the goal
     if (ppnNode==ppnDst) {
@@ -121,12 +121,12 @@ static BOOL FindPath(CNavigationMarker *pnmSrc, CNavigationMarker *pnmDst)
     // for each link of current node
     CPathNode *ppnLink = NULL;
     for(INDEX i=0; (ppnLink=ppnNode->GetLink(i))!=NULL; i++) {
-      PRINTOUT(CPrintF(" Link %d: %s\n", i, ppnLink->GetName()));
+      PRINTOUT(CPrintF(" Link %d: %s\n", i, ppnLink->GetName().str_String));
       // get cost to get to this node if coming from current node
       FLOAT fNewG = ppnLink->pn_fG+NodeDistance(ppnNode, ppnLink);
       // if a shorter path already exists
       if ((ppnLink->pn_lnInOpen.IsLinked() || ppnLink->pn_lnInClosed.IsLinked()) && fNewG>=ppnLink->pn_fG) {
-        PRINTOUT(CPrintF("  shorter path exists through: %s\n", ppnLink->pn_ppnParent->GetName()));
+        PRINTOUT(CPrintF("  shorter path exists through: %s\n", ppnLink->pn_ppnParent->GetName().str_String));
         // skip this link
         continue;
       }
@@ -138,12 +138,12 @@ static BOOL FindPath(CNavigationMarker *pnmSrc, CNavigationMarker *pnmDst)
       // remove from closed list, if in it
       if (ppnLink->pn_lnInClosed.IsLinked()) {
         ppnLink->pn_lnInClosed.Remove();
-        PRINTOUT(CPrintF("  %s removed from CLOSED\n", ppnLink->GetName()));
+        PRINTOUT(CPrintF("  %s removed from CLOSED\n", ppnLink->GetName().str_String));
       }
       // add to open if not in it
       if (!ppnLink->pn_lnInOpen.IsLinked()) {
         SortIntoOpenList(ppnLink);
-        PRINTOUT(CPrintF("  %s added to OPEN\n", ppnLink->GetName()));
+        PRINTOUT(CPrintF("  %s added to OPEN\n", ppnLink->GetName().str_String));
       }
     }
   }

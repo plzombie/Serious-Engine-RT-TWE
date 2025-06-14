@@ -173,7 +173,7 @@ void CCompMessage::PrepareMessage(INDEX ctCharsPerLine)
     // if failed
     } catch (char *strError) {
       // report warning
-      CPrintF("Cannot load message'%s': %s\n", (const CTString &)cm_fnmFileName, strError);
+      CPrintF("Cannot load message'%s': %s\n", cm_fnmFileName.str_String, strError);
       // do nothing else
       return;
     }
