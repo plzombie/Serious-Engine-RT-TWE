@@ -2107,10 +2107,10 @@ void CGfxLibrary::SwapBuffers(CViewPort *pvp)
 
 
 // get array of all supported display modes
-CDisplayMode *CGfxLibrary::EnumDisplayModes( INDEX &ctModes, enum GfxAPIType eAPI/*=GAT_CURRENT*/, INDEX iAdapter/*=0*/)
+CDisplayMode *CGfxLibrary::EnumDisplayModes( INDEX &ctModes, enum GfxAPIType eAPI/*=GAT_CURRENT*/, INDEX iAdapter/*=-1*/)
 {
   if( eAPI==GAT_CURRENT) eAPI = gl_eCurrentAPI;
-  if( iAdapter==0) iAdapter = gl_iCurrentAdapter;
+  if( iAdapter<0) iAdapter = gl_iCurrentAdapter;
   CDisplayAdapter *pda = &gl_gaAPI[eAPI].ga_adaAdapter[iAdapter];
   ctModes = pda->da_ctDisplayModes;
   return &pda->da_admDisplayModes[0];

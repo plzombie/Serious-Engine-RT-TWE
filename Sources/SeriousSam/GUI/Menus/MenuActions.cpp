@@ -978,8 +978,9 @@ extern void UpdateVideoOptionsButtons(INDEX iSelected)
 #endif // SE1_VULKAN
 #endif // SE1_D3D
 
-  CDisplayAdapter &da = _pGfx->gl_gaAPI[SwitchToAPI(gmCurrent.gm_mgDisplayAPITrigger.mg_iSelected)]
-    .ga_adaAdapter[gmCurrent.gm_mgDisplayAdaptersTrigger.mg_iSelected];
+  CGfxAPI &ga = _pGfx->gl_gaAPI[SwitchToAPI(gmCurrent.gm_mgDisplayAPITrigger.mg_iSelected)];
+  if (gmCurrent.gm_mgDisplayAdaptersTrigger.mg_iSelected >= ga.ga_ctAdapters) gmCurrent.gm_mgDisplayAdaptersTrigger.mg_iSelected = 0;
+  CDisplayAdapter &da = ga.ga_adaAdapter[gmCurrent.gm_mgDisplayAdaptersTrigger.mg_iSelected];
 
   // number of available preferences is higher if video setup is custom
   gmCurrent.gm_mgDisplayPrefsTrigger.mg_ctTexts = 3;

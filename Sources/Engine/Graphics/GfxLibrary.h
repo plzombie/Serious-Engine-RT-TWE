@@ -266,7 +266,7 @@ public:
   void PretouchIfNeeded(void);
 
   // get array of all supported display modes (do not modify array!)
-  CDisplayMode *EnumDisplayModes( INDEX &ctModes, enum GfxAPIType eAPI=GAT_CURRENT, INDEX iAdapter=0);
+  CDisplayMode *EnumDisplayModes( INDEX &ctModes, enum GfxAPIType eAPI=GAT_CURRENT, INDEX iAdapter=-1);
 
   // set viewport for rendering
   BOOL SetCurrentViewport( CViewPort *pvp);
