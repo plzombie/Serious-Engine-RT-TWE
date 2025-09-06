@@ -661,6 +661,9 @@ copy $(OutDir)$(TargetName).map $(SolutionDir)..\Bin_ARM64\ &gt;nul </Command>
   <ItemGroup>
     <ResourceCompile Include="SeriousSam.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="SplashMask.bmp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
