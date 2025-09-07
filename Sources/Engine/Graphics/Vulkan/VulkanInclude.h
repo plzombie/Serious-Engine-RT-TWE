@@ -23,6 +23,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #define VK_USE_PLATFORM_WIN32_KHR
 #include <vulkan/vulkan.h>
+#include <Engine/VulkanMemoryAllocator/include/vk_mem_alloc.h>
 #include <Engine/Graphics/Vulkan/SvkVertex.h>
 #include <Engine/Graphics/Vulkan/SvkPipelineStates.h>
 #include <Engine/Graphics/Vulkan/SvkSamplerStates.h>
@@ -56,7 +57,7 @@ public:
   VkImageView       sto_ImageView;
   VkImageLayout     sto_Layout;
   VkDeviceMemory    sto_Memory;
-  uint32_t          sto_MemoryHandle;
+  VmaAllocation     sto_MemoryHandle;
 
   SvkSamplerFlags   sto_SamplerFlags;
 

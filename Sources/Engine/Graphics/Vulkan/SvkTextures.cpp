@@ -29,8 +29,8 @@ void SvkMain::CreateTexturesDataStructure()
 
   // average RGBA texture size with mipmaps in bytes
   const uint32_t AvgTextureSize = 256 * 256 * 4 * 4 / 3;
-  const uint32_t AvgTextureCount = 512;
-  gl_VkImageMemPool = new SvkMemoryPool(gl_VkDevice, AvgTextureSize * AvgTextureCount);
+  const uint32_t AvgTextureCount = 64; //512;
+  gl_VkImageMemPool = new SvkMemoryPool(gl_VkInstance, gl_VkDevice, gl_VkPhysDevice, AvgTextureSize * AvgTextureCount);
 
   for (uint32_t i = 0; i < gl_VkMaxCmdBufferCount; i++)
   {

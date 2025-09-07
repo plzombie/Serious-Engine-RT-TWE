@@ -1503,6 +1503,9 @@
     <ClInclude Include="zlib\gzguts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VulkanMemoryAllocator\include\vk_mem_alloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Base\CTString.inl">

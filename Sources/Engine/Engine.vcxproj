@@ -1651,6 +1651,7 @@ if not exist $(SolutionDir)RTGL1\Build\ARM64-Release\RayTracedGL1.lib echo "ERRO
     <ClInclude Include="Light\LensFlares.h" />
     <ClInclude Include="Light\LightSource.h" />
     <ClInclude Include="Raytracing\TextureUploader.h" />
+    <ClInclude Include="VulkanMemoryAllocator\include\vk_mem_alloc.h" />
     <ClInclude Include="zlib\crc32.h" />
     <ClInclude Include="zlib\deflate.h" />
     <ClInclude Include="zlib\gzguts.h" />
