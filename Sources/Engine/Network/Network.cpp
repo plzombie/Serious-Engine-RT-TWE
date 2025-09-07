@@ -15,6 +15,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "StdH.h"
 
+#include <new>
 #include <Engine/Build.h>
 #include <Engine/Base/Console.h>
 #include <Engine/Base/CRCTable.h>
@@ -2553,6 +2554,8 @@ void CNetworkLibrary::FinishCRCGather(void)
     strmCRC.SetPos_t(0);
     ga_ulCRC = CRCT_MakeCRCForFiles_t(strmCRC);
 
+  } catch (const std::bad_alloc &ba) {
+    FatalError("Not enough memory: %s", ba.what());
   } catch (char *strError) {
     CPrintF(TRANS("Warning, cannot get CRCs: %s\n"), strError);
   }

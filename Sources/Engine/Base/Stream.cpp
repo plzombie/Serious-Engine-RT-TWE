@@ -15,6 +15,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdh.h"
 
+#include <new>
 #include <sys\types.h>
 #include <sys\stat.h>
 #include <fcntl.h>
@@ -1160,6 +1161,9 @@ CTMemoryStream::CTMemoryStream(void)
   _plhOpenedStreams->AddTail( strm_lnListNode);
   // allocate amount of memory needed to hold maximum allowed file length (when saving)
   mstrm_pubBuffer = (UBYTE*)VirtualAlloc(NULL, _ulMaxLenghtOfSavingFile, MEM_COMMIT, PAGE_READWRITE);
+  if (!mstrm_pubBuffer) {
+    throw std::bad_alloc();
+  }
   mstrm_pubBufferEnd = mstrm_pubBuffer + _ulMaxLenghtOfSavingFile;
   mstrm_pubBufferMax = mstrm_pubBuffer;
 }
