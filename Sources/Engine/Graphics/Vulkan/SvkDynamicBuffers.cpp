@@ -14,6 +14,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA. */
 
 #include "StdH.h"
+#include <Engine/Base/ErrorReporting.h>
 #include <Engine/Graphics/Vulkan/SvkMain.h>
 
 #ifdef SE1_VULKAN
@@ -156,6 +157,9 @@ void SvkMain::InitDynamicBuffer(SvkDynamicBufferGlobal &dynBufferGlobal, SvkDyna
 
   r = vkAllocateMemory(gl_VkDevice, &allocInfo, nullptr, &dynBufferGlobal.sdg_DynamicBufferMemory);
   VK_CHECKERROR(r);
+  if (r != VK_SUCCESS) {
+    FatalError("Not enough video memory: %ull", (unsigned long long)(allocInfo.allocationSize));
+  }
 
   for (uint32_t i = 0; i < gl_VkMaxCmdBufferCount; i++)
   {

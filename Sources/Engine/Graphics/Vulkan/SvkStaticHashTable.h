@@ -59,6 +59,7 @@ public:
   void Clear();
   // Apply function to each element in each bucket
   void Map(void (*func) (T&));
+  void Map(void (*func) (T&, void *), void *);
 
 private:
   bool FindElement(INDEX key, INDEX &outBucketIndex, INDEX &outElemIndex);
@@ -198,6 +199,24 @@ inline void SvkStaticHashTable<T>::Map(void(*func)(T &))
     for (INDEX j = 0; j < bucket.Count(); j++)
     {
       func(bucket[j].Value);
+    }
+  }
+}
+
+template<class T>
+inline void SvkStaticHashTable<T>::Map(void(*func)(T &, void *arg), void *arg)
+{
+  if (ht_Buckets == nullptr)
+  {
+    return;
+  }
+
+  for (INDEX i = 0; i < ht_BucketCount; i++)
+  {
+    auto &bucket = ht_Buckets[i];
+    for (INDEX j = 0; j < bucket.Count(); j++)
+    {
+      func(bucket[j].Value, arg);
     }
   }
 }

@@ -38,10 +38,27 @@ void SvkMain::CreateTexturesDataStructure()
     gl_VkTexturesToDelete[i]->SetAllocationStep(2048);
   }
 }
+ 
+void SvkMain::FreeTextureMemory(SvkTextureObject &sto, void *memoryPool)
+{
+  SvkMemoryPool *svkMemoryPool;
+
+  svkMemoryPool = (SvkMemoryPool *)memoryPool;
+
+  if (sto.sto_MemoryHandle != nullptr)
+  {
+    svkMemoryPool->Free(sto.sto_MemoryHandle);
+
+    sto.sto_MemoryHandle = nullptr;
+  }
+}
 
 void SvkMain::DestroyTexturesDataStructure()
 {
+  gl_VkTextures.Map(FreeTextureMemory, gl_VkImageMemPool);
+
   delete gl_VkImageMemPool;
+  gl_VkImageMemPool = nullptr;
 
   // destroy all texture objects; memory handles will be ignored
   // as image memory pool is freed already
@@ -157,7 +174,11 @@ void SvkMain::FreeDeletedTextures(uint32_t cmdBufferIndex)
     if (sto.sto_Image != VK_NULL_HANDLE)
     {
       // free image memory from pool
-      gl_VkImageMemPool->Free(sto.sto_MemoryHandle);
+      if (sto.sto_MemoryHandle != nullptr) {
+        gl_VkImageMemPool->Free(sto.sto_MemoryHandle);
+
+        sto.sto_MemoryHandle = nullptr;
+      }
 
       // free image, image view and desc set, if exist
       DestroyTextureObject(sto);
@@ -168,7 +189,7 @@ void SvkMain::FreeDeletedTextures(uint32_t cmdBufferIndex)
 }
 
 void SvkMain::DestroyTextureObject(SvkTextureObject &sto)
-{  
+{
   // if was uploaded
   if (sto.sto_Image != VK_NULL_HANDLE)
   {

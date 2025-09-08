@@ -1237,14 +1237,10 @@ void BSPTree<Type, iDimensions>::Read_t(CTStream &strm) // throw char *
   // read count of nodes and create array
   INDEX ctNodes;
   strm>>ctNodes;
-#ifdef _WIN64
+#if 1
   // 2 pointers have now more space, tag is a pointer too
   const int actualSizeOfBSPNode =
-    sizeof(enum BSPNodeLocation) +
-    sizeof(BSPNode<Type, iDimensions> *) +
-    sizeof(BSPNode<Type, iDimensions> *) +
-    sizeof(UINT64) +
-    sizeof(Plane<Type, iDimensions>);
+    sizeof(BSPNode<Type, iDimensions>);
 
   // size on x86, as it's stored on disk
   const int sizeOfBSPNode =
@@ -1304,14 +1300,10 @@ void BSPTree<Type, iDimensions>::Write_t(CTStream &strm) // throw char *
   INDEX ctNodes = bt_abnNodes.Count();
 
   // calculate size of chunk to write
-#ifdef _WIN64
+#if 1
   // 2 pointers have now more space
   const int actualSizeOfBSPNode =
-    sizeof(enum BSPNodeLocation) +
-    sizeof(BSPNode<Type, iDimensions> *) +
-    sizeof(BSPNode<Type, iDimensions> *) +
-    sizeof(UINT64) +
-    sizeof(Plane<Type, iDimensions>);
+    sizeof(BSPNode<Type, iDimensions>);
 
   // size on x86
   const int sizeOfBSPNode =

@@ -230,6 +230,7 @@ public:
 
   VkDescriptorSet GetTextureDescriptor(uint32_t textureId);
   void FreeDeletedTextures(uint32_t cmdBufferIndex);
+  static void FreeTextureMemory(SvkTextureObject &sto, void *memoryPool);
   static void DestroyTextureObject(SvkTextureObject &sto);
 
   void InitOcclusionQuerying();
