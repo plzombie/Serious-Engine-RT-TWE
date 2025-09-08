@@ -27,11 +27,6 @@ void SvkMain::CreateTexturesDataStructure()
   gl_VkTextures.New(512, 8);
   gl_VkLastTextureId = 1;
 
-  // average RGBA texture size with mipmaps in bytes
-  const uint32_t AvgTextureSize = 256 * 256 * 4 * 4 / 3;
-  const uint32_t AvgTextureCount = 64; //512;
-  gl_VkImageMemPool = new SvkMemoryPool(gl_VkInstance, gl_VkDevice, gl_VkPhysDevice, AvgTextureSize * AvgTextureCount);
-
   for (uint32_t i = 0; i < gl_VkMaxCmdBufferCount; i++)
   {
     gl_VkTexturesToDelete[i] = new CStaticStackArray<SvkTextureObject>();
@@ -53,12 +48,23 @@ void SvkMain::FreeTextureMemory(SvkTextureObject &sto, void *memoryPool)
   }
 }
 
+void SvkMain::CreateMemoryPool()
+{
+  // average RGBA texture size with mipmaps in bytes
+  const uint32_t AvgTextureSize = 256 * 256 * 4 * 4 / 3;
+  const uint32_t AvgTextureCount = 64; //512;
+  gl_VkImageMemPool = new SvkMemoryPool(gl_VkInstance, gl_VkDevice, gl_VkPhysDevice, AvgTextureSize * AvgTextureCount);
+}
+
+void SvkMain::DestroyMemoryPool()
+{
+  delete gl_VkImageMemPool;
+  gl_VkImageMemPool = nullptr;
+}
+
 void SvkMain::DestroyTexturesDataStructure()
 {
   gl_VkTextures.Map(FreeTextureMemory, gl_VkImageMemPool);
-
-  delete gl_VkImageMemPool;
-  gl_VkImageMemPool = nullptr;
 
   // destroy all texture objects; memory handles will be ignored
   // as image memory pool is freed already

@@ -108,6 +108,8 @@ struct SvkDBufferToDelete
 struct SvkDynamicBufferGlobal
 {
   uint32_t        sdg_CurrentDynamicBufferSize;
+  uint32_t        sdg_MemoryOffset;
+  VmaAllocation   sdg_Allocation;
   VkDeviceMemory  sdg_DynamicBufferMemory;
 };
 

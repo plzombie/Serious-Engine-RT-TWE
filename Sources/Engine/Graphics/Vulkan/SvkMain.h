@@ -168,6 +168,9 @@ public:
   BOOL CreateDevice();
   void CreateRenderPass();
 
+  void CreateMemoryPool();
+  void DestroyMemoryPool();
+
   void CreateSyncPrimitives();
   void DestroySyncPrimitives();
 

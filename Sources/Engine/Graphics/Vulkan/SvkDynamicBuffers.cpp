@@ -19,9 +19,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #ifdef SE1_VULKAN
 
-#define SVK_DYNAMIC_VERTEX_BUFFER_START_SIZE	  (256 * 1024 * 1024)
-#define SVK_DYNAMIC_INDEX_BUFFER_START_SIZE	    (128 * 1024 * 1024)
-#define SVK_DYNAMIC_UNIFORM_BUFFER_START_SIZE   (32 * 1024 * 1024)
+#define SVK_DYNAMIC_VERTEX_BUFFER_START_SIZE	  (8 * 1024 * 1024)
+#define SVK_DYNAMIC_INDEX_BUFFER_START_SIZE	    (4 * 1024 * 1024)
+#define SVK_DYNAMIC_UNIFORM_BUFFER_START_SIZE   (1 * 1024 * 1024)
 #define SVK_DYNAMIC_UNIFORM_MAX_ALLOC_SIZE      1024
 
 
@@ -155,6 +155,9 @@ void SvkMain::InitDynamicBuffer(SvkDynamicBufferGlobal &dynBufferGlobal, SvkDyna
   allocInfo.memoryTypeIndex = GetMemoryTypeIndex(memReqs.memoryTypeBits,
       VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, VK_MEMORY_PROPERTY_HOST_CACHED_BIT);
 
+  //dynBufferGlobal.sdg_Allocation = gl_VkImageMemPool->Allocate(allocInfo, memReqs, dynBufferGlobal.sdg_DynamicBufferMemory, dynBufferGlobal.sdg_MemoryOffset);
+  //if (dynBufferGlobal.sdg_Allocation == nullptr) {
+  dynBufferGlobal.sdg_MemoryOffset = 0;
   r = vkAllocateMemory(gl_VkDevice, &allocInfo, nullptr, &dynBufferGlobal.sdg_DynamicBufferMemory);
   VK_CHECKERROR(r);
   if (r != VK_SUCCESS) {
@@ -163,14 +166,14 @@ void SvkMain::InitDynamicBuffer(SvkDynamicBufferGlobal &dynBufferGlobal, SvkDyna
 
   for (uint32_t i = 0; i < gl_VkMaxCmdBufferCount; i++)
   {
-    uint32_t offset = i * alignedSize;
+    uint32_t offset = dynBufferGlobal.sdg_MemoryOffset + i * alignedSize;
     r = vkBindBufferMemory(gl_VkDevice, buffers[i].sdb_Buffer, dynBufferGlobal.sdg_DynamicBufferMemory, offset);
     VK_CHECKERROR(r);
   }
 
   void *data;
   r = vkMapMemory(gl_VkDevice, dynBufferGlobal.sdg_DynamicBufferMemory,
-    0, alignedSize * gl_VkMaxCmdBufferCount, 0, &data);
+    dynBufferGlobal.sdg_MemoryOffset, alignedSize * gl_VkMaxCmdBufferCount, 0, &data);
 
   for (uint32_t i = 0; i < gl_VkMaxCmdBufferCount; i++)
   {

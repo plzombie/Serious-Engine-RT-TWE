@@ -244,6 +244,7 @@ BOOL SvkMain::InitDriver_Vulkan(INDEX iPreferredAdapter)
   }
 
   InitSamplers();
+  CreateMemoryPool();
   CreateTexturesDataStructure();
   CreateDescriptorPools();
   CreateCmdBuffers();
@@ -280,6 +281,8 @@ void SvkMain::EndDriver_Vulkan(void)
 
   DestroyDescriptorSetLayouts();
   DestroyDescriptorPools();
+
+  DestroyMemoryPool();
 
   DestroySamplers();
   DestroyPipelines();
