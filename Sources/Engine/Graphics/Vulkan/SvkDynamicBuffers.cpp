@@ -222,7 +222,7 @@ bool SvkMain::GetVertexBuffer(uint32_t size, SvkDynamicBuffer &outDynBuffer)
   if (commonBuffer.sdb_CurrentOffset + size > dynBufferGlobal.sdg_CurrentDynamicBufferSize)
   {
     // currently, dynamic buffer recreation is disabled
-    return false;
+    //return false;
 
     AddDynamicBufferToDeletion(dynBufferGlobal, gl_VkDynamicVB);
 
@@ -249,7 +249,7 @@ bool SvkMain::GetIndexBuffer(uint32_t size, SvkDynamicBuffer &outDynBuffer)
   if (commonBuffer.sdb_CurrentOffset + size > dynBufferGlobal.sdg_CurrentDynamicBufferSize)
   {
     // currently, dynamic buffer recreation is disabled
-    return false;
+    //return false;
 
     AddDynamicBufferToDeletion(dynBufferGlobal, gl_VkDynamicIB);
 
@@ -283,7 +283,7 @@ bool SvkMain::GetUniformBuffer(uint32_t size, SvkDynamicUniform &outDynUniform)
   if (commonBuffer.sdb_CurrentOffset + SVK_DYNAMIC_UNIFORM_MAX_ALLOC_SIZE > dynBufferGlobal.sdg_CurrentDynamicBufferSize)
   {
     // currently, dynamic buffer recreation is disabled
-    return false;
+    //return false;
 
     AddDynamicUniformToDeletion(dynBufferGlobal, gl_VkDynamicUB);
 
