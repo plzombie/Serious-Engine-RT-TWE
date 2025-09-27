@@ -19,8 +19,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #ifdef SE1_VULKAN
 
-#define SVK_DYNAMIC_VERTEX_BUFFER_START_SIZE	  (8 * 1024 * 1024)
-#define SVK_DYNAMIC_INDEX_BUFFER_START_SIZE	    (4 * 1024 * 1024)
+#define SVK_DYNAMIC_VERTEX_BUFFER_START_SIZE	  (64 * 1024 * 1024)
+#define SVK_DYNAMIC_INDEX_BUFFER_START_SIZE	    (512 * 1024)
 #define SVK_DYNAMIC_UNIFORM_BUFFER_START_SIZE   (1 * 1024 * 1024)
 #define SVK_DYNAMIC_UNIFORM_MAX_ALLOC_SIZE      1024
 
@@ -94,7 +94,8 @@ void SvkMain::InitDynamicUniformBuffers(uint32_t newSize)
   for (uint32_t i = 0; i < gl_VkMaxCmdBufferCount; i++)
   {
     VkDescriptorSet descSet;
-    vkAllocateDescriptorSets(gl_VkDevice, &descAllocInfo, &descSet);
+    VkResult r = vkAllocateDescriptorSets(gl_VkDevice, &descAllocInfo, &descSet);
+    VK_CHECKERROR(r);
   
     VkDescriptorBufferInfo bufferInfo = {};
     bufferInfo.buffer = uniformDynBuffers[i].sdb_Buffer;
@@ -213,6 +214,27 @@ void SvkMain::ClearCurrentDynamicOffsets(uint32_t cmdBufferIndex)
   gl_VkDynamicUB[cmdBufferIndex].sdb_CurrentOffset = 0;
 }
 
+static bool GetNewSize(uint32_t *new_size, uint32_t old_size, uint32_t required_size, uint32_t granularity)
+{
+  uint32_t add, diff;
+
+  diff = required_size - old_size;
+
+  if (diff > granularity) {
+    add = diff / granularity * granularity;
+
+    if (diff % granularity && (UINT32_MAX - old_size - add >= granularity))
+      add += granularity;
+    else
+      return false;
+  } else
+    add = granularity;
+
+  *new_size = old_size + add;
+
+  return true;
+}
+
 bool SvkMain::GetVertexBuffer(uint32_t size, SvkDynamicBuffer &outDynBuffer)
 {
   SvkDynamicBuffer &commonBuffer = gl_VkDynamicVB[gl_VkCmdBufferCurrent];
@@ -221,14 +243,13 @@ bool SvkMain::GetVertexBuffer(uint32_t size, SvkDynamicBuffer &outDynBuffer)
   // if not enough
   if (commonBuffer.sdb_CurrentOffset + size > dynBufferGlobal.sdg_CurrentDynamicBufferSize)
   {
-    // currently, dynamic buffer recreation is disabled
-    //return false;
-
     AddDynamicBufferToDeletion(dynBufferGlobal, gl_VkDynamicVB);
 
     vkUnmapMemory(gl_VkDevice, dynBufferGlobal.sdg_DynamicBufferMemory);
 
-    uint32_t newSize = dynBufferGlobal.sdg_CurrentDynamicBufferSize + 2 * SVK_DYNAMIC_VERTEX_BUFFER_START_SIZE;
+    uint32_t newSize = 0;
+
+    if (!GetNewSize(&newSize, dynBufferGlobal.sdg_CurrentDynamicBufferSize, commonBuffer.sdb_CurrentOffset + size, (uint32_t)2 * SVK_DYNAMIC_VERTEX_BUFFER_START_SIZE)) return false;
     InitDynamicVertexBuffers(newSize);
   }
 
@@ -248,14 +269,13 @@ bool SvkMain::GetIndexBuffer(uint32_t size, SvkDynamicBuffer &outDynBuffer)
   // if not enough
   if (commonBuffer.sdb_CurrentOffset + size > dynBufferGlobal.sdg_CurrentDynamicBufferSize)
   {
-    // currently, dynamic buffer recreation is disabled
-    //return false;
-
     AddDynamicBufferToDeletion(dynBufferGlobal, gl_VkDynamicIB);
 
     vkUnmapMemory(gl_VkDevice, dynBufferGlobal.sdg_DynamicBufferMemory);
 
-    uint32_t newSize = dynBufferGlobal.sdg_CurrentDynamicBufferSize + SVK_DYNAMIC_INDEX_BUFFER_START_SIZE;
+    uint32_t newSize = 0;
+
+    if (!GetNewSize(&newSize, dynBufferGlobal.sdg_CurrentDynamicBufferSize, commonBuffer.sdb_CurrentOffset + size, SVK_DYNAMIC_INDEX_BUFFER_START_SIZE)) return false;
     InitDynamicIndexBuffers(newSize);
   }
 
@@ -283,13 +303,15 @@ bool SvkMain::GetUniformBuffer(uint32_t size, SvkDynamicUniform &outDynUniform)
   if (commonBuffer.sdb_CurrentOffset + SVK_DYNAMIC_UNIFORM_MAX_ALLOC_SIZE > dynBufferGlobal.sdg_CurrentDynamicBufferSize)
   {
     // currently, dynamic buffer recreation is disabled
-    //return false;
+    return false;
 
     AddDynamicUniformToDeletion(dynBufferGlobal, gl_VkDynamicUB);
 
     vkUnmapMemory(gl_VkDevice, dynBufferGlobal.sdg_DynamicBufferMemory);
 
-    uint32_t newSize = dynBufferGlobal.sdg_CurrentDynamicBufferSize + SVK_DYNAMIC_UNIFORM_BUFFER_START_SIZE;
+    uint32_t newSize = 0;
+
+    if (!GetNewSize(&newSize, dynBufferGlobal.sdg_CurrentDynamicBufferSize, commonBuffer.sdb_CurrentOffset + SVK_DYNAMIC_UNIFORM_MAX_ALLOC_SIZE, SVK_DYNAMIC_UNIFORM_BUFFER_START_SIZE)) return false;
     InitDynamicUniformBuffers(newSize);
   }
 
