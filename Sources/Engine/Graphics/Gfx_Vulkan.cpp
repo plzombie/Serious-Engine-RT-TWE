@@ -632,6 +632,13 @@ void SvkMain::SwapBuffers_Vulkan()
   {
     ASSERTALWAYS("Vulkan error: Can't present swap chain image.\n");
   }
+
+  r = vkQueueWaitIdle(gl_VkQueuePresent);
+  if (r != VK_SUCCESS) 
+  {
+    // Should recreate device there or something
+    ASSERTALWAYS("Vulkan error: Can't present swap chain image.\n");
+  }
 }
 
 void SvkMain::SetViewport_Vulkan(float leftUpperX, float leftUpperY, float width, float height, float minDepth, float maxDepth)
