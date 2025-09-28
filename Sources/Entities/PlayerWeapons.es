@@ -2460,7 +2460,7 @@ functions:
       if( eapi.iIronBalls != 0) {strMessage.PrintF("%s %d %s,", (const char*)strMessage, eapi.iIronBalls, TRANS("Cannonballs"));}
 //      if( eapi.iNukeBalls != 0) {strMessage.PrintF("%s %d %s,", strMessage, eapi.iNukeBalls, TRANS("Nuke balls"));}
 
-      INDEX iLen = strlen(strMessage);
+      size_t iLen = strlen(strMessage);
       if( iLen>0 && strMessage[iLen-1]==',')
       {
         strMessage.DeleteChar(iLen-1);

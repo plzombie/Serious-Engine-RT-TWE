@@ -1641,7 +1641,8 @@ functions:
   CTString GetStatsRealWorldStarted(void)
   {
     struct tm *newtime;
-    newtime = localtime((const time_t*)&m_iStartTime);
+    time_t start_time = (time_t)m_iStartTime; //TODO: m_iStartTime should have type time_t
+    newtime = localtime((const time_t*)&start_time);
 
     setlocale(LC_ALL, "");
     CTString strTimeline;
@@ -6550,7 +6551,9 @@ procedures:
   Main(EVoid evoid)
   {
     // remember start time
-    time((time_t*)&m_iStartTime);
+    time_t start_time = 0; 
+    time(&start_time);
+    m_iStartTime = (INDEX)start_time; //TODO: m_iStartTime should have type time_t
 
     m_ctUnreadMessages = 0;
     SetFlags(GetFlags()|ENF_CROSSESLEVELS|ENF_NOTIFYLEVELCHANGE);

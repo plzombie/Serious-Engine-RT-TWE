@@ -2243,7 +2243,7 @@ functions:
 
   void RenderGameView(CDrawPort *pdp, void *pvUserData)
   {
-    BOOL bShowExtras = (ULONG(pvUserData)&GRV_SHOWEXTRAS);
+    BOOL bShowExtras = (uintptr_t(pvUserData)&GRV_SHOWEXTRAS);
 
     // if not yet initialized
     if(!(m_ulFlags&PLF_INITIALIZED) || (m_ulFlags&PLF_DONTRENDER)) { 
