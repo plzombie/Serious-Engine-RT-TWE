@@ -25,8 +25,8 @@ LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,1,25164,0
- PRODUCTVERSION 0,1,25164,0
+ FILEVERSION 0,2,25292,0
+ PRODUCTVERSION 0,2,25292,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -43,12 +43,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Serious Sam RT TWE contributors"
             VALUE "FileDescription", "Serious Sam RT - The Working Edition"
-            VALUE "FileVersion", "0.1.25164.0"
+            VALUE "FileVersion", "0.2.25292.0"
             VALUE "InternalName", "SeriousS.exe"
             VALUE "LegalCopyright", "Copyright (C) 2002-2025 GNU GPL V2"
             VALUE "OriginalFilename", "SeriousS.exe"
             VALUE "ProductName", "Serious Sam RT TWE"
-            VALUE "ProductVersion", "0.1.25164.0"
+            VALUE "ProductVersion", "0.2.25292.0"
         END
     END
     BLOCK "VarFileInfo"

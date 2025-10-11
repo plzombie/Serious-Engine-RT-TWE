@@ -1,5 +1,13 @@
 # Serious-Engine-RT-TWE changelog
 
+## Serious-Engine-RT-TWE v0.2.25292.0
+
+* Fix error when different renderers have different count of adapters
+* Vulkan: reduce memory consumption
+* Vulkan: reduce input lag when VSync enabled
+* The Second Encounter is now able to complete level
+* The Second Encounter now show working loading screen
+
 ## Serious-Engine-RT-TWE v0.1.25164.0
 ### Changes after Serious-Engine-RT v1.5
 
