@@ -162,7 +162,7 @@ void SvkMain::InitDynamicBuffer(SvkDynamicBufferGlobal &dynBufferGlobal, SvkDyna
   r = vkAllocateMemory(gl_VkDevice, &allocInfo, nullptr, &dynBufferGlobal.sdg_DynamicBufferMemory);
   VK_CHECKERROR(r);
   if (r != VK_SUCCESS) {
-    FatalError("Not enough video memory: %ull", (unsigned long long)(allocInfo.allocationSize));
+    FatalError("Not enough video memory: %llu", (unsigned long long)(allocInfo.allocationSize));
   }
 
   for (uint32_t i = 0; i < gl_VkMaxCmdBufferCount; i++)
