@@ -219,11 +219,12 @@ static bool GetNewSize(uint32_t *new_size, uint32_t old_size, uint32_t required_
   uint32_t add, diff;
 
   diff = required_size - old_size;
-
-  if (diff > granularity) {
+  if (diff % granularity == 0)
+    add = diff;
+  else if (diff > granularity) {
     add = diff / granularity * granularity;
 
-    if (diff % granularity && (UINT32_MAX - old_size - add >= granularity))
+    if (UINT32_MAX - old_size - add >= granularity)
       add += granularity;
     else
       return false;
