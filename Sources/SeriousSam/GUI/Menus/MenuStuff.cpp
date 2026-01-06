@@ -91,7 +91,7 @@ extern CTString astrCPUPerformancePresetTexts[] = {
   "Min",
 };
 
-extern PIX apixWidths[][2] = {
+extern PIX apixWidths[APIXWIDTHS_MAXCNT][2] = {
   640, 480,
   960, 720,
   1024, 768,
@@ -103,7 +103,7 @@ extern PIX apixWidths[][2] = {
   2560, 1440,
   3200, 1800,
   3840, 2160,
-
+  LONG_MAX, LONG_MAX,
   //320, 240,
   //400, 300,
   //512, 384,

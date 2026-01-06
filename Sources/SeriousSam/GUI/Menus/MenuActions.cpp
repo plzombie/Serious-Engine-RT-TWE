@@ -643,7 +643,7 @@ static void FillResolutionsList(void)
     int iFullscreenHeight = _pixDesktopHeight;
       
     INDEX iRes = 0;
-    for (; iRes<_ctResolutions; iRes++) {
+    for (; iRes<_ctResolutions-1; iRes++) {
       if (apixWidths[iRes][0] > _pixDesktopWidth)
       {
         break;
