@@ -43,17 +43,54 @@ public:
 
 static CResolution _areResolutions[] =
 {
+// Enormously big list of display modes
+// TODO: replace with the call to EnumDisplaySettingW for current display
   {  640,  480 },
+  {  800,  600 },
   {  960,  720 },
+  { 1024,  600 },
   { 1024,  768 },
-  { 1280,  960 },
   { 1280,  720 },
+  { 1280,  960 },
+  { 1280, 1024 },
+  { 1366,  768 },
   { 1600,  900 },
   { 1920, 1080 },
+  { 1920, 1200 },
   { 2048, 1152 },
+  { 2024, 1280 },
+  { 2160, 1440 },
+  { 2560, 1080 }, // Ultra-wide
   { 2560, 1440 },
+  { 2560, 1600 },
+  { 2560, 1664 },
+  { 2880, 1620 },
+  { 2880, 1800 },
+  { 2880, 1864 },
+  { 2880, 1920 },
+  { 2944, 1840 },
+  { 3000, 2000 },
+  { 3024, 1964 },
+  { 3072, 1920 },
+  { 3120, 2080 },
   { 3200, 1800 },
+  { 3200, 2000 },
+  { 3440, 1440 },
+  { 3456, 2234 },
+  { 3840, 1080 }, // Ultra-wide
+  { 3840, 1600 },
   { 3840, 2160 },
+  { 3840, 2400 },
+  { 4096, 2160 },
+  { 5120, 1440 },
+  { 5120, 2160 },
+  { 5120, 2880 },
+  { 6016, 3384 },
+  { 7680, 2160 }, // Ultra-wide
+  { 7680, 4320 },
+  {10240, 5760 },
+  {11520, 6480 },
+  {15360, 8640 }
 
   //{  320,  240 },
   //{  400,  300 },
@@ -122,6 +159,8 @@ void CGfxLibrary::InitAPIs(void)
   // enumerate modes thru resolution list
   for( iResolution=0; iResolution<MAX_RESOLUTIONS; iResolution++)
   {
+    if (pda->da_ctDisplayModes >= pda->da_maxAdmDisplayModes) break;
+
     DEVMODE devmode;
     memset( &devmode, 0, sizeof(devmode));
     CResolution &re = _areResolutions[iResolution];
@@ -217,6 +256,8 @@ void CGfxLibrary::InitAPIs(void)
     // enumerate modes thru resolution list
     for (iResolution = 0; iResolution < MAX_RESOLUTIONS; iResolution++)
     {
+      if (pda->da_ctDisplayModes >= pda->da_maxAdmDisplayModes) break;
+
       DEVMODE devmode;
       memset(&devmode, 0, sizeof(devmode));
       CResolution& re = _areResolutions[iResolution];

@@ -39,6 +39,7 @@ public:
   CTString da_strVendor;         // OpenGL will fill this upon initialization of adapter ...
   CTString da_strRenderer;       //  ... till then, it will be set to unknown/OpenGL ICD/1.1 or ...
   CTString da_strVersion;        //  ... 3Dfx/OpenGL/1.1
+  static const size_t da_maxAdmDisplayModes = 25; // To enlarge the size of maximum display modes in future
 };
 
 
